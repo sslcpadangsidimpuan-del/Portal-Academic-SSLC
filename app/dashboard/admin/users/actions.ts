@@ -79,7 +79,7 @@ export async function createUser(formData: FormData) {
           role: "SISWA",
           siswaProfile: {
             create: {
-              levelId: levelId === "" ? null : levelId,
+              ...(levelId ? { levels: { connect: [{ id: levelId }] } } : {}),
               dateOfBirth,
               gender,
               religion,
