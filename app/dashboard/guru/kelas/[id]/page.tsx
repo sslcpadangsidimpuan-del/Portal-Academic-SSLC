@@ -2,14 +2,11 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// 1. Ubah tipe data params menjadi Promise
 export default async function RuangKelasPage({ params }: { params: Promise<{ id: string }> }) {
-  // 2. Ekstrak (await) id dari params terlebih dahulu sebelum digunakan
   const { id } = await params;
 
-  // 3. Masukkan 'id' yang sudah berhasil diekstrak ke dalam Prisma
   const level = await prisma.level.findUnique({
-    where: { id: id }, // Sekarang id tidak lagi undefined!
+    where: { id: id },
     include: {
       siswas: {
         include: {
@@ -19,10 +16,10 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
     },
   });
 
-  // Jika kelas tidak ditemukan, kembalikan halaman 404
   if (!level) {
     notFound();
   }
+
   return (
     <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto">
       {/* Header Navigasi & Info Kelas */}
@@ -36,13 +33,13 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm mt-4 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-slate-800">Ruang Kelas: {level.name}</h1>
-            <p className="text-slate-500 mt-1">{level.description || "Tidak ada deskripsi kelas."}</p>
+            <p className="text-slate-500 mt-1">Daftar siswa dan aktivitas di kelas {level.name}.</p>
           </div>
           <div className="text-4xl">📚</div>
         </div>
       </div>
 
-      {/* Area Tombol Aksi (DIUBAH MENJADI GRID 3 KOLOM) */}
+      {/* Area Tombol Aksi */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {/* Tombol Absensi */}
         <Link 
@@ -72,7 +69,7 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           </div>
         </Link>
 
-        {/* TOMBOL DOKUMENTASI FOTO & VIDEO (FIXED OVERFLOW) */}
+        {/* Tombol Galeri Kelas */}
         <Link 
           href={`/dashboard/guru/kelas/${level.id}/photos/new`}
           className="flex items-center gap-3 sm:gap-4 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 p-4 rounded-xl transition-colors group"
@@ -86,8 +83,6 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           </div>
         </Link>
       </div>
-
-
 
       {/* Daftar Siswa di Kelas Ini */}
       <div>
