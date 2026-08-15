@@ -3,22 +3,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Fraunces, Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['300', '500', '600', '700'],
-  style: ['normal', 'italic'],
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-});
+const inter = Inter({ subsets: ['latin'] });
 
 const WA_NUMBER = '6282275058957';
 const WA_URL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
@@ -33,7 +24,16 @@ const NAV_LINKS = [
   { href: '#dream', label: 'Our Big Dream' },
 ];
 
-const HERO_PHOTOS = ['/act1.JPEG', '/val1.png',  '/act2.JPEG', '/val2.png', '/act3.JPEG', '/val3.png', '/act4.JPEG', '/val4.png'];
+const HERO_PHOTOS = [
+  '/act1.JPEG',
+  '/val1.png',
+  '/act2.JPEG',
+  '/val2.png',
+  '/act3.JPEG',
+  '/val3.png',
+  '/act4.JPEG',
+  '/val4.png',
+];
 
 function StarIcon({ className = '' }: { className?: string }) {
   return (
@@ -218,7 +218,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <main className={`${jakarta.className} min-h-screen bg-[#FFF8F1] text-[#2C2738]`}>
+    <main className={`${inter.className} min-h-screen bg-[#FFF8F1] text-[#2C2738]`}>
       {/* Navigation */}
       <nav
         className={`fixed w-full z-50 backdrop-blur-md transition-all duration-300 ${
@@ -297,18 +297,18 @@ export default function LandingPage() {
 
         <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12">
           
-          {/* Header Info (Always First) */}
+          {/* Header Info */}
           <div className="w-full md:w-1/2 space-y-4 sm:space-y-6" data-reveal>
             <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold tracking-widest uppercase text-[#C7963E] bg-[#EFCE8E]/20 px-3 py-1 rounded-full">
               <StarIcon className="w-3.5 h-3.5" />
               The First Step Toward a Bright Future
             </span>
             
-            <h1 className={`${fraunces.className} text-3xl sm:text-4xl md:text-5xl font-semibold text-[#16233F] leading-tight`}>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#16233F] leading-tight">
               Welcome to <span className="text-[#E8637F]">Smart Step Learning Center</span> (SSLC)
             </h1>
 
-            {/* Mobile Photo Slider Hook (Hanya muncul di Layar HP setelah Judul) */}
+            {/* Mobile Photo Slider */}
             <div className="block md:hidden my-4 relative">
               <div className="relative rounded-2xl shadow-xl shadow-[#16233F]/15 overflow-hidden">
                 <Swiper
@@ -337,7 +337,7 @@ export default function LandingPage() {
               </div>
               <div className="absolute -bottom-3 left-3 right-3 bg-white/90 backdrop-blur-sm rounded-xl shadow-md px-3 py-2 flex items-center justify-center gap-2 z-10 border border-slate-100">
                 <StarIcon className="w-4 h-4 text-[#C7963E]" />
-                <span className="text-[11px] font-bold text-[#16233F]">SSLC  highlights</span>
+                <span className="text-[11px] font-bold text-[#16233F]">SSLC highlights</span>
               </div>
             </div>
 
@@ -424,7 +424,7 @@ export default function LandingPage() {
               <StarIcon className="w-3.5 h-3.5" />
               About SSLC
             </span>
-            <h2 className={`${fraunces.className} text-2xl sm:text-3xl md:text-4xl font-semibold text-[#16233F]`}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#16233F]">
               A Trusted Partner in Every Child&apos;s Growth
             </h2>
             <p className="text-[#6A6376] text-sm sm:text-base leading-relaxed">
@@ -461,7 +461,7 @@ export default function LandingPage() {
             <path d="M12 6c-2-1.5-5-2-8-1v13c3-1 6-.5 8 1 2-1.5 5-2 8-1V5c-3-1-6-.5-8 1z" />
             <line x1="12" y1="6" x2="12" y2="19" />
           </svg>
-          <p className={`${fraunces.className} italic text-lg sm:text-xl md:text-2xl text-[#16233F] leading-relaxed px-2`}>
+          <p className="italic font-medium text-lg sm:text-xl md:text-2xl text-[#16233F] leading-relaxed px-2">
             &quot;To become the largest, most trusted, and leading informal education institution that empowers every
             child to learn, grow, and thrive through holistic education, innovation, and international standards.&quot;
           </p>
@@ -476,7 +476,7 @@ export default function LandingPage() {
               <StarIcon className="w-3.5 h-3.5" />
               Our Mission
             </span>
-            <h2 className={`${fraunces.className} text-2xl sm:text-3xl md:text-4xl font-semibold text-[#16233F]`}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#16233F]">
               How We Bring the Vision to Life
             </h2>
           </div>
@@ -491,7 +491,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Values Section (Optimized for Mobile with Horizontal Carousel) */}
+      {/* Values Section */}
       <section id="values" className="scroll-mt-20 py-12 sm:py-16 md:py-24 px-4 sm:px-6 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-8 sm:mb-12" data-reveal>
@@ -499,13 +499,12 @@ export default function LandingPage() {
               <StarIcon className="w-3.5 h-3.5" />
               Our Core Values
             </span>
-            <h2 className={`${fraunces.className} text-2xl sm:text-3xl md:text-4xl font-semibold text-[#16233F]`}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#16233F]">
               What S·S·L·C Stands For
             </h2>
             <p className="text-xs text-slate-400 mt-2 block sm:hidden">👈 Usap ke samping untuk melihat nilai lainnya</p>
           </div>
 
-          {/* Responsive Layout: Mobile Horizontal Snap Scroll, Desktop Grid */}
           <div 
             className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 md:grid-cols-4 sm:overflow-visible sm:pb-0" 
             data-reveal
@@ -516,7 +515,6 @@ export default function LandingPage() {
                 className="snap-center flex-shrink-0 w-[82vw] sm:w-auto bg-[#f7e5d7] rounded-2xl p-5 sm:p-6 text-center shadow-md border border-slate-100 flex flex-col justify-between"
               >
                 <div>
-                  {/* High Quality Responsive Image Box */}
                   <div className="relative w-full h-44 sm:h-36 md:h-40 rounded-xl overflow-hidden mb-4 bg-[#FBDCE4] shadow-inner">
                     <Image
                       src={value.image}
@@ -526,7 +524,7 @@ export default function LandingPage() {
                       className="object-cover"
                     />
                   </div>
-                  <span className={`${fraunces.className} text-3xl sm:text-4xl font-bold bg-gradient-to-br from-[#E8637F] to-[#f58ca2] bg-clip-text text-transparent`}>
+                  <span className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-br from-[#E8637F] to-[#f58ca2] bg-clip-text text-transparent">
                     {value.letter}
                   </span>
                   <h3 className="font-bold text-[#16233F] mt-1 mb-2 text-base">{value.title}</h3>
@@ -561,7 +559,7 @@ export default function LandingPage() {
           <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#EFCE8E] mb-3">
             Our Big Dream
           </span>
-          <h2 className={`${fraunces.className} text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4 sm:mb-6`}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4 sm:mb-6">
             The Most Trusted, Leading Integrated Education Institution in the Region
           </h2>
           <p className="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed mb-4">
@@ -583,7 +581,7 @@ export default function LandingPage() {
             <StarIcon className="w-3.5 h-3.5" />
             Ready to Take the First Step?
           </span>
-          <h2 className={`${fraunces.className} text-2xl sm:text-3xl md:text-4xl font-semibold text-[#16233F] mb-3 sm:mb-4`}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#16233F] mb-3 sm:mb-4">
             Give Your Child a Smart Step Toward a Bright Future
           </h2>
           <p className="text-[#6A6376] text-xs sm:text-sm md:text-base mb-6 sm:mb-8">
@@ -637,7 +635,7 @@ export default function LandingPage() {
               <ul className="space-y-2.5 text-xs sm:text-sm">
                 <li>Gang Sehat 5, Jln SM Raja, Wek V, Kec Padangsidimpuan Selatan, Kota Padang Sidempuan, Sumatera Utara 22721</li>
                 <li>+62 822-7505-8957</li>
-                <li className="">smartsteplearningcenterpadangsidimpuan@gmail.com</li>
+                <li>smartsteplearningcenterpadangsidimpuan@gmail.com</li>
                 <li>
                   <Link
                     href="https://www.instagram.com/smartsteplearningcenter_?igsh=MWgzNXZ5cWwwdjZrOQ=="
@@ -701,11 +699,10 @@ export default function LandingPage() {
           background: #ffffff;
           opacity: 0.6;
         }
-        .hero-swiper .swiper-pagination-bullet-active {
+        .hero-swiper .swiper-[#E8637F] {
           background: #e8637f;
           opacity: 1;
         }
-        /* Sembunyikan Scrollbar untuk Carousel Mobile */
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
