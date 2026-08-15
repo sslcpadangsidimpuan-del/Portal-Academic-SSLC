@@ -15,7 +15,7 @@ export default async function LaporanBelajarSiswaPage() {
     include: {
       siswaProfile: {
         include: {
-          levels: true, // 🟢 Ambil daftar KELAS AKTIF siswa saat ini
+          levels: true,
           absensi: true,
           semesterReports: {
             orderBy: { createdAt: 'desc' },
@@ -52,12 +52,11 @@ export default async function LaporanBelajarSiswaPage() {
       }
     });
 
-    // Cek apakah rapor ini dari kelas yang sedang aktif atau riwayat
     const isActive = reportLevelId ? activeLevelIds.includes(reportLevelId) : false;
 
     return {
       ...report,
-      isActiveClass: isActive, // 🟢 Flag penanda kelas aktif
+      isActiveClass: isActive,
       attendanceSummary: summary
     };
   });
@@ -72,7 +71,6 @@ export default async function LaporanBelajarSiswaPage() {
   return (
     <StudentReportClient 
       studentName={user?.name || "Student"}
-      studentUsername={user?.username || ""}
       activeLevels={activeLevels}
       semesterReports={semesterReportsWithAttendance}
     />
