@@ -116,30 +116,35 @@ async function main() {
   });
 
   // Buat atau pastikan akun Siswa lama tetap ada
-  await prisma.user.upsert({
-    where: { username: 'SISWA001' },
-    update: {},
-    create: {
-      username: 'SISWA001',
-      name: 'Andi Murid',
-      password: hashedPasswordDefault,
-      role: 'SISWA',
-      siswaProfile: {
-        create: {
-          parentName: 'Bapak Andi',
-          parentPhone: '08123456789',
-          levelId: levelDefault.id,
+await prisma.user.upsert({
+  where: { username: 'SISWA001' },
+  update: {},
+  create: {
+    username: 'SISWA001',
+    name: 'Andi Murid',
+    password: hashedPasswordDefault,
+    role: 'SISWA',
+    siswaProfile: {
+      create: {
+        dateOfBirth: new Date('2015-01-01'),
+        gender: 'LAKI_LAKI',
+        religion: 'ISLAM',
+        fatherName: 'Bapak Andi',
+        parentPhone: '08123456789',
+        levels: {
+          connect: [{ id: levelDefault.id }],
         },
       },
     },
-  });
-
+  },
+});
+  
   console.log('==================================================');
   console.log('✅ PROSES SEEDING BERHASIL SELESAI!');
   console.log('==================================================');
   console.log('🔑 AKUN SUPER ADMIN BARU:');
-  console.log('👑 Owner MEC -> Username: owner_mec | Pass: owner123');
-  console.log('🛠️ Admin MEC -> Username: admin_mec | Pass: admin123');
+  console.log('👑 Owner SSLC -> Username: owner_sslc | Pass: owner123');
+  console.log('🛠️ Admin SSLC -> Username: admin_sslc | Pass: admin123');
   console.log('--------------------------------------------------');
   console.log('🧑‍🏫 Guru Uji Coba  -> Username: GURU001  | Pass: rahasia123');
   console.log('👦 Siswa Uji Coba -> Username: SISWA001 | Pass: rahasia123');
