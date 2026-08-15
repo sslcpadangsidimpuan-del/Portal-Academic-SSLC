@@ -1,0 +1,226 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Membedakan tipe user untuk login
+enum Role {
+  GURU
+  SISWA
+  SUPER_ADMIN
+}
+
+model User {
+  id                    String                  @id @default(uuid())
+  username              String                  @unique // NIP untuk guru, NIS untuk siswa
+  password              String                  // Password yang nantinya akan dienkripsi
+  name                  String
+  role                  Role
+
+  guruProfile           GuruProfile?
+  siswaProfile          SiswaProfile?
+  notificationsReceived NotificationRecipient[]
+}
+
+model GuruProfile {
+  id              String @id @default(uuid())
+  userId          String @unique
+  user            User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  signatureUrl String?  // Menyimpan lokasi gambar, misal: /uploads/signatures/ttd-guru1.png
+
+  levels          Level[]
+
+  // Relasi: Laporan dan foto yang dibuat oleh guru ini
+  dailyReports    DailyReport[]
+  semesterReports SemesterReport[]
+  photosUploaded  Photo[]
+}
+
+model SiswaProfile {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  levels    Level[]
+
+  // --- DATA DIRI SISWA (OPSIONAL) ---
+  dateOfBirth   DateTime?
+  gender        String?    // "LAKI_LAKI" / "PEREMPUAN"
+  religion      String?    // "ISLAM", "KRISTEN", "KATOLIK", "HINDU", "BUDDHA", "KONGHUCU", dll.
+  address       String?    
+  schoolOrigin  String?    // Asal Sekolah
+  joinDate      DateTime?  // Tanggal Bergabung
+
+  // --- DATA ORANG TUA ---
+  fatherName        String?    // Nama Ayah
+  fatherOccupation  String?    // Pekerjaan Ayah
+  motherName        String?    // Nama Ibu
+  motherOccupation  String?    // Pekerjaan Ibu
+  parentPhone       String?    // Nomor HP / WhatsApp Utama Orang Tua
+
+  // --- DATA WALI (OPTIONAL) ---
+  guardianName       String?    // Nama Wali
+  guardianOccupation String?    // Pekerjaan Wali
+  guardianAddress    String?    // Alamat Wali
+  guardianPhone      String?    // Nomor HP Wali
+
+  // --- RELASI BAWAAN (DISEJALANKAN DENGAN SEMESTER REPORT & ABSENSI) ---
+  dailyReports    DailyReport[]
+  semesterReports SemesterReport[]
+  absensi         Absensi[]
+  tags            PhotoTag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Level {
+  id       String @id @default(cuid())
+  name     String // Contoh: "Beginner 1", "Nursery 1"
+  category String @default("Regular") // "Regular", "Nursery", atau "Preschool"
+
+  // 🟢 DIUBAH: Relasi balik implicit Many-to-Many
+  siswas   SiswaProfile[]
+
+  dailyReports    DailyReport[]
+  semesterReports SemesterReport[]
+
+  gurus           GuruProfile[]
+  absensi         Absensi[]
+  photos          Photo[]
+}
+
+// Report Harian per individu
+model DailyReport {
+  id        String   @id @default(uuid())
+  date      DateTime @default(now())
+  createdAt DateTime @default(now())
+  material  String   // Materi yang diajarkan hari itu
+  notes     String   // Catatan perkembangan/penilaian siswa
+
+  siswaId String
+  siswa   SiswaProfile @relation(fields: [siswaId], references: [id], onDelete: Cascade)
+
+  guruId String
+  guru   GuruProfile @relation(fields: [guruId], references: [id])
+
+  levelId String
+  level   Level  @relation(fields: [levelId], references: [id])
+}
+
+model SemesterReport {
+  id        String   @id @default(cuid())
+  semester  String   // Digunakan untuk mengisi "Term" (misal: "July - December 2026")
+  classParticipation String?
+
+  studentPerformance  String?  // "Excellent", "Good", "Average", "Needs Improvement"
+  englishUse          String?  // "Always", "Sometimes", "Needs Improvement"
+  studentProgress     String?  // Teks deskripsi progress semester
+  
+  // --- NILAI MID TEST (0-100) ---
+  midVocabulary Int?
+  midGrammar    Int?
+  midListening  Int?
+  midSpeaking   Int?
+  midSpelling   Int?
+  midReading    Int?
+  midWriting    Int?
+
+  // --- NILAI FINAL TEST (0-100) ---
+  finalVocabulary Int?
+  finalGrammar    Int?
+  finalListening  Int?
+  finalSpeaking   Int?
+  finalSpelling   Int?
+  finalReading    Int?
+  finalWriting    Int?
+
+  // --- COMMENTS / FEEDBACK (Halaman 2) ---
+  comments  String?  
+
+  // --- FIELD LAMA (Opsional agar data lama aman) ---
+  examScore Float?   
+  summary   String?  
+  
+  createdAt DateTime @default(now())
+
+  // --- RELASI ---
+  siswaId String
+  siswa   SiswaProfile @relation(fields: [siswaId], references: [id], onDelete: Cascade)
+
+  guruId String
+  guru   GuruProfile @relation(fields: [guruId], references: [id])
+
+  levelId String?
+  level   Level?  @relation(fields: [levelId], references: [id])
+}
+
+model Absensi {
+  id      String   @id @default(uuid())
+  date    DateTime @default(now())
+  status  String
+
+  siswaId String
+  siswa   SiswaProfile @relation(fields: [siswaId], references: [id], onDelete: Cascade)
+
+  levelId String?
+  level   Level?  @relation(fields: [levelId], references: [id])
+}
+
+// Sistem Katalog Foto & video
+model Photo {
+  id        String   @id @default(uuid())
+  url       String   // Lokasi file, misal: /uploads/foto1.jpg
+
+  // -- FIELD BARU UNTUK KELOMPOK 2 --
+  fileType   String   @default("image") // "image" atau "video"
+  caption    String?  // Teks deskripsi foto/video
+  
+  isPublic  Boolean  @default(false) // Jika true = kategori umum per kelas
+  createdAt DateTime @default(now())
+
+  uploaderId String
+  uploader   GuruProfile @relation(fields: [uploaderId], references: [id])
+
+  levelId String?
+  level   Level?  @relation(fields: [levelId], references: [id], onDelete: Cascade)
+  tags    PhotoTag[]
+}
+
+// Untuk menandai (assign) siapa saja siswa di dalam foto tersebut
+model PhotoTag {
+  id      String       @id @default(uuid())
+  photoId String
+  photo   Photo        @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  siswaId String
+  siswa   SiswaProfile @relation(fields: [siswaId], references: [id], onDelete: Cascade)
+}
+
+// TABEL SISTEM NOTIFIKASI & PENGUMUMAN
+
+model Notification {
+  id         String   @id @default(cuid())
+  title      String   // Judul pengumuman
+  content    String   // Isi pesan
+  type       String   @default("INFO") // INFO (Biru), WARNING (Kuning/Tagihan), SUCCESS (Hijau)
+  targetRole String   // GLOBAL, GURU, SISWA, SPECIFIC
+  createdAt  DateTime @default(now())
+
+  recipients NotificationRecipient[]
+}
+
+model NotificationRecipient {
+  id             String       @id @default(cuid())
+  
+  notificationId String
+  notification   Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
+  
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([notificationId, userId])
+}

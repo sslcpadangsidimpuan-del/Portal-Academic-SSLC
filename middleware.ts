@@ -1,0 +1,30 @@
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
+
+export default withAuth(
+  function middleware(req) {
+    const token = req.nextauth.token;
+    const pathname = req.nextUrl.pathname;
+
+    // 1. Proteksi Halaman Guru: Hanya Role GURU & SUPER_ADMIN
+    if (pathname.startsWith("/dashboard/guru") && token?.role !== "GURU" && token?.role !== "SUPER_ADMIN") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+
+    // 2. Proteksi Halaman Admin: Hanya Role SUPER_ADMIN
+    if (pathname.startsWith("/dashboard/admin") && token?.role !== "SUPER_ADMIN") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+  },
+  {
+    callbacks: {
+      // Memastikan user sudah login sebelum diproses fungsi middleware di atas
+      authorized: ({ token }) => !!token,
+    },
+  }
+);
+
+// Tentukan route mana saja yang ingin diproteksi otomatis
+export const config = {
+  matcher: ["/dashboard/:path*"],
+};
