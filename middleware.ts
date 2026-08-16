@@ -17,6 +17,7 @@ export default withAuth(
     }
   },
   {
+    secret: process.env.NEXTAUTH_SECRET || "rahasia_kita_123",
     callbacks: {
       // Memastikan user sudah login sebelum diproses fungsi middleware di atas
       authorized: ({ token }) => !!token,

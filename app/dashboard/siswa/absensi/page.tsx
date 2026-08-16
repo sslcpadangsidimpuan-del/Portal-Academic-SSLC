@@ -4,6 +4,9 @@ import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 import KalenderAbsensiClient from "./KalenderAbsensiClient";
 
+// Memaksa halaman diproses dinamis di Server saat runtime (mencegah static prerender error saat build)
+export const dynamic = "force-dynamic";
+
 export default async function AbsensiSiswaPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
