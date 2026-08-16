@@ -6,11 +6,12 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { createClient } from "@supabase/supabase-js";
 
-// Inisialisasi Supabase Client untuk keperluan hapus file fisik
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+// Helper client Supabase (Lazy Initialization agar aman saat build)
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  return createClient(url, key);
+}
 
 export default async function GaleriKelasGuruPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -45,6 +46,9 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
     const photoId = formData.get("photoId") as string;
     if (!photoId) return;
 
+    // Inisialisasi Supabase hanya saat action dijalankan (Runtime)
+    const supabase = getSupabaseClient();
+
     // 1. Ambil data foto di DB untuk mendapatkan URL filenya
     const photoRecord = await prisma.photo.findUnique({
       where: { id: photoId }
@@ -52,12 +56,10 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
 
     if (photoRecord && photoRecord.url) {
       try {
-        // Ekstrak nama file dari URL publik Supabase (contoh: .../media/172345678.jpg -> 172345678.jpg)
         const urlParts = photoRecord.url.split('/');
         const filename = urlParts[urlParts.length - 1];
 
         if (filename) {
-          // Hapus file fisik dari Supabase Bucket 'media'
           await supabase.storage.from('media').remove([filename]);
         }
       } catch (err) {
@@ -103,7 +105,7 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
         </p>
       </div>
 
-      {/* GRID GALERI MEDIA (RESPONSIF MOBILE & DESKTOP) */}
+      {/* GRID GALERI MEDIA */}
       {photos.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {photos.map((item) => {
@@ -114,7 +116,7 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
                 key={item.id} 
                 className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
               >
-                {/* CONTAINER MEDIA (IMAGE / VIDEO) */}
+                {/* CONTAINER MEDIA */}
                 <div className="relative bg-slate-900 aspect-video sm:aspect-square w-full overflow-hidden flex items-center justify-center">
                   {isVideo ? (
                     <video 
@@ -133,7 +135,6 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
                     />
                   )}
 
-                  {/* BADGE TIPE MEDIA (JIKA VIDEO) */}
                   {isVideo && (
                     <span className="absolute top-2 left-2 bg-slate-900/80 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-1 rounded-md flex items-center gap-1 pointer-events-none">
                       ▶ Video
@@ -144,7 +145,6 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
                 {/* INFORMASI MEDIA & CAPTION */}
                 <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
                   <div>
-                    {/* VISIBILITAS BADGE */}
                     <div className="flex items-center gap-2 mb-2 flex-wrap">
                       {item.isPublic && !item.levelId ? (
                         <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🎉 Event Sekolah</span>
@@ -159,7 +159,6 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
                       </span>
                     </div>
 
-                    {/* CAPTION DESKRIPSI */}
                     {item.caption ? (
                       <p className="text-slate-800 text-xs sm:text-sm font-medium leading-snug break-words">
                         {item.caption}
@@ -168,7 +167,6 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
                       <p className="text-slate-400 italic text-xs">Tanpa deskripsi.</p>
                     )}
 
-                    {/* TAGGED STUDENTS (JIKA ADA) */}
                     {item.tags.length > 0 && (
                       <div className="mt-3 pt-2 border-t border-slate-100">
                         <p className="text-[10px] font-bold text-slate-500 mb-1">Siswa Ditandai:</p>

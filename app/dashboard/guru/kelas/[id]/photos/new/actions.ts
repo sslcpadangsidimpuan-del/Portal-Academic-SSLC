@@ -8,15 +8,17 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import sharp from "sharp"; 
 import { createClient } from "@supabase/supabase-js";
 
-// Inisialisasi Supabase Client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  return createClient(url, key);
+}
 
 export async function handleUploadAction(levelId: string, formData: FormData) {
   const session = await getServerSession(authOptions);
   if (!session) throw new Error("Sesi habis.");
+
+  const supabase = getSupabaseClient();
 
   const currentUser = await prisma.user.findUnique({
     where: { username: (session.user as any).username },
@@ -49,7 +51,6 @@ export async function handleUploadAction(levelId: string, formData: FormData) {
 
     let finalBuffer: Buffer;
 
-    // 1. Kompresi gambar dalam memori (Tanpa menyentuh folder lokal)
     if (isVideo) {
       finalBuffer = originalBuffer;
     } else {
@@ -59,12 +60,11 @@ export async function handleUploadAction(levelId: string, formData: FormData) {
         .toBuffer();
     }
 
-    // 2. Upload Buffer langsung ke Supabase Storage (Bucket: 'media')
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('media')
       .upload(uniqueFilename, finalBuffer, {
         contentType: isVideo ? file.type : 'image/jpeg',
-        upsert: false // Jangan timpa file jika nama sama (walau kemungkinannya kecil)
+        upsert: false
       });
 
     if (uploadError) {
@@ -72,14 +72,12 @@ export async function handleUploadAction(levelId: string, formData: FormData) {
       throw new Error("Gagal mengunggah file ke cloud.");
     }
 
-    // 3. Dapatkan Public URL dari Supabase
     const { data: publicUrlData } = supabase.storage
       .from('media')
       .getPublicUrl(uniqueFilename);
 
     const fileUrl = publicUrlData.publicUrl;
 
-    // 4. Simpan URL Cloud ke Database Prisma
     await prisma.photo.create({
       data: {
         url: fileUrl,
