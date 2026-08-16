@@ -2,14 +2,14 @@ import { prisma } from "@/lib/db";
 import CreateNotificationForm from "./CreateNotificationForm";
 import { deleteGlobalNotification, dismissForUser } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 export default async function ManageNotificationsPage() {
-  // Ambil semua user untuk opsi dropdown "Pilih Spesifik"
   const users = await prisma.user.findMany({
     where: { role: { in: ["GURU", "SISWA"] } },
     orderBy: { name: 'asc' }
   });
 
-  // Ambil daftar pengumuman yang sedang tayang beserta orang-orang yang belum dihapus statusnya
   const notifications = await prisma.notification.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
@@ -27,13 +27,10 @@ export default async function ManageNotificationsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* KOLOM KIRI: FORM (Lebar 5/12) */}
         <div className="lg:col-span-5">
           <CreateNotificationForm users={users} />
         </div>
 
-        {/* KOLOM KANAN: DAFTAR PENGUMUMAN AKTIF (Lebar 7/12) */}
         <div className="lg:col-span-7 space-y-6">
           <h2 className="text-xl font-bold text-slate-800">Pengumuman Terkirim & Aktif</h2>
           
@@ -62,7 +59,6 @@ export default async function ManageNotificationsPage() {
                       <h3 className={`text-lg font-bold ${textColor}`}>{notif.title}</h3>
                     </div>
                     
-                    {/* Tombol Hapus Global */}
                     <form action={deleteGlobalNotification}>
                       <input type="hidden" name="id" value={notif.id} />
                       <button type="submit" className="bg-white/80 hover:bg-white text-rose-500 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-colors border border-rose-100">
@@ -73,7 +69,6 @@ export default async function ManageNotificationsPage() {
                   
                   <p className="text-sm text-slate-700 mb-6">{notif.content}</p>
 
-                  {/* Daftar Orang yang Belum Lunas / Belum Dihapus Pesannya */}
                   <div className="bg-white/60 rounded-xl p-4 border border-white/40">
                     <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">
                       Masih Tayang di {notif.recipients.length} Pengguna:
@@ -87,7 +82,6 @@ export default async function ManageNotificationsPage() {
                             <span className="text-xs font-semibold text-slate-700 px-3 py-1.5">
                               {recipient.user.name}
                             </span>
-                            {/* Tombol Hapus Spesifik (Misal: Anak ini sudah lunas bayar SPP) */}
                             <form action={dismissForUser} className="border-l border-slate-100">
                               <input type="hidden" name="notificationId" value={notif.id} />
                               <input type="hidden" name="userId" value={recipient.userId} />

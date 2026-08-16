@@ -2,6 +2,8 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function DaftarSiswaReportPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -40,7 +42,6 @@ export default async function DaftarSiswaReportPage({ params }: { params: Promis
               </div>
             </div>
 
-            {/* Dua Tombol Bersebelahan */}
             <div className="flex gap-2">
               <Link 
                 href={`/dashboard/guru/kelas/${id}/report/${siswa.id}/harian`}

@@ -3,6 +3,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function BiodataSiswaPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
@@ -136,7 +138,7 @@ export default async function BiodataSiswaPage() {
           </div>
         </div>
 
-        {/* 3. DATA WALI (JIKA ADA) */}
+        {/* 3. DATA WALI */}
         {sp?.guardianName && (
           <div className="space-y-3 pt-2">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b pb-2">

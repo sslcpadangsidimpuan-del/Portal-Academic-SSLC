@@ -2,6 +2,8 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function RuangKelasPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -22,7 +24,6 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
 
   return (
     <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto">
-      {/* Header Navigasi & Info Kelas */}
       <div className="mb-8">
         <Link 
           href="/dashboard/guru/kelas" 
@@ -39,9 +40,7 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
         </div>
       </div>
 
-      {/* Area Tombol Aksi */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        {/* Tombol Absensi */}
         <Link 
           href={`/dashboard/guru/kelas/${level.id}/absensi`}
           className="flex items-center gap-3 sm:gap-4 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 p-4 rounded-xl transition-colors group"
@@ -55,7 +54,6 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           </div>
         </Link>
 
-        {/* Tombol Report */}
         <Link 
           href={`/dashboard/guru/kelas/${level.id}/report`}
           className="flex items-center gap-3 sm:gap-4 bg-amber-50 hover:bg-amber-100 border border-amber-200 p-4 rounded-xl transition-colors group"
@@ -69,7 +67,6 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           </div>
         </Link>
 
-        {/* Tombol Galeri Kelas */}
         <Link 
           href={`/dashboard/guru/kelas/${level.id}/photos/new`}
           className="flex items-center gap-3 sm:gap-4 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 p-4 rounded-xl transition-colors group"
@@ -84,7 +81,6 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
         </Link>
       </div>
 
-      {/* Daftar Siswa di Kelas Ini */}
       <div>
         <h2 className="text-xl font-bold text-slate-800 mb-4">Daftar Siswa ({level.siswas.length})</h2>
         

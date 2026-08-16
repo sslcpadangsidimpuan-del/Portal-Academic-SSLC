@@ -1,31 +1,25 @@
 import { prisma } from "@/lib/db";
-import Link from "next/link"; // Pastikan Link di-import untuk navigasi
+import Link from "next/link";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  // ==========================================
-  // 1. STATISTIK MAKRO (DATA TOTAL)
-  // ==========================================
   const totalGuru = await prisma.user.count({ where: { role: 'GURU' } });
   const totalSiswa = await prisma.user.count({ where: { role: 'SISWA' } });
   const totalKelas = await prisma.level.count();
 
-  // ==========================================
-  // 2. STATISTIK HARIAN (OPERASIONAL HARI INI)
-  // ==========================================
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0);
   
   const endOfDay = new Date();
   endOfDay.setHours(23, 59, 59, 999);
 
-  // Menghitung jumlah laporan harian yang di-submit hari ini
   const totalLaporanHariIni = await prisma.dailyReport.count({
     where: {
       createdAt: { gte: startOfDay, lte: endOfDay }
     }
   });
 
-  // Mengambil data absensi khusus hari ini lalu mengelompokkannya
   const absensiHariIni = await prisma.absensi.findMany({
     where: {
       date: { gte: startOfDay, lte: endOfDay }
@@ -46,7 +40,6 @@ export default async function AdminDashboard() {
         </p>
       </div>
 
-      {/* 1. KARTU STATISTIK MAKRO */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-6">
           <div className="w-16 h-16 bg-sky-50 text-sky-600 rounded-2xl flex items-center justify-center text-3xl">🧑‍🏫</div>
@@ -73,14 +66,11 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      {/* 2. PANTAUAN OPERASIONAL HARI INI */}
       <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
         <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
         Pantauan Hari Ini
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-        
-        {/* Rekap Kehadiran Harian */}
         <div className="lg:col-span-2 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
           <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6">Status Kehadiran Siswa</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -103,7 +93,6 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        {/* Laporan Harian */}
         <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-center items-center text-center">
           <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Laporan Pembelajaran Masuk</p>
           <div className="text-6xl font-black text-indigo-600 mb-2">{totalLaporanHariIni}</div>
@@ -111,7 +100,6 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      {/* 3. JALAN PINTAS (BERFUNGSI) */}
       <h2 className="text-xl font-bold text-slate-800 mb-6">Jalan Pintas</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Link href="/dashboard/admin/users" className="bg-slate-800 hover:bg-slate-900 text-white p-6 rounded-2xl flex items-center justify-between transition-colors group">
@@ -130,7 +118,6 @@ export default async function AdminDashboard() {
           <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
         </Link>
       </div>
-
     </div>
   );
 }

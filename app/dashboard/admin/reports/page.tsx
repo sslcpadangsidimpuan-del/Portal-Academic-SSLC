@@ -2,12 +2,13 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import ReportViewer from "./ReportViewer";
 
+export const dynamic = "force-dynamic";
+
 export default async function ReportsPage({ searchParams }: { searchParams: Promise<{ search?: string, siswaId?: string }> }) {
   const { search, siswaId } = await searchParams;
   const searchQuery = search || "";
   const selectedSiswaId = siswaId || null;
 
-  // 1. Ambil daftar siswa untuk kolom pencarian (Gunakan levels: true untuk multi-kelas)
   const students = await prisma.user.findMany({
     where: {
       role: "SISWA",
@@ -27,7 +28,6 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
     take: 30
   });
 
-  // 2. Deklarasi variabel penampung data
   let selectedStudent = null;
   let dailyReports: any[] = [];
   let semesterReports: any[] = [];
@@ -46,7 +46,6 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
     });
 
     if (selectedStudent?.siswaProfile) {
-      // Ambil Laporan Harian
       dailyReports = await prisma.dailyReport.findMany({
         where: { siswaId: selectedStudent.siswaProfile.id },
         include: { 
@@ -56,7 +55,6 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
         orderBy: { date: 'desc' }
       });
 
-      // Ambil Laporan Semester
       semesterReports = await prisma.semesterReport.findMany({
         where: { siswaId: selectedStudent.siswaProfile.id },
         include: { 
@@ -66,7 +64,6 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
         orderBy: { createdAt: 'desc' }
       });
 
-      // Ambil Data Absensi Siswa
       absensiData = await prisma.absensi.findMany({
         where: { siswaId: selectedStudent.siswaProfile.id },
         include: { level: true }
@@ -76,8 +73,6 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
 
   return (
     <div className="p-4 sm:p-8 max-w-7xl mx-auto animate-in fade-in duration-500 lg:h-[calc(100vh-4rem)] flex flex-col">
-      
-      {/* HEADER PAGE */}
       <div className="mb-4 sm:mb-6 shrink-0">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Pantau Laporan</h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -86,10 +81,7 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 flex-1 min-h-0">
-        
-        {/* KOLOM KIRI: PENCARIAN & DAFTAR SISWA */}
         <div className="w-full lg:w-1/3 flex flex-col bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden shrink-0 lg:shrink max-h-[380px] lg:max-h-none">
-          
           <div className="p-3 sm:p-4 border-b border-slate-100 bg-slate-50">
             <form method="GET" className="flex gap-2">
               {selectedSiswaId && <input type="hidden" name="siswaId" value={selectedSiswaId} />}
@@ -160,7 +152,6 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
           </div>
         </div>
 
-        {/* KOLOM KANAN: DISPLAY LAPORAN (CLIENT COMPONENT) */}
         <div className="w-full lg:w-2/3 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col flex-1 min-h-[450px] lg:min-h-0">
           {selectedStudent ? (
             <ReportViewer 
@@ -179,7 +170,6 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
             </div>
           )}
         </div>
-
       </div>
     </div>
   );

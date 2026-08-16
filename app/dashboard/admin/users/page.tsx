@@ -2,17 +2,16 @@ import { prisma } from "@/lib/db";
 import AddUserForm from "./AddUserForm";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function ManageUsersPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
-  // Menangkap tab dari URL, default ke "GURU"
   const { tab: rawTab } = await searchParams;
   const activeTab = rawTab === "SISWA" ? "SISWA" : "GURU";
 
-  // Ambil data kelas untuk form
   const levels = await prisma.level.findMany({
     orderBy: { name: 'asc' }
   });
 
-  // Ambil data HANYA untuk role yang tab-nya sedang aktif
   const users = await prisma.user.findMany({
     where: {
       role: activeTab
@@ -36,17 +35,12 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* KOLOM KIRI: FORM TAMBAH PENGGUNA */}
         <div className="lg:col-span-1">
           <AddUserForm levels={levels} />
         </div>
 
-        {/* KOLOM KANAN: AREA TABEL PENGGUNA TERDAFTAR */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-            
-            {/* HEADER & NAVIGASI TAB */}
             <div className="p-6 border-b border-slate-100 bg-slate-50">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-lg font-bold text-slate-800">Daftar Pengguna Terdaftar</h2>
@@ -55,7 +49,6 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                 </span>
               </div>
 
-              {/* Tombol Tab */}
               <div className="flex space-x-6 border-b border-slate-200">
                 <Link 
                   href="?tab=GURU"
@@ -80,7 +73,6 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
               </div>
             </div>
             
-            {/* AREA TABEL DINAMIS BEBAS DARI OVERFLOW */}
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead className="bg-white border-b border-slate-100 text-slate-400">
@@ -110,13 +102,10 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                       
                       return (
                         <tr key={user.id} className="hover:bg-slate-50/80 transition-colors">
-                          
-                          {/* KOLOM NAMA & USERNAME */}
                           <td className="p-4 align-top">
                             <p className="font-bold text-slate-800">{user.name}</p>
                             <p className="text-xs text-slate-500 font-mono mt-0.5">{user.username}</p>
                             
-                            {/* Khusus Siswa: Gender & Sekolah Asal */}
                             {activeTab === "SISWA" && sp && (
                               <div className="mt-2 space-y-0.5 text-[11px] text-slate-500">
                                 {sp.gender && <p>Gender : {sp.gender}</p>}
@@ -125,7 +114,6 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                             )}
                           </td>
                           
-                          {/* KONDISIONAL KOLOM BERDASARKAN TAB */}
                           {activeTab === "GURU" ? (
                             <td className="p-4 align-top">
                               {user.guruProfile && user.guruProfile.levels.length > 0 ? (
@@ -142,7 +130,6 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                             </td>
                           ) : (
                             <>
-                              {/* Kolom Kelas & TTL */}
                               <td className="p-4 align-top text-xs space-y-1">
                                 {sp?.levels && sp.levels.length > 0 ? (
                                   <div className="flex flex-wrap gap-1 mb-1">
@@ -165,7 +152,6 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                                 {sp?.address && <p className="text-slate-500 truncate max-w-[150px]" title={sp.address}>Address : {sp.address}</p>}
                               </td>
 
-                              {/* Kolom Ortu & Wali */}
                               <td className="p-4 align-top text-xs space-y-1">
                                 {(sp?.fatherName || sp?.motherName) ? (
                                   <div className="space-y-0.5">
@@ -186,7 +172,6 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                               </td>
                             </>
                           )}
-
                         </tr>
                       );
                     })
@@ -196,7 +181,6 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -2,17 +2,17 @@ import { prisma } from "@/lib/db";
 import Link from "next/link";
 import AddClassForm from "./AddClassForm";
 import MoveStudentForm from "./MoveStudentForm";
-import MoveTeacherForm from "./MoveTeacherForm"; // <-- Komponen baru yang akan kita buat
+import MoveTeacherForm from "./MoveTeacherForm"; 
 import DeleteButton from "./DeleteButton";
+
+export const dynamic = "force-dynamic";
 
 export default async function ManageClassesPage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   const { tab: rawTab } = await searchParams;
   const activeTab = rawTab || "Regular";
 
-  // Tambahkan kategori PINDAH_GURU
   const categories = ["Regular", "Nursery", "Preschool", "Bimbel", "Former Students", "PINDAH_SISWA", "PINDAH_GURU"];
 
-  // Ambil daftar kelas untuk form dan tabel
   const levels = await prisma.level.findMany({
     orderBy: { name: 'asc' },
     include: {
@@ -20,17 +20,14 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
     }
   });
 
-  // Ambil daftar siswa khusus untuk tab Pindah Siswa
-const students = await prisma.user.findMany({
+  const students = await prisma.user.findMany({
     where: { role: "SISWA" },
-    include: { siswaProfile: { include: { levels: true } } }, // 🟢 Perhatikan 'levels: true'
+    include: { siswaProfile: { include: { levels: true } } }, 
     orderBy: { name: 'asc' }
   });
 
-  // Ambil daftar guru khusus untuk tab Pindah/Assign Guru
   const teachers = await prisma.user.findMany({
     where: { role: "GURU" },
-    // Asumsi relasi di schema Prisma: guruProfile memiliki relasi array ke level/kelas
     include: { guruProfile: { include: { levels: true } } }, 
     orderBy: { name: 'asc' }
   });
@@ -44,7 +41,6 @@ const students = await prisma.user.findMany({
         <p className="text-slate-500 mt-1">Manajemen kelas, pergerakan siswa, dan penugasan guru.</p>
       </div>
 
-      {/* Navigasi Tab */}
       <div className="flex space-x-2 border-b border-slate-200 mb-8 overflow-x-auto">
         {categories.map((kategori) => {
           const isActive = activeTab === kategori;
@@ -68,8 +64,6 @@ const students = await prisma.user.findMany({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* KOLOM KIRI: FORM */}
         <div className="lg:col-span-1">
           {activeTab === "PINDAH_SISWA" ? (
             <MoveStudentForm students={students} levels={levels} />
@@ -80,7 +74,6 @@ const students = await prisma.user.findMany({
           )}
         </div>
 
-        {/* KOLOM KANAN: TABEL */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div className="p-6 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
@@ -116,36 +109,32 @@ const students = await prisma.user.findMany({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50">
-                  
-                  {/* TABEL PINDAH SISWA */}
                   {activeTab === "PINDAH_SISWA" && students.map(s => {
-  const assignedLevels = s.siswaProfile?.levels || [];
-  return (
-    <tr key={s.id} className="hover:bg-slate-50">
-      <td className="p-4 font-bold text-slate-800">
-        {s.name} 
-        <span className="block text-xs text-slate-500 font-mono font-normal">NIS: {s.username}</span>
-      </td>
-      <td className="p-4">
-        {assignedLevels.length > 0 ? (
-          <div className="flex flex-wrap gap-1.5">
-            {assignedLevels.map((lvl: any) => (
-              <span key={lvl.id} className="bg-sky-50 text-sky-700 px-3 py-1 rounded-full text-xs font-bold border border-sky-100">
-                {lvl.name}
-              </span>
-            ))}
-          </div>
-        ) : (
-          <span className="text-slate-400 text-xs italic">Belum Ditempatkan</span>
-        )}
-      </td>
-    </tr>
-  );
-})}
-                  {/* TABEL PINDAH GURU */}
+                    const assignedLevels = s.siswaProfile?.levels || [];
+                    return (
+                      <tr key={s.id} className="hover:bg-slate-50">
+                        <td className="p-4 font-bold text-slate-800">
+                          {s.name} 
+                          <span className="block text-xs text-slate-500 font-mono font-normal">NIS: {s.username}</span>
+                        </td>
+                        <td className="p-4">
+                          {assignedLevels.length > 0 ? (
+                            <div className="flex flex-wrap gap-1.5">
+                              {assignedLevels.map((lvl: any) => (
+                                <span key={lvl.id} className="bg-sky-50 text-sky-700 px-3 py-1 rounded-full text-xs font-bold border border-sky-100">
+                                  {lvl.name}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <span className="text-slate-400 text-xs italic">Belum Ditempatkan</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+
                   {activeTab === "PINDAH_GURU" && teachers.map(t => {
-                    // Cek relasi array kelas/level pada guru
-                    // Sesuaikan 'levels' dengan nama relasi many-to-many di schema Prisma Anda
                     const assignedLevels = (t.guruProfile as any)?.levels || []; 
                     return (
                       <tr key={t.id} className="hover:bg-slate-50">
@@ -167,7 +156,6 @@ const students = await prisma.user.findMany({
                     );
                   })}
 
-                  {/* TABEL DAFTAR KELAS (REGULAR, NURSERY, DLL) */}
                   {!activeTab.includes("PINDAH") && (
                     filteredLevels.length === 0 ? (
                       <tr><td colSpan={4} className="p-8 text-center text-slate-400">Belum ada kelas di kategori ini.</td></tr>
@@ -184,13 +172,11 @@ const students = await prisma.user.findMany({
                       ))
                     )
                   )}
-
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

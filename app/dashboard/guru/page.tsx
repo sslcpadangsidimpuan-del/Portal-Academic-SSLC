@@ -3,6 +3,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function GuruDashboard() {
   const session = await getServerSession(authOptions);
   
@@ -12,7 +14,6 @@ export default async function GuruDashboard() {
 
   const username = (session.user as any).username;
 
-  // Mencari data guru berdasarkan sesi login
   const user = await prisma.user.findUnique({
     where: { username: username },
     include: { guruProfile: true }
@@ -20,7 +21,6 @@ export default async function GuruDashboard() {
 
   if (!user) return <div>Data tidak ditemukan.</div>;
 
-  // MENARIK DATA NOTIFIKASI KHUSUS UNTUK GURU INI
   const myNotifications = await prisma.notificationRecipient.findMany({
     where: { userId: user.id },
     include: { notification: true },
@@ -29,17 +29,15 @@ export default async function GuruDashboard() {
 
   return (
     <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto">
-      {/* Banner Ucapan Selamat Datang */}
       <div className="bg-blue-600 text-white p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm mb-6">
-  <h1 className="text-xl sm:text-3xl font-black mb-1 sm:mb-2 flex items-center gap-2">
-    Halo, {user.name}! 👋
-  </h1>
-  <p className="text-xs sm:text-base text-blue-100 font-medium">
-    Selamat datang di portal manajemen kelas Anda.
-  </p>
-</div>
+        <h1 className="text-xl sm:text-3xl font-black mb-1 sm:mb-2 flex items-center gap-2">
+          Halo, {user.name}! 👋
+        </h1>
+        <p className="text-xs sm:text-base text-blue-100 font-medium">
+          Selamat datang di portal manajemen kelas Anda.
+        </p>
+      </div>
 
-      {/* AREA PENGUMUMAN (Hanya muncul jika ada notifikasi) */}
       {myNotifications.length > 0 && (
         <div className="mb-8">
           <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 flex items-center gap-2">

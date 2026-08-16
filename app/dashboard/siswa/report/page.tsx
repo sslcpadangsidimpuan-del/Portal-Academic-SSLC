@@ -4,6 +4,8 @@ import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 import StudentReportClient from "./StudentReportClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function LaporanBelajarSiswaPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
@@ -36,7 +38,6 @@ export default async function LaporanBelajarSiswaPage() {
   const rawReports = siswaProfile?.semesterReports || [];
   const rawAbsensi = siswaProfile?.absensi || [];
 
-  // Hitung rekapitulasi absensi PER KELAS & tandai status kelas aktif
   const semesterReportsWithAttendance = rawReports.map((report) => {
     const reportLevelId = report.levelId;
 
@@ -61,7 +62,6 @@ export default async function LaporanBelajarSiswaPage() {
     };
   });
 
-  // Urutkan: Rapor Kelas Aktif SELALU di paling atas
   semesterReportsWithAttendance.sort((a, b) => {
     if (a.isActiveClass && !b.isActiveClass) return -1;
     if (!a.isActiveClass && b.isActiveClass) return 1;
