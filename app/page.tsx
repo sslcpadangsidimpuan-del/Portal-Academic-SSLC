@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 const WA_NUMBER = '6282275058957';
 const WA_URL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
-  'Halo SSLC, saya ingin bertanya tentang SSLC'
+  'Halo Admin SSLC, saya ingin bertanya tentang SSLC'
 )}`;
 
 const NAV_LINKS = [
