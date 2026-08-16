@@ -3,6 +3,13 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
+// FALLBACK NEXTAUTH_URL UNTUK MENCEGAH ERR_INVALID_URL SAAT BUILD VERCEL
+if (!process.env.NEXTAUTH_URL) {
+  process.env.NEXTAUTH_URL = process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}` 
+    : "https://portal-academic-sslc.vercel.app";
+}
+
 // SIMPLE IN-MEMORY RATE LIMITER FOR LOGIN
 const loginAttempts = new Map<string, { count: number; resetTime: number }>();
 
