@@ -4,6 +4,9 @@ import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 import ContactAdmin from "@/app/components/ContactAdmin";
 
+// Mencegah Next.js melakukan static prerendering saat build time
+export const dynamic = "force-dynamic";
+
 export default async function SiswaDashboard() {
   const session = await getServerSession(authOptions);
   
@@ -31,10 +34,9 @@ export default async function SiswaDashboard() {
   });
 
   return (
-    // Penyesuaian padding luar: p-4 di mobile, p-8 di desktop agar teks tidak terpotong tepi layar HP
     <div className="p-4 sm:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto space-y-6 sm:space-y-8">
       
-      {/* Banner Ucapan Selamat Datang (Ukuran text & padding mengecil dinamis di mobile) */}
+      {/* Banner Ucapan Selamat Datang */}
       <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl sm:rounded-3xl p-5 sm:p-8 text-white shadow-lg shadow-emerald-100/60">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1.5 sm:mb-2 tracking-tight">
           Halo, {user.name}! 👋
@@ -44,8 +46,7 @@ export default async function SiswaDashboard() {
         </p>
       </div>
 
-      {/* Info Singkat (Card Bawah) */}
-      {/* Menggunakan grid-cols-2 mulai dari layar 'sm' (tablet/HP lebar) agar card mengecil berdampingan, tidak menumpuk kaku */}
+      {/* Info Singkat */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         
         {/* Card 1: Kelas */}
