@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import sharp from "sharp"; 
 import { createClient } from "@supabase/supabase-js";
 
