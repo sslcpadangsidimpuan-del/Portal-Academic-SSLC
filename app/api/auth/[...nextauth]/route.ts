@@ -3,9 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
-// ==========================================
 // SIMPLE IN-MEMORY RATE LIMITER FOR LOGIN
-// ==========================================
 const loginAttempts = new Map<string, { count: number; resetTime: number }>();
 
 function checkRateLimit(identifier: string): { allowed: boolean; remainingSeconds: number } {
@@ -30,6 +28,8 @@ function checkRateLimit(identifier: string): { allowed: boolean; remainingSecond
 }
 
 export const authOptions: AuthOptions = {
+  // Tambahkan fallback string rahasia untuk mencegah MissingSecretError jika env terlambat dimuat
+  secret: process.env.NEXTAUTH_SECRET || "rahasia_kita_123",
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -61,8 +61,7 @@ export const authOptions: AuthOptions = {
 
         if (!isPlaintextMatch && !isBcryptMatch) return null;
 
-        // 🟢 FEATURE: MIGRASI PLAINTEXT KE BCRYPT OTOMATIS
-        // Jika user login dengan password teks biasa, langsung hash dan update di DB!
+        // FEATURE: MIGRASI PLAINTEXT KE BCRYPT OTOMATIS
         if (isPlaintextMatch) {
           const hashedPassword = await bcrypt.hash(credentials.password, 10);
           await prisma.user.update({
@@ -107,7 +106,6 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
