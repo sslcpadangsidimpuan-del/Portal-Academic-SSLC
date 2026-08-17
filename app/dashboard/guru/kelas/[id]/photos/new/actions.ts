@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
-import sharp from "sharp"; 
 import { createClient } from "@supabase/supabase-js";
 
 function getSupabaseClient() {
@@ -45,29 +44,14 @@ export async function handleUploadAction(levelId: string, formData: FormData) {
     const isVideo = file.type.startsWith("video/");
     const fileType = isVideo ? "video" : "image";
     
-    const extension = isVideo ? file.name.split('.').pop() : "jpg";
+    const extension = isVideo ? file.name.split('.').pop() : (file.name.split('.').pop() || "jpg");
     const uniqueFilename = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${extension}`;
 
-    let uploadBody: File | Blob;
-
-    if (isVideo) {
-      // Untuk video, langsung gunakan objek File bawaan browser
-      uploadBody = file; 
-    } else {
-      // Untuk gambar, konversi Buffer sharp ke tipe Blob agar Next.js tidak mengubahnya jadi teks JSON
-      const originalBuffer = Buffer.from(await file.arrayBuffer());
-      const sharpBuffer = await sharp(originalBuffer)
-        .resize({ width: 1080, withoutEnlargement: true })
-        .jpeg({ quality: 80 })
-        .toBuffer();
-      
-      uploadBody = new Blob([sharpBuffer], { type: 'image/jpeg' });
-    }
-
+    // Langsung unggah file yang sudah dikompresi & dirotasi di browser
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('media')
-      .upload(uniqueFilename, uploadBody, {
-        contentType: isVideo ? file.type : 'image/jpeg',
+      .upload(uniqueFilename, file, {
+        contentType: file.type || (isVideo ? "video/mp4" : "image/jpeg"),
         upsert: false
       });
 
