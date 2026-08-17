@@ -2,9 +2,13 @@ import { prisma } from "@/lib/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
 import { revalidatePath } from "next/cache";
+import { createClient } from "@supabase/supabase-js";
+
+// Inisialisasi Supabase Client menggunakan Service Role Key
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 export default async function GuruProfilePage() {
   // 1. Ambil data sesi guru yang sedang login
@@ -24,7 +28,7 @@ export default async function GuruProfilePage() {
   const guruProfileId = currentUser.guruProfile.id;
 
   // ==========================================
-  // SERVER ACTION: PROSES UPLOAD TTD
+  // SERVER ACTION: PROSES UPLOAD TTD KE SUPABASE STORAGE
   // ==========================================
   async function handleUploadSignature(formData: FormData) {
     "use server";
@@ -32,25 +36,41 @@ export default async function GuruProfilePage() {
     const file = formData.get("signature") as File;
     if (!file || file.size === 0) return;
 
-    // A. Siapkan folder public/uploads/signatures
-    const uploadDir = join(process.cwd(), "public", "uploads", "signatures");
-    await mkdir(uploadDir, { recursive: true });
+    // A. Buat buffer dari file yang diunggah
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-    // B. Buat nama file unik & simpan secara fisik
-    const buffer = Buffer.from(await file.arrayBuffer());
-    // Ambil ekstensi asli file (png/jpg)
+    // B. Ambil ekstensi asli file dan buat nama file unik
     const ext = file.name.split('.').pop() || 'png';
-    const filename = `ttd-${guruProfileId}-${Date.now()}.${ext}`;
-    await writeFile(join(uploadDir, filename), buffer);
+    const filePath = `signatures/ttd-${guruProfileId}-${Date.now()}.${ext}`;
 
-    // C. Simpan URL-nya ke Database Prisma
-    const signatureUrl = `/uploads/signatures/${filename}`;
+    // C. Unggah file ke Supabase Storage (Bucket: media)
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from("media")
+      .upload(filePath, buffer, {
+        contentType: file.type || "image/png",
+        upsert: true,
+      });
+
+    if (uploadError) {
+      console.error("Gagal upload TTD ke Supabase Storage:", uploadError);
+      throw new Error(`Gagal mengunggah tanda tangan: ${uploadError.message}`);
+    }
+
+    // D. Ambil Public URL dari file yang diunggah
+    const { data: publicUrlData } = supabase.storage
+      .from("media")
+      .getPublicUrl(uploadData.path);
+
+    const signatureUrl = publicUrlData.publicUrl;
+
+    // E. Simpan Public URL ke Database Prisma
     await prisma.guruProfile.update({
       where: { id: guruProfileId },
       data: { signatureUrl: signatureUrl }
     });
 
-    // Refresh halaman agar TTD yang baru langsung muncul
+    // Refresh halaman agar TTD baru langsung muncul
     revalidatePath("/dashboard/guru/profile");
   }
 
