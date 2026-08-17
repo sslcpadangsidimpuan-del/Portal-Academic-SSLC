@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db";
 import Link from "next/link";
-import { handleUploadAction } from "./actions"; // 👈 Impor Server Action
+import { handleUploadAction } from "./actions";
+import { SubmitButton } from "./submit-button"; // 👈 1. Impor tombol barunya
 
 export default async function UploadPhotoPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -12,7 +13,6 @@ export default async function UploadPhotoPage({ params }: { params: Promise<{ id
 
   if (!level) return <div>Kelas tidak ditemukan.</div>;
 
-  // 👈 Bind parameter `id` kelas ke dalam Server Action
   const boundUpload = handleUploadAction.bind(null, id); 
 
   return (
@@ -38,7 +38,6 @@ export default async function UploadPhotoPage({ params }: { params: Promise<{ id
         </div>
       </Link>
 
-      {/* Gunakan boundUpload sebagai action form */}
       <form action={boundUpload} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-8">
         
         <div className="bg-rose-50 border border-rose-200 p-4 rounded-xl flex gap-3">
@@ -121,9 +120,9 @@ export default async function UploadPhotoPage({ params }: { params: Promise<{ id
           </div>
         </div>
 
-        <button type="submit" className="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold hover:bg-indigo-700 transition flex items-center justify-center gap-2">
-          <span>📤</span> Unggah Semua Media
-        </button>
+        {/* 👈 2. Ganti tag <button> lama dengan komponen baru */}
+        <SubmitButton />
+        
       </form>
     </div>
   );
