@@ -23,20 +23,20 @@ export function UploadForm({ action, students }: UploadFormProps) {
     const compressedFormData = new FormData();
 
     // Salin variabel form non-file
-    compressedFormData.append("caption", originalFormData.get("caption") as string || "");
-    compressedFormData.append("visibility", originalFormData.get("visibility") as string || "public");
+    compressedFormData.append("caption", (originalFormData.get("caption") as string) || "");
+    compressedFormData.append("visibility", (originalFormData.get("visibility") as string) || "public");
     
     const selectedStudents = originalFormData.getAll("students");
     selectedStudents.forEach((studentId) => {
       compressedFormData.append("students", studentId as string);
     });
 
-    // Opsi kompresi foto & otomatis perbaiki rotasi EXIF
+    // Opsi kompresi foto tanpa parameter libURL yang bermasalah
     const compressionOptions = {
       maxSizeMB: 0.8,              // Ukuran maksimal ~800KB
       maxWidthOrHeight: 1280,      // Resolusi maksimal 1280px
-      useWebWorker: true,
-      libURL: undefined,
+      useWebWorker: false,         // Matikan Web Worker sementara untuk menghindari bundler conflict
+      alwaysKeepResolution: true
     };
 
     try {
@@ -46,26 +46,23 @@ export function UploadForm({ action, students }: UploadFormProps) {
         if (file.type.startsWith("image/")) {
           setLoadingText(`Mengompresi & menyesuaikan foto (${i + 1}/${files.length})...`);
           
-          // Memutar foto ke posisi yang benar & mengompres
           const compressedFile = await imageCompression(file, compressionOptions);
           
-          // Salin ke file baru agar nama file tetap sama
           const finalFile = new File([compressedFile], file.name, {
-            type: compressedFile.type,
+            type: compressedFile.type || "image/jpeg",
           });
           
           compressedFormData.append("media", finalFile);
         } else {
-          // File video tidak dikompresi
           compressedFormData.append("media", file);
         }
       }
 
       setLoadingText("Mengunggah ke server...");
       await action(compressedFormData);
-    } catch (error) {
-      console.error("Gagal memproses file:", error);
-      alert("Terjadi kesalahan saat memproses media.");
+    } catch (error: any) {
+      console.error("Detail Error Upload:", error);
+      alert(`Gagal: ${error?.message || "Terjadi kesalahan saat memproses media."}`);
       setIsCompressing(false);
     }
   }
