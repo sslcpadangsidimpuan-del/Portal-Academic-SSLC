@@ -5,28 +5,15 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 
-// Inisialisasi Supabase Client dengan header otentikasi kustom untuk mendukung Secret Key Supabase format baru (sb_secret_...)
+// Inisialisasi bersih: Versi terbaru supabase-js sudah otomatis mengenali format sb_secret_...
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseSecretKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-const supabase = createClient(supabaseUrl, supabaseSecretKey, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-  },
-  global: {
-    headers: {
-      Authorization: `Bearer ${supabaseSecretKey}`,
-    },
-  },
-});
+const supabase = createClient(supabaseUrl, supabaseSecretKey);
 
 export default async function GuruProfilePage() {
-  // 1. Ambil data sesi guru yang sedang login
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
 
-  // 2. Tarik data profil guru dari database
   const currentUser = await prisma.user.findUnique({
     where: { username: (session.user as any).username },
     include: { guruProfile: true },
@@ -47,15 +34,12 @@ export default async function GuruProfilePage() {
     const file = formData.get("signature") as File;
     if (!file || file.size === 0) return;
 
-    // A. Buat buffer dari file yang diunggah
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // B. Ambil ekstensi asli file dan buat nama file unik
     const ext = file.name.split('.').pop() || 'png';
     const filePath = `signatures/ttd-${guruProfileId}-${Date.now()}.${ext}`;
 
-    // C. Unggah file ke Supabase Storage (Bucket: media)
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from("media")
       .upload(filePath, buffer, {
@@ -68,20 +52,15 @@ export default async function GuruProfilePage() {
       throw new Error(`Gagal mengunggah tanda tangan: ${uploadError.message}`);
     }
 
-    // D. Ambil Public URL dari file yang diunggah
     const { data: publicUrlData } = supabase.storage
       .from("media")
       .getPublicUrl(uploadData.path);
 
-    const signatureUrl = publicUrlData.publicUrl;
-
-    // E. Simpan Public URL ke Database Prisma
     await prisma.guruProfile.update({
       where: { id: guruProfileId },
-      data: { signatureUrl: signatureUrl }
+      data: { signatureUrl: publicUrlData.publicUrl }
     });
 
-    // Refresh halaman agar TTD baru langsung muncul
     revalidatePath("/dashboard/guru/profile");
   }
 
@@ -97,7 +76,6 @@ export default async function GuruProfilePage() {
       
       <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
         
-        {/* INFORMASI DASAR */}
         <div className="mb-8">
           <h2 className="text-lg font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Informasi Akun</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -112,11 +90,9 @@ export default async function GuruProfilePage() {
           </div>
         </div>
 
-        {/* AREA TANDA TANGAN DIGITAL */}
         <div>
           <h2 className="text-lg font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Tanda Tangan Digital</h2>
           
-          {/* Tampilkan TTD jika sudah pernah diunggah */}
           {currentUser.guruProfile.signatureUrl ? (
             <div className="mb-6">
               <p className="text-sm text-slate-500 mb-2 font-medium">Tanda Tangan Saat Ini:</p>
@@ -135,7 +111,6 @@ export default async function GuruProfilePage() {
             </div>
           )}
 
-          {/* Form Upload TTD */}
           <form action={handleUploadSignature} className="bg-slate-50 p-5 rounded-xl border border-slate-200">
             <label className="block text-sm font-bold text-slate-700 mb-2">
               Perbarui / Unggah Tanda Tangan
