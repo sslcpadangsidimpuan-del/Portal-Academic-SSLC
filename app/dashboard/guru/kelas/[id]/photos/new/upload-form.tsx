@@ -31,11 +31,10 @@ export function UploadForm({ action, students }: UploadFormProps) {
       compressedFormData.append("students", studentId as string);
     });
 
-    // Opsi kompresi foto tanpa parameter libURL yang bermasalah
     const compressionOptions = {
-      maxSizeMB: 0.8,              // Ukuran maksimal ~800KB
-      maxWidthOrHeight: 1280,      // Resolusi maksimal 1280px
-      useWebWorker: false,         // Matikan Web Worker sementara untuk menghindari bundler conflict
+      maxSizeMB: 0.8,
+      maxWidthOrHeight: 1280,
+      useWebWorker: false,
       alwaysKeepResolution: true
     };
 
@@ -61,6 +60,14 @@ export function UploadForm({ action, students }: UploadFormProps) {
       setLoadingText("Mengunggah ke server...");
       await action(compressedFormData);
     } catch (error: any) {
+      // 🟢 PERBAIKAN: Jika error disebabkan oleh redirect Next.js, abaikan dan biarkan halaman berpindah!
+      if (
+        error?.message?.includes("NEXT_REDIRECT") || 
+        error?.digest?.includes("NEXT_REDIRECT")
+      ) {
+        return;
+      }
+
       console.error("Detail Error Upload:", error);
       alert(`Gagal: ${error?.message || "Terjadi kesalahan saat memproses media."}`);
       setIsCompressing(false);
