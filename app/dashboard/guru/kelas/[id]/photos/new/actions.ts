@@ -42,27 +42,31 @@ export async function handleUploadAction(levelId: string, formData: FormData) {
   for (const file of files) {
     if (file.size === 0) continue;
 
-    const originalBuffer = Buffer.from(await file.arrayBuffer());
     const isVideo = file.type.startsWith("video/");
     const fileType = isVideo ? "video" : "image";
     
     const extension = isVideo ? file.name.split('.').pop() : "jpg";
     const uniqueFilename = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${extension}`;
 
-    let finalBuffer: Buffer;
+    let uploadBody: File | Blob;
 
     if (isVideo) {
-      finalBuffer = originalBuffer;
+      // Untuk video, langsung gunakan objek File bawaan browser
+      uploadBody = file; 
     } else {
-      finalBuffer = await sharp(originalBuffer)
+      // Untuk gambar, konversi Buffer sharp ke tipe Blob agar Next.js tidak mengubahnya jadi teks JSON
+      const originalBuffer = Buffer.from(await file.arrayBuffer());
+      const sharpBuffer = await sharp(originalBuffer)
         .resize({ width: 1080, withoutEnlargement: true })
         .jpeg({ quality: 80 })
         .toBuffer();
+      
+      uploadBody = new Blob([sharpBuffer], { type: 'image/jpeg' });
     }
 
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('media')
-      .upload(uniqueFilename, finalBuffer, {
+      .upload(uniqueFilename, uploadBody, {
         contentType: isVideo ? file.type : 'image/jpeg',
         upsert: false
       });
