@@ -5,10 +5,21 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 
-// Inisialisasi Supabase Client menggunakan Service Role Key
+// Inisialisasi Supabase Client dengan header otentikasi kustom untuk mendukung Secret Key Supabase format baru (sb_secret_...)
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
+const supabaseSecretKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+const supabase = createClient(supabaseUrl, supabaseSecretKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
+  },
+  global: {
+    headers: {
+      Authorization: `Bearer ${supabaseSecretKey}`,
+    },
+  },
+});
 
 export default async function GuruProfilePage() {
   // 1. Ambil data sesi guru yang sedang login
