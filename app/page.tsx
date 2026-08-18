@@ -25,14 +25,18 @@ const NAV_LINKS = [
 ];
 
 const HERO_PHOTOS = [
-  '/act1.JPEG',
+  '/actsM.JPEG',
   '/val1.png',
-  '/act2.JPEG',
+  '/acts1.JPEG',
   '/val2.png',
-  '/act3.JPEG',
+  '/acts2.JPEG',
   '/val3.png',
-  '/act4.JPEG',
+  '/acts3.JPEG',
   '/val4.png',
+  '/acts4.JPEG',
+  '/acts5.JPEG',
+  '/acts6.JPEG',
+  '/acts7.JPEG',
 ];
 
 function StarIcon({ className = '' }: { className?: string }) {
