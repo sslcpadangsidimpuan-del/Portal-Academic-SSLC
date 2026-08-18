@@ -25,7 +25,7 @@ const NAV_LINKS = [
 ];
 
 const HERO_PHOTOS = [
-  '/actsM.jpeg',
+  '/actsM.png',
   '/val1.png',
   '/act4.jpeg',
   '/val2.png',
