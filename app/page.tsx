@@ -230,7 +230,7 @@ export default function LandingPage() {
       >
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <Link href="#hero" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Smart Step Learning Center" width={160} height={158} className="h-9 md:h-11 w-auto" priority />
+            <Image src="/logotnsp.png" alt="Smart Step Learning Center" width={160} height={158} className="h-9 md:h-11 w-auto" priority />
           </Link>
 
           <div className="hidden md:flex items-center gap-6 text-sm font-semibold">

@@ -83,6 +83,7 @@ export default async function SiswaPhotoGalleryPage() {
                 key={item.id} 
                 className="bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300 relative"
               >
+                {/* Badge Tag */}
                 <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 pointer-events-none">
                   {item.levelId === null ? (
                     <span className="bg-amber-500 text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full backdrop-blur-xs shadow-xs">
@@ -99,7 +100,8 @@ export default async function SiswaPhotoGalleryPage() {
                   )}
                 </div>
 
-                <div className="relative aspect-square w-full bg-slate-900 overflow-hidden group/image flex items-center justify-center">
+                {/* Media Preview (Foto / Video) */}
+                <div className="relative aspect-square w-full bg-slate-900 overflow-hidden flex items-center justify-center">
                   {isVideo ? (
                     <video 
                       src={item.url} 
@@ -112,27 +114,14 @@ export default async function SiswaPhotoGalleryPage() {
                     <img 
                       src={item.url} 
                       alt={item.caption || "Dokumentasi Belajar"} 
-                      className="object-cover w-full h-full group-hover/image:scale-102 transition-transform duration-300"
+                      className="object-cover w-full h-full group-hover:scale-102 transition-transform duration-300"
                       loading="lazy"
                     />
                   )}
-                  
-                  {!isVideo && (
-                    <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/image:opacity-100 transition-opacity duration-200 flex items-center justify-center backdrop-blur-xs p-2 pointer-events-none group-hover/image:pointer-events-auto">
-                      <a
-                        href={item.url}
-                        download={`Dokumentasi_${new Date(item.createdAt).getTime()}.jpg`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-white hover:bg-slate-100 text-slate-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-xs shadow-md transition-all flex items-center gap-1.5 transform translate-y-2 group-hover/image:translate-y-0 duration-300 text-center"
-                      >
-                        📥 <span className="inline">Simpan Foto</span>
-                      </a>
-                    </div>
-                  )}
                 </div>
 
-                <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between bg-slate-50/30 border-t border-slate-100 space-y-1.5 sm:space-y-2">
+                {/* Card Footer Info & Download Button Statis */}
+                <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between bg-slate-50/30 border-t border-slate-100 space-y-2">
                   <div>
                     {item.caption ? (
                       <p className="text-[11px] sm:text-xs text-slate-800 font-semibold leading-snug line-clamp-2 break-words mb-1">
@@ -150,6 +139,17 @@ export default async function SiswaPhotoGalleryPage() {
                       })}
                     </p>
                   </div>
+
+                  {/* 📥 Tombol Download Statis (Selalu Terlihat di HP/Desktop) */}
+                  <a
+                    href={item.url}
+                    download={`Dokumentasi_${new Date(item.createdAt).getTime()}.${isVideo ? 'mp4' : 'jpg'}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full mt-1 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 py-1.5 sm:py-2 px-3 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-xs transition-colors flex items-center justify-center gap-1.5 text-center cursor-pointer active:scale-95"
+                  >
+                    <span>📥</span> Unduh {isVideo ? 'Video' : 'Foto'}
+                  </a>
 
                   {!item.isPublic && item.tags.length > 0 && (
                     <div className="pt-1 border-t border-slate-100 hidden sm:block">
