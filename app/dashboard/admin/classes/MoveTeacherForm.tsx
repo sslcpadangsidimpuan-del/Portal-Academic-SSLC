@@ -50,7 +50,7 @@ export default function MoveTeacherForm({ teachers, levels }: { teachers: any[],
   };
 
   // Kelompokkan kelas berdasarkan kategori agar rapi di UI
-  const categories = ["Regular", "Nursery", "Preschool", "Bimbel"];
+  const categories = ["Regular", "Nursery", "Preschool", "Bimbel", "Former Students"];
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6">

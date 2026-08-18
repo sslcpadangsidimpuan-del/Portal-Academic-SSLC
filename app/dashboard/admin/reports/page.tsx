@@ -90,7 +90,7 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
                 name="search" 
                 defaultValue={searchQuery} 
                 placeholder="Cari Nama / NIS..." 
-                className="flex-1 p-2 sm:p-2.5 text-xs sm:text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="flex-1 text-slate-400 p-2 sm:p-2.5 text-xs sm:text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <button type="submit" className="bg-slate-800 text-white px-3 sm:px-4 rounded-lg text-xs sm:text-sm font-bold hover:bg-slate-700 transition-colors">
                 Cari
