@@ -25,18 +25,18 @@ const NAV_LINKS = [
 ];
 
 const HERO_PHOTOS = [
-  '/actsM.JPEG',
+  '/actsM.jpeg',
   '/val1.png',
-  '/acts1.JPEG',
+  '/acts1.jpeg',
   '/val2.png',
-  '/acts2.JPEG',
+  '/acts2.jpeg',
   '/val3.png',
-  '/acts3.JPEG',
+  '/acts3.jpeg',
   '/val4.png',
-  '/acts4.JPEG',
-  '/acts5.JPEG',
-  '/acts6.JPEG',
-  '/acts7.JPEG',
+  '/acts4.jpeg',
+  '/acts5.jpeg',
+  '/acts6.jpeg',
+  '/acts7.jpeg',
 ];
 
 function StarIcon({ className = '' }: { className?: string }) {
