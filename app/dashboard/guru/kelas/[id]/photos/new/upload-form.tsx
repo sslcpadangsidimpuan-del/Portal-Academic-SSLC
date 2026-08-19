@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import imageCompression from "browser-image-compression";
+import { generateUploadTickets } from "./actions"; // Import fungsi "Tiket VIP" yang baru kita buat
 
 interface UploadFormProps {
   action: (formData: FormData) => Promise<void>;
@@ -20,47 +21,100 @@ export function UploadForm({ action, students }: UploadFormProps) {
     const originalFormData = new FormData(form);
     const files = originalFormData.getAll("media") as File[];
 
-    const compressedFormData = new FormData();
-
-    // Salin variabel form non-file
-    compressedFormData.append("caption", (originalFormData.get("caption") as string) || "");
-    compressedFormData.append("visibility", (originalFormData.get("visibility") as string) || "public");
-    
-    const selectedStudents = originalFormData.getAll("students");
-    selectedStudents.forEach((studentId) => {
-      compressedFormData.append("students", studentId as string);
-    });
-
-    const compressionOptions = {
-      maxSizeMB: 0.8,
-      maxWidthOrHeight: 1280,
-      useWebWorker: false,
-      alwaysKeepResolution: true
-    };
+    if (!files || files.length === 0 || files[0].size === 0) {
+      alert("Harap pilih file terlebih dahulu.");
+      setIsCompressing(false);
+      return;
+    }
 
     try {
+      const compressionOptions = {
+        maxSizeMB: 0.8,
+        maxWidthOrHeight: 1280,
+        useWebWorker: false,
+        alwaysKeepResolution: true
+      };
+
+      const finalFiles: File[] = [];
+      const fileConfigs: { name: string, type: string }[] = [];
+
+      // 1. KOMPRESI FOTO DI BROWSER
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
 
         if (file.type.startsWith("image/")) {
-          setLoadingText(`Mengompresi & menyesuaikan foto (${i + 1}/${files.length})...`);
-          
+          setLoadingText(`Menyesuaikan ukuran foto (${i + 1}/${files.length})...`);
           const compressedFile = await imageCompression(file, compressionOptions);
           
           const finalFile = new File([compressedFile], file.name, {
             type: compressedFile.type || "image/jpeg",
           });
-          
-          compressedFormData.append("media", finalFile);
+          finalFiles.push(finalFile);
+          fileConfigs.push({ name: finalFile.name, type: finalFile.type });
         } else {
-          compressedFormData.append("media", file);
+          // Video dibiarkan utuh
+          finalFiles.push(file);
+          fileConfigs.push({ name: file.name, type: file.type || "video/mp4" });
         }
       }
 
-      setLoadingText("Mengunggah ke server...");
-      await action(compressedFormData);
+      // 2. MINTA "TIKET JALUR KHUSUS" (SIGNED URL) DARI SERVER VERCEL
+      setLoadingText("Meminta izin upload ke cloud...");
+      const tickets = await generateUploadTickets(fileConfigs);
+
+      if (tickets.length !== finalFiles.length) {
+        throw new Error("Gagal mendapatkan izin upload untuk seluruh file.");
+      }
+
+      const uploadedUrls: string[] = [];
+      const uploadedTypes: string[] = [];
+
+      // 3. UPLOAD LANGSUNG (DIRECT UPLOAD) KE SUPABASE MENGGUNAKAN TIKET
+      for (let i = 0; i < finalFiles.length; i++) {
+        const file = finalFiles[i];
+        const ticket = tickets[i];
+        
+        setLoadingText(`Mengunggah ${ticket.fileType === 'video' ? 'Video' : 'Foto'} (${i + 1}/${finalFiles.length})...`);
+
+        // Mengirim file LANGSUNG ke Supabase Storage (bypass Vercel)
+        const uploadResponse = await fetch(ticket.signedUrl, {
+          method: "PUT",
+          body: file,
+          headers: {
+            "Content-Type": file.type || (ticket.fileType === 'video' ? "video/mp4" : "image/jpeg"),
+          },
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error(`Gagal mengunggah ${file.name}`);
+        }
+
+        // Menyimpan URL hasil unggahan yang sukses ke dalam daftar
+        uploadedUrls.push(ticket.publicUrl);
+        uploadedTypes.push(ticket.fileType);
+      }
+
+      // 4. SIMPAN DATA KE DATABASE (Hanya Mengirim URL & Teks, Tidak Mengirim File!)
+      setLoadingText("Menyimpan ke galeri...");
+      
+      const dbFormData = new FormData();
+      dbFormData.append("caption", (originalFormData.get("caption") as string) || "");
+      dbFormData.append("visibility", (originalFormData.get("visibility") as string) || "public");
+      
+      const selectedStudents = originalFormData.getAll("students");
+      selectedStudents.forEach((studentId) => {
+        dbFormData.append("students", studentId as string);
+      });
+
+      // Menambahkan array URL dan tipe file ke payload FormData
+      uploadedUrls.forEach((url) => dbFormData.append("uploadedUrls", url));
+      uploadedTypes.forEach((type) => dbFormData.append("uploadedTypes", type));
+
+      // Jalankan Server Action untuk menyimpan ke database (Aman, Vercel tidak tersedak)
+      await action(dbFormData);
+
     } catch (error: any) {
-      // 🟢 PERBAIKAN: Jika error disebabkan oleh redirect Next.js, abaikan dan biarkan halaman berpindah!
+      // Abaikan error NEXT_REDIRECT agar perpindahan halaman sukses
       if (
         error?.message?.includes("NEXT_REDIRECT") || 
         error?.digest?.includes("NEXT_REDIRECT")

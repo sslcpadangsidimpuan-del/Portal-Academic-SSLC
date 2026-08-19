@@ -4,7 +4,7 @@ import React from "react";
 
 export default function ContactAdmin() {
   // Nomor WA Admin SSLC (Sesuaikan nomor jika perlu)
-  const waNumber = "6281234567890"; 
+  const waNumber = "6282275058957"; 
   const waMessage = encodeURIComponent("Halo Admin SSLC, saya butuh bantuan mengenai sistem portal.");
   const waUrl = `https://wa.me/${waNumber}?text=${waMessage}`;
 
