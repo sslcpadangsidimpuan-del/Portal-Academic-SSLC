@@ -59,7 +59,7 @@ export default function MoveStudentForm({ students, levels }: { students: any[],
     });
   };
 
-  const categories = ["Regular", "Nursery", "Preschool", "Bimbel"];
+  const categories = ["Regular", "Nursery", "Preschool", "Bimbel", "Former Students",];
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 border-t-4 border-t-amber-500">
