@@ -22,8 +22,8 @@ export default async function ManageNotificationsPage() {
   return (
     <div className="p-8 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-800">Kirim Pengumuman</h1>
-        <p className="text-slate-500 mt-1">Kelola notifikasi, tagihan, dan pesan massal untuk pengguna.</p>
+        <h1 className="text-3xl font-bold text-slate-800">Notification</h1>
+        <p className="text-slate-500 mt-1">Manage notifications, bills, and mass messages for users.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -32,11 +32,11 @@ export default async function ManageNotificationsPage() {
         </div>
 
         <div className="lg:col-span-7 space-y-6">
-          <h2 className="text-xl font-bold text-slate-800">Pengumuman Terkirim & Aktif</h2>
+          <h2 className="text-xl font-bold text-slate-800">Announcement Sent & Active.</h2>
           
           {notifications.length === 0 ? (
             <div className="bg-white p-10 rounded-2xl border border-slate-100 text-center text-slate-400">
-              Belum ada pengumuman yang tayang.
+              No announcements have been posted yet.
             </div>
           ) : (
             notifications.map(notif => {
@@ -62,7 +62,7 @@ export default async function ManageNotificationsPage() {
                     <form action={deleteGlobalNotification}>
                       <input type="hidden" name="id" value={notif.id} />
                       <button type="submit" className="bg-white/80 hover:bg-white text-rose-500 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-colors border border-rose-100">
-                        Hapus Semua
+                        Delete All
                       </button>
                     </form>
                   </div>
@@ -71,10 +71,10 @@ export default async function ManageNotificationsPage() {
 
                   <div className="bg-white/60 rounded-xl p-4 border border-white/40">
                     <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">
-                      Masih Tayang di {notif.recipients.length} Pengguna:
+                      Still airing on {notif.recipients.length} Users:
                     </p>
                     {notif.recipients.length === 0 ? (
-                      <p className="text-xs text-slate-400 italic">Semua target sudah dihapus / tidak ada target.</p>
+                      <p className="text-xs text-slate-400 italic">All targets have been deleted / there are no targets.</p>
                     ) : (
                       <div className="flex flex-wrap gap-2">
                         {notif.recipients.map(recipient => (

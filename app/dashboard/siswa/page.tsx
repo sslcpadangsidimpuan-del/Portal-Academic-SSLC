@@ -39,10 +39,10 @@ export default async function SiswaDashboard() {
       {/* Banner Ucapan Selamat Datang */}
       <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl sm:rounded-3xl p-5 sm:p-8 text-white shadow-lg shadow-emerald-100/60">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1.5 sm:mb-2 tracking-tight">
-          Halo, {user.name}! 👋
+          Hallo, {user.name}! 👋
         </h1>
         <p className="text-emerald-50 opacity-90 text-sm sm:text-base md:text-lg leading-relaxed">
-          Selamat datang di portal akademik Smart Step Learning Center.
+          Welcome to integrated academic portal Smart Step Learning Center.
         </p>
       </div>
 
@@ -55,7 +55,7 @@ export default async function SiswaDashboard() {
             🎓
           </div>
           <div className="min-w-0">
-            <h3 className="text-slate-400 sm:text-slate-500 text-xs sm:text-sm font-semibold tracking-wide uppercase">Kelas Saat Ini</h3>
+            <h3 className="text-slate-400 sm:text-slate-500 text-xs sm:text-sm font-semibold tracking-wide uppercase">Current Class</h3>
             {user.siswaProfile?.levels && user.siswaProfile.levels.length > 0 ? (
               <div className="flex flex-wrap gap-1.5 mt-1">
                 {user.siswaProfile.levels.map((lvl: any) => (

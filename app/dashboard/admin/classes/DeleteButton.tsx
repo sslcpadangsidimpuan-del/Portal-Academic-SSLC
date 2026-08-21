@@ -23,7 +23,7 @@ export default function DeleteButton({ id }: { id: string }) {
           }
         }}
       >
-        Hapus
+        Delete
       </button>
     </form>
   );

@@ -86,7 +86,7 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
 
   const handleDownloadMonthlyReport = async () => {
     if (monthlyReports.length === 0) {
-      alert("Belum ada laporan harian pada bulan ini untuk kelas yang dipilih.");
+      alert("No daily reports are available for the selected class this month.");
       return;
     }
 
@@ -130,13 +130,13 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
         {/* DROPDOWN FILTER KELAS */}
         {levels && levels.length > 0 && (
           <div className="flex items-center justify-between bg-white p-3 rounded-2xl border border-slate-100 shadow-xs">
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Pilih Kelas:</span>
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Select Class:</span>
             <select
               value={selectedLevelId}
               onChange={(e) => setSelectedLevelId(e.target.value)}
               className="bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm font-semibold rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
-              <option value="ALL">Semua Kelas ({levels.length})</option>
+              <option value="ALL">All Classes ({levels.length})</option>
               {levels.map((lvl: any) => (
                 <option key={lvl.id} value={lvl.id}>
                   {lvl.category} — {lvl.name}
@@ -151,13 +151,13 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
             onClick={handlePrevMonth} 
             className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors shadow-xs shrink-0"
           >
-            ← <span className="hidden sm:inline">Sebelumnya</span>
+            ← <span className="hidden sm:inline">Previous</span>
           </button>
           
           <div className="text-center min-w-0">
-            <h1 className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider block">Kehadiran & Laporan</h1>
+            <h1 className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider block">Attendance & Daily Report</h1>
             <p className="text-sm sm:text-lg font-bold text-slate-800 truncate mt-0.5">
-              Bulan: <span className="text-emerald-600">{monthName}</span>
+              Month: <span className="text-emerald-600">{monthName}</span>
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
             onClick={handleNextMonth} 
             className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:bg-slate-100 hover:text-indigo-600 transition-colors shadow-xs shrink-0"
           >
-            <span className="hidden sm:inline">Berikutnya</span> →
+            <span className="hidden sm:inline">Next</span> →
           </button>
         </div>
 
@@ -176,7 +176,7 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
             disabled={isDownloading}
             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm py-3 rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 disabled:bg-slate-400"
           >
-            {isDownloading ? "⏳ Sedang Menyiapkan Dokumen..." : "📥 Download Laporan Bulan Ini (PDF)"}
+            {isDownloading ? "⏳ Processing..." : "📥 Download Daily Report (PDF)"}
           </button>
         )}
       </div>
@@ -235,7 +235,7 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
 
                 {daftarLaporan && (
                   <div className="w-full text-[7px] sm:text-[9px] bg-white/20 px-0.5 py-0.5 sm:px-1 rounded-sm sm:rounded font-medium text-white text-center truncate tracking-tighter leading-none mb-0.5">
-                    📄 {daftarLaporan.length} <span className="hidden sm:inline">Laporan</span>
+                    📄 {daftarLaporan.length} <span className="hidden sm:inline">Report</span>
                   </div>
                 )}
               </div>
@@ -246,10 +246,10 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
 
       {/* LEGENDA STATUS ABSENSI */}
       <div className="flex flex-wrap gap-3 items-center justify-center mt-6 text-[10px] sm:text-xs text-slate-500 font-medium px-2">
-        <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-500 inline-block"></span> Hadir</div>
-        <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-blue-500 inline-block"></span> Izin</div>
-        <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-amber-400 inline-block"></span> Sakit</div>
-        <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-rose-500 inline-block"></span> Alpa</div>
+        <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-500 inline-block"></span> Present</div>
+        <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-blue-500 inline-block"></span> Excused</div>
+        <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-amber-400 inline-block"></span> Sick</div>
+        <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-rose-500 inline-block"></span> Unexcused</div>
       </div>
 
       {/* --- MODAL DETAIL LAPORAN HARIAN --- */}
@@ -267,7 +267,7 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
             <div className="flex items-center gap-3 mb-4 border-b border-slate-100 pb-3 sm:pb-4 pr-6">
               <span className="text-2xl sm:text-3xl shrink-0">📚</span>
               <div className="min-w-0">
-                <h3 className="text-base sm:text-xl font-bold text-slate-800 truncate">Laporan Pembelajaran</h3>
+                <h3 className="text-base sm:text-xl font-bold text-slate-800 truncate">Daily Report</h3>
                 <p className="text-[10px] sm:text-xs text-slate-400 mt-0.5 truncate">{selectedDateText}</p>
               </div>
             </div>
@@ -287,7 +287,7 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
                           </span>
                         )}
                       </div>
-                      <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0 bg-white border border-slate-100 px-1.5 py-0.5 rounded">Sesi #{idx + 1}</span>
+                      <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0 bg-white border border-slate-100 px-1.5 py-0.5 rounded">Session #{idx + 1}</span>
                     </div>
 
                     <div className="bg-slate-50 p-2.5 sm:p-3 rounded-lg border border-slate-100">

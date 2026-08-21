@@ -134,20 +134,20 @@ export default function StudentReportClient({
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Laporan Semester</h1>
-          <p className="mt-1 text-slate-500 text-sm sm:text-base">Pantau hasil pencapaian akademik aktif dan riwayat rapor Anda di sini.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Semester Report</h1>
+          <p className="mt-1 text-slate-500 text-sm sm:text-base">Keep track of your active academic achievements and report card history here.</p>
         </div>
 
         {/* Dropdown Filter Kelas Terkelompok */}
         {allReportLevels.length > 1 && (
           <div className="flex items-center gap-2 bg-white p-2 rounded-xl border border-slate-200 shadow-xs">
-            <span className="text-xs font-bold text-slate-400 uppercase pl-2">Filter Kelas:</span>
+            <span className="text-xs font-bold text-slate-400 uppercase pl-2">Filter:</span>
             <select
               value={selectedLevelId}
               onChange={(e) => setSelectedLevelId(e.target.value)}
               className="bg-slate-50 border border-slate-200 text-slate-700 text-sm font-semibold rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
-              <option value="ALL">Semua Kelas ({allReportLevels.length})</option>
+              <option value="ALL">All Classes ({allReportLevels.length})</option>
 
               {currentActiveLevels.length > 0 && (
                 <optgroup label="🟢 Kelas Aktif Saat Ini">
@@ -295,8 +295,8 @@ export default function StudentReportClient({
       ) : (
         <div className="py-16 text-center bg-white rounded-3xl border-2 border-dashed border-slate-200">
           <div className="text-4xl mb-4">📚</div>
-          <h3 className="text-lg sm:text-xl font-semibold text-slate-700">Belum Ada Rapor Semester</h3>
-          <p className="text-slate-500 mt-2 text-sm max-w-md mx-auto">Nilai dan evaluasi semester Anda akan muncul di sini setelah guru menginputkannya.</p>
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-700">No Semester Report Yet</h3>
+          <p className="text-slate-500 mt-2 text-sm max-w-md mx-auto">Your semester grades and evaluations will appear here after the teacher inputs them.</p>
         </div>
       )}
 
@@ -311,7 +311,7 @@ export default function StudentReportClient({
                 {isDownloading ? "⏳ Memproses..." : "📥 Download PDF"}
               </button>
               <button onClick={() => setIsPreviewOpen(false)} style={{ backgroundColor: '#f1f5f9', color: '#334155', padding: '8px 16px', borderRadius: '8px', fontWeight: 'bold', fontSize: '12px', border: 'none', cursor: 'pointer' }}>
-                ✕ Tutup
+                ✕ Close
               </button>
             </div>
           </div>

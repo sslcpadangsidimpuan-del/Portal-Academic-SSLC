@@ -29,10 +29,10 @@ export default function ContactAdmin() {
       {/* 📝 Teks Hanya Tampil di Tablet & Desktop (Disembunyikan di HP / hidden sm:flex) */}
       <div className="hidden sm:flex flex-col text-left pr-1">
         <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-wider leading-tight">
-          BUTUH BANTUAN?
+          Need Help?
         </span>
         <span className="text-xs font-bold text-slate-700 leading-tight">
-          Hubungi Admin
+          Contact Admin
         </span>
       </div>
     </a>

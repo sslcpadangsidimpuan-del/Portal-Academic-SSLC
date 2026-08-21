@@ -37,16 +37,16 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
   return (
     <div className="p-8 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-800">Kelola Level & Kelas</h1>
-        <p className="text-slate-500 mt-1">Manajemen kelas, pergerakan siswa, dan penugasan guru.</p>
+        <h1 className="text-3xl font-bold text-slate-800">Class Management</h1>
+        <p className="text-slate-500 mt-1">Class management, student movement, and teacher assignments.</p>
       </div>
 
       <div className="flex space-x-2 border-b border-slate-200 mb-8 overflow-x-auto">
         {categories.map((kategori) => {
           const isActive = activeTab === kategori;
           let label = kategori;
-          if (kategori === "PINDAH_SISWA") label = "🔄 Pindah Siswa";
-          if (kategori === "PINDAH_GURU") label = "👨‍🏫 Assign Guru";
+          if (kategori === "PINDAH_SISWA") label = "🔄 Move Student";
+          if (kategori === "PINDAH_GURU") label = "👨‍🏫 Teacher Assignments";
           
           return (
             <Link 
@@ -80,7 +80,7 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
               <h2 className="text-lg font-bold text-slate-800">
                 {activeTab === "PINDAH_SISWA" ? "Daftar Penempatan Siswa" 
                  : activeTab === "PINDAH_GURU" ? "Daftar Penugasan Guru" 
-                 : `Daftar Kelas ${activeTab}`}
+                 : `Class List ${activeTab}`}
               </h2>
             </div>
             
@@ -90,20 +90,20 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
                   <tr>
                     {activeTab === "PINDAH_SISWA" ? (
                       <>
-                        <th className="p-4 font-semibold">Nama Siswa</th>
-                        <th className="p-4 font-semibold">Kelas Saat Ini</th>
+                        <th className="p-4 font-semibold">Student Name</th>
+                        <th className="p-4 font-semibold">Current Class</th>
                       </>
                     ) : activeTab === "PINDAH_GURU" ? (
                       <>
-                        <th className="p-4 font-semibold">Nama Guru</th>
-                        <th className="p-4 font-semibold">Kelas Yang Diajar</th>
+                        <th className="p-4 font-semibold">Teacher's Name</th>
+                        <th className="p-4 font-semibold">Classes Taught</th>
                       </>
                     ) : (
                       <>
-                        <th className="p-4 font-semibold">Nama Kelas</th>
-                        <th className="p-4 font-semibold text-center">Jumlah Siswa</th>
-                        <th className="p-4 font-semibold text-center">Jumlah Guru</th>
-                        <th className="p-4 font-semibold text-right">Aksi</th>
+                        <th className="p-4 font-semibold">Class Name</th>
+                        <th className="p-4 font-semibold text-center">Number of Students</th>
+                        <th className="p-4 font-semibold text-center">Number of Teachers</th>
+                        <th className="p-4 font-semibold text-right">Action</th>
                       </>
                     )}
                   </tr>
@@ -115,7 +115,7 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
                       <tr key={s.id} className="hover:bg-slate-50">
                         <td className="p-4 font-bold text-slate-800">
                           {s.name} 
-                          <span className="block text-xs text-slate-500 font-mono font-normal">NIS: {s.username}</span>
+                          <span className="block text-xs text-slate-500 font-mono font-normal">ID: {s.username}</span>
                         </td>
                         <td className="p-4">
                           {assignedLevels.length > 0 ? (
@@ -127,7 +127,7 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
                               ))}
                             </div>
                           ) : (
-                            <span className="text-slate-400 text-xs italic">Belum Ditempatkan</span>
+                            <span className="text-slate-400 text-xs italic">Not Assinged Yet</span>
                           )}
                         </td>
                       </tr>
@@ -149,7 +149,7 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
                               ))}
                             </div>
                           ) : (
-                            <span className="text-slate-400 text-xs italic">Belum Ditempatkan</span>
+                            <span className="text-slate-400 text-xs italic">Not Assinged Yet</span>
                           )}
                         </td>
                       </tr>
@@ -158,7 +158,7 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
 
                   {!activeTab.includes("PINDAH") && (
                     filteredLevels.length === 0 ? (
-                      <tr><td colSpan={4} className="p-8 text-center text-slate-400">Belum ada kelas di kategori ini.</td></tr>
+                      <tr><td colSpan={4} className="p-8 text-center text-slate-400">There aren't any classes in this category yet.</td></tr>
                     ) : (
                       filteredLevels.map(level => (
                         <tr key={level.id} className="hover:bg-slate-50 transition-colors">

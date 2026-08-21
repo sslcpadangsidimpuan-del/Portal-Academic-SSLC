@@ -13,11 +13,11 @@ export function SidebarGuru() {
   const closeMenu = () => setIsOpen(false);
 
   const menuItems = [
-    { name: "Beranda", href: "/dashboard/guru", icon: "🏠" },
-    { name: "Level & Kelas", href: "/dashboard/guru/kelas", icon: "📚" },
-    { name: "Dokumentasi", href: "/dashboard/guru/photos", icon: "🖼️" },
-    { name: "Evaluasi & Rapor", href: "/dashboard/guru/evaluasi", icon: "📊" },
-    { name: "Profile", href: "/dashboard/guru/profile", icon: "📊"}
+    { name: "Home", href: "/dashboard/guru", icon: "🏠" },
+    { name: "Class & Level", href: "/dashboard/guru/kelas", icon: "📚" },
+    { name: "Galery", href: "/dashboard/guru/photos", icon: "🖼️" },
+    { name: "Student Report", href: "/dashboard/guru/evaluasi", icon: "📊" },
+    { name: "Profile", href: "/dashboard/guru/profile", icon: "👤"}
   ];
 
   return (
@@ -85,7 +85,7 @@ export function SidebarGuru() {
             onClick={() => { closeMenu(); signOut({ callbackUrl: "/login" }); }}
             className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-rose-600 rounded-xl hover:bg-rose-50 transition-colors"
           >
-            <span>🚪</span> Keluar
+            <span>🚪</span> Logout
           </button>
         </div>
       </aside>

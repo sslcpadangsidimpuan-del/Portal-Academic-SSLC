@@ -27,7 +27,7 @@ export default async function SiswaPhotoGalleryPage() {
   if (!siswa || assignedLevels.length === 0) {
     return (
       <div className="p-4 sm:p-8 text-center bg-white rounded-2xl sm:rounded-3xl border border-slate-200 max-w-xl mx-auto mt-6 sm:mt-12 mx-4">
-        <p className="text-slate-500 font-medium text-sm sm:text-base">Profil siswa atau data kelas tidak ditemukan.</p>
+        <p className="text-slate-500 font-medium text-sm sm:text-base">Information Not found</p>
       </div>
     );
   }
@@ -60,16 +60,16 @@ export default async function SiswaPhotoGalleryPage() {
   return (
     <div className="p-4 sm:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto w-full box-border">
       <div className="mb-4 sm:mb-8 text-left">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Dokumentasi Aktivitas</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Galery</h1>
         <p className="text-slate-500 mt-1 sm:mt-2 text-xs sm:text-base leading-relaxed">
-          Kumpulan momen pembelajaran dan kreativitas {currentUser.name} selama di kelas.
+          {currentUser.name}'s Learning and Creativity Momments.
         </p>
       </div>
 
       <div className="bg-rose-50 border border-rose-200 p-3 sm:p-4 rounded-xl sm:rounded-2xl mb-5 sm:mb-8 flex items-start gap-2.5 sm:gap-3">
         <span className="text-base sm:text-xl leading-none">⚠️</span>
         <p className="text-rose-700 text-xs sm:text-sm font-semibold leading-snug sm:leading-relaxed">
-          *Foto atau Video akan dihapus secara otomatis dalam 30 hari sejak tanggal upload.
+          *Photos or videos will be automatically deleted 30 days after the upload date.
         </p>
       </div>
 
@@ -91,11 +91,11 @@ export default async function SiswaPhotoGalleryPage() {
                     </span>
                   ) : item.isPublic ? (
                     <span className="bg-emerald-500/95 text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full backdrop-blur-xs shadow-xs">
-                      🌍 Kelas
+                      🌍 Class
                     </span>
                   ) : (
                     <span className="bg-purple-600/95 text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full backdrop-blur-xs shadow-xs">
-                      ✨ Kamu
+                      ✨ Yours
                     </span>
                   )}
                 </div>
@@ -128,7 +128,7 @@ export default async function SiswaPhotoGalleryPage() {
                         {item.caption}
                       </p>
                     ) : (
-                      <p className="text-[10px] sm:text-xs text-slate-400 italic mb-1">Tanpa deskripsi</p>
+                      <p className="text-[10px] sm:text-xs text-slate-400 italic mb-1">No Desc</p>
                     )}
 
                     <p className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">
@@ -148,13 +148,13 @@ export default async function SiswaPhotoGalleryPage() {
                     rel="noopener noreferrer"
                     className="w-full mt-1 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 py-1.5 sm:py-2 px-3 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-xs transition-colors flex items-center justify-center gap-1.5 text-center cursor-pointer active:scale-95"
                   >
-                    <span>📥</span> Unduh {isVideo ? 'Video' : 'Foto'}
+                    <span>📥</span> Download {isVideo ? 'Video' : 'Foto'}
                   </a>
 
                   {!item.isPublic && item.tags.length > 0 && (
                     <div className="pt-1 border-t border-slate-100 hidden sm:block">
                       <span className="bg-purple-50 text-purple-700 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-md font-medium border border-purple-100 inline-block w-full text-center truncate">
-                        Eksklusif Ditag
+                        Tagged
                       </span>
                     </div>
                   )}
@@ -166,9 +166,9 @@ export default async function SiswaPhotoGalleryPage() {
       ) : (
         <div className="py-16 sm:py-24 text-center bg-white rounded-2xl sm:rounded-3xl border-2 border-dashed border-slate-200 px-4">
           <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">📸</div>
-          <h3 className="text-lg sm:text-xl font-bold text-slate-700">Belum ada media</h3>
+          <h3 className="text-lg sm:text-xl font-bold text-slate-700">Galery is Empty</h3>
           <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xs mx-auto">
-            Foto atau video aktivitas belajar mengajar di kelas Anda akan dibagikan oleh guru di sini.
+            Photos or videos of classroom learning activities will be shared by the teacher here.
           </p>
         </div>
       )}

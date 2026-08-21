@@ -63,8 +63,8 @@ export default function MoveStudentForm({ students, levels }: { students: any[],
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 border-t-4 border-t-amber-500">
-      <h2 className="text-xl font-bold text-slate-800 mb-2">Penempatan Kelas Siswa</h2>
-      <p className="text-sm text-slate-500 mb-6">Pilih siswa dan centang kelas yang akan diikuti (bisa lebih dari satu).</p>
+      <h2 className="text-xl font-bold text-slate-800 mb-2">Student Class Placement</h2>
+      <p className="text-sm text-slate-500 mb-6">Select students and check the classes they will attend (can be more than one).</p>
       
       {message && (
         <div className={`p-4 rounded-xl mb-6 text-sm ${message.type === "error" ? "bg-red-50 text-red-600" : "bg-green-50 text-green-600"}`}>
@@ -74,14 +74,14 @@ export default function MoveStudentForm({ students, levels }: { students: any[],
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm font-semibold text-slate-600 mb-2">1. Pilih Siswa</label>
+          <label className="block text-sm font-semibold text-slate-600 mb-2">1. Choose Student</label>
           <select 
             value={selectedStudentProfileId}
             onChange={handleStudentChange}
             required 
             className="w-full text-slate-700 p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
           >
-            <option value="">-- Pilih Siswa --</option>
+            <option value="">-- Choose Student --</option>
             {students.map(s => {
               const profileId = s.siswaProfile?.id;
               if (!profileId) return null;
@@ -89,7 +89,7 @@ export default function MoveStudentForm({ students, levels }: { students: any[],
               const activeLevels = s.siswaProfile?.levels?.map((l: any) => l.name).join(", ") || "Belum ada kelas";
               return (
                 <option key={profileId} value={profileId}>
-                  {s.name} (NIS: {s.username}) — [{activeLevels}]
+                  {s.name} (ID: {s.username}) — [{activeLevels}]
                 </option>
               );
             })}
@@ -97,7 +97,7 @@ export default function MoveStudentForm({ students, levels }: { students: any[],
         </div>
 
         <div className={selectedStudentProfileId ? "block" : "hidden"}>
-          <label className="block text-sm font-semibold text-slate-600 mb-2">2. Pilih Daftar Kelas</label>
+          <label className="block text-sm font-semibold text-slate-600 mb-2">2. Choose Class List</label>
           <div className="space-y-4 max-h-[45vh] overflow-y-auto pr-2">
             {categories.map(cat => {
               const catLevels = levels.filter(l => l.category === cat);
@@ -130,7 +130,7 @@ export default function MoveStudentForm({ students, levels }: { students: any[],
           disabled={isPending || selectedStudentProfileId === ""} 
           className="w-full mt-2 bg-amber-500 text-white font-bold py-3 rounded-xl hover:bg-amber-600 transition-colors disabled:bg-slate-300 disabled:cursor-not-allowed"
         >
-          {isPending ? "Menyimpan..." : "Simpan Penempatan Kelas"}
+          {isPending ? "Menyimpan..." : "Save Class Placement"}
         </button>
       </form>
     </div>

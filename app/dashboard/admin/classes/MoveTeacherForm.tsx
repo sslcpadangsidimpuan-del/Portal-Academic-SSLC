@@ -61,20 +61,20 @@ export default function MoveTeacherForm({ teachers, levels }: { teachers: any[],
           </svg>
         </div>
         <div>
-          <h2 className="text-lg font-bold text-slate-800">Assign Guru ke Kelas</h2>
-          <p className="text-xs text-slate-500 mt-0.5">Pilih guru dan centang kelas yang akan diajar.</p>
+          <h2 className="text-lg font-bold text-slate-800">Assign Teacher to Class</h2>
+          <p className="text-xs text-slate-500 mt-0.5">Choose a teacher and check the classes they will teach.</p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">1. Pilih Guru</label>
+          <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">1. Choose a Teacher</label>
           <select 
             value={selectedTeacherId}
             onChange={handleTeacherChange}
             className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all font-medium"
           >
-            <option value="">-- Pilih Guru --</option>
+            <option value="">-- Choose a Teacher --</option>
             {teachers.map(t => (
               <option key={t.id} value={t.id}>{t.name}</option>
             ))}
@@ -83,7 +83,7 @@ export default function MoveTeacherForm({ teachers, levels }: { teachers: any[],
 
         {selectedTeacherId && (
           <div className="animate-in slide-in-from-top-2 duration-300">
-            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">2. Pilih Kelas (Bisa Lebih Dari Satu)</label>
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">2. Select Class (You Can Choose More Than One)</label>
             <div className="space-y-4 max-h-[40vh] overflow-y-auto pr-2">
               {categories.map(cat => {
                 const catLevels = levels.filter(l => l.category === cat);
@@ -117,7 +117,7 @@ export default function MoveTeacherForm({ teachers, levels }: { teachers: any[],
           disabled={isPending || !selectedTeacherId}
           className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors mt-2"
         >
-          {isPending ? "Menyimpan..." : "Simpan Penugasan Guru"}
+          {isPending ? "Menyimpan..." : "Save Teacher Assignment"}
         </button>
       </form>
     </div>
