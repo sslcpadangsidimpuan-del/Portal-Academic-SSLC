@@ -74,7 +74,7 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
   return (
     <div className="p-4 sm:p-8 max-w-7xl mx-auto animate-in fade-in duration-500 lg:h-[calc(100vh-4rem)] flex flex-col">
       <div className="mb-4 sm:mb-6 shrink-0">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Check the Report</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Student Report</h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
           Track students' academic records, evaluations, and attendance historically.
         </p>
