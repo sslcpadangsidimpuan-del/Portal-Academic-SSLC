@@ -135,7 +135,7 @@ export default function StudentReportClient({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Semester Report</h1>
-          <p className="mt-1 text-slate-500 text-sm sm:text-base">Keep track of your active academic achievements and report card history here.</p>
+          <p className="mt-1 text-slate-500 text-sm sm:text-base">Keep track of your academic achievements and report card history here.</p>
         </div>
 
         {/* Dropdown Filter Kelas Terkelompok */}
@@ -150,7 +150,7 @@ export default function StudentReportClient({
               <option value="ALL">All Classes ({allReportLevels.length})</option>
 
               {currentActiveLevels.length > 0 && (
-                <optgroup label="🟢 Kelas Aktif Saat Ini">
+                <optgroup label="🟢 Current Class">
                   {currentActiveLevels.map((lvl: any) => (
                     <option key={lvl.id} value={lvl.id}>
                       {lvl.category} — {lvl.name}
@@ -160,7 +160,7 @@ export default function StudentReportClient({
               )}
 
               {pastHistoryLevels.length > 0 && (
-                <optgroup label="📜 Riwayat Kelas (Graduate)">
+                <optgroup label="📜 Graduated">
                   {pastHistoryLevels.map((lvl: any) => (
                     <option key={lvl.id} value={lvl.id}>
                       {lvl.category} — {lvl.name} (Lulus)

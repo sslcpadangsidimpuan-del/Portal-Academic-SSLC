@@ -262,7 +262,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
                                 ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
                                 : "bg-amber-50 text-amber-700 border-amber-200"
                             }`}>
-                              {rep.isActiveClass ? "🟢 current class:" : "📜 Graduated:"} {rep.level.category} — {rep.level.name}
+                              {rep.isActiveClass ? "🟢 Current Class:" : "📜 Graduated:"} {rep.level.category} — {rep.level.name}
                             </span>
                           ) : (
                             <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-2.5 py-1 rounded-md border border-slate-200">

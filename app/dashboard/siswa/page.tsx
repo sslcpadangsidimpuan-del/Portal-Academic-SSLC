@@ -39,7 +39,7 @@ export default async function SiswaDashboard() {
       {/* Banner Ucapan Selamat Datang */}
       <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl sm:rounded-3xl p-5 sm:p-8 text-white shadow-lg shadow-emerald-100/60">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1.5 sm:mb-2 tracking-tight">
-          Hallo, {user.name}! 👋
+          Hi, {user.name}! 👋
         </h1>
         <p className="text-emerald-50 opacity-90 text-sm sm:text-base md:text-lg leading-relaxed">
           Welcome to integrated academic portal Smart Step Learning Center.

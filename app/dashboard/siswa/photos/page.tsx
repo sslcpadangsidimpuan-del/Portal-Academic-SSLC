@@ -60,9 +60,9 @@ export default async function SiswaPhotoGalleryPage() {
   return (
     <div className="p-4 sm:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto w-full box-border">
       <div className="mb-4 sm:mb-8 text-left">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Galery</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Gallery</h1>
         <p className="text-slate-500 mt-1 sm:mt-2 text-xs sm:text-base leading-relaxed">
-          {currentUser.name}'s Learning and Creativity Momments.
+          {currentUser.name}'s Learning and Creativity Moments.
         </p>
       </div>
 

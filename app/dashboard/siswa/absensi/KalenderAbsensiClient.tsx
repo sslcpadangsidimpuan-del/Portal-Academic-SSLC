@@ -301,7 +301,7 @@ export default function KalenderAbsensiClient({ levels, dataAbsensi, dataLaporan
                         <p className="text-[11px] sm:text-xs font-semibold text-slate-800 leading-snug">{data.performance}</p>
                       </div>
                       <div className="bg-indigo-50/60 p-2.5 sm:p-3 rounded-lg border border-indigo-100 flex flex-col justify-center sm:items-center gap-1 sm:gap-1.5 text-left sm:text-center">
-                        <p className="text-[9px] uppercase font-bold text-indigo-600 tracking-wider">English Use</p>
+                        <p className="text-[9px] uppercase font-bold text-indigo-600 tracking-wider">English Use In Class</p>
                         <p className="text-[11px] sm:text-xs font-semibold text-slate-800 leading-snug">{data.englishUse}</p>
                       </div>
                       <div className="bg-emerald-50/60 p-2.5 sm:p-3 rounded-lg border border-emerald-100 flex flex-col justify-center sm:items-center gap-1 sm:gap-1.5 text-left sm:text-center">
