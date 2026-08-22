@@ -18,7 +18,7 @@ export function SidebarSiswa() {
     { name: "Profile", href: "/dashboard/siswa/biodata", icon: "👤" },
     { name: "Semester Report", href: "/dashboard/siswa/report", icon: "📈" },
     { name: "Attendance & Daily Report", href: "/dashboard/siswa/absensi", icon: "📅" },
-    { name: "Galery", href: "/dashboard/siswa/photos", icon: "📸" }
+    { name: "Gallery", href: "/dashboard/siswa/photos", icon: "📸" }
   ];
 
   return (
@@ -92,7 +92,7 @@ export function SidebarSiswa() {
             onClick={() => { closeMenu(); signOut({ callbackUrl: "/login" }); }}
             className="w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold text-rose-600 rounded-xl hover:bg-rose-50 transition-colors"
           >
-            <span>🚪</span> Logout
+            <span>🚪</span> Log out
           </button>
         </div>
       </aside>

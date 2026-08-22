@@ -148,7 +148,7 @@ export default async function SiswaPhotoGalleryPage() {
                     rel="noopener noreferrer"
                     className="w-full mt-1 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 py-1.5 sm:py-2 px-3 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-xs transition-colors flex items-center justify-center gap-1.5 text-center cursor-pointer active:scale-95"
                   >
-                    <span>📥</span> Download {isVideo ? 'Video' : 'Foto'}
+                    <span>📥</span> Download {isVideo ? 'Video' : 'Photo'}
                   </a>
 
                   {!item.isPublic && item.tags.length > 0 && (
