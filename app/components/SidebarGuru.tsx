@@ -85,7 +85,7 @@ export function SidebarGuru() {
             onClick={() => { closeMenu(); signOut({ callbackUrl: "/login" }); }}
             className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-rose-600 rounded-xl hover:bg-rose-50 transition-colors"
           >
-            <span>🚪</span> Logout
+            <span>🚪</span> Log out
           </button>
         </div>
       </aside>

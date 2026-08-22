@@ -114,7 +114,7 @@ export default function SidebarAdmin({ userName }: { userName: string }) {
         {/* Tombol Logout untuk HP */}
         <div className="p-4 border-t border-slate-800 md:hidden">
             <Link href="/api/auth/signout" className="block w-full text-center py-3 bg-rose-500/10 text-rose-400 rounded-xl hover:bg-rose-500/20 transition-colors font-medium">
-               Logout
+               Log out
             </Link>
         </div>
       </aside>

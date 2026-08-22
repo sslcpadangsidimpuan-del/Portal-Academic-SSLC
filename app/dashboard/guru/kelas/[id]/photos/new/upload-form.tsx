@@ -138,7 +138,7 @@ export function UploadForm({ action, students }: UploadFormProps) {
       </div>
       
       <div>
-        <label className="block text-sm font-bold text-slate-700 mb-2">Select Photo / Video (You can choose more than one)</label>
+        <label className="block text-sm font-bold text-slate-700 mb-2">Select Photo / Video (Multiple selections are allowed)</label>
         <input 
           type="file" 
           name="media" 

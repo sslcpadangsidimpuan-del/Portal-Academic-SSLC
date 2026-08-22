@@ -232,7 +232,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
               href={`/dashboard/guru/kelas/${selectedLevelId}/report/${selectedSiswa.id}/semester`}
               className="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white px-5 py-3 rounded-xl font-bold transition-all text-center text-xs sm:text-sm flex items-center justify-center gap-2"
             >
-              <span>📝</span> New Assessment Input
+              <span>📝</span>Input New Assessment 
             </Link>
           </div>
 
@@ -586,7 +586,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
             
             <form onSubmit={handleUpdateSemester} className="space-y-4 overflow-y-auto pr-1 flex-1">
               <div>
-                <label className="text-xs font-bold text-slate-500 uppercase block mb-1">Periode / Term</label>
+                <label className="text-xs font-bold text-slate-500 uppercase block mb-1">Period / Term</label>
                 <input required type="text" value={semesterFormData.term} onChange={e => setSemesterFormData({...semesterFormData, term: e.target.value})} className="w-full border rounded-xl px-4 py-2.5 bg-slate-50 text-slate-800 text-sm outline-none focus:border-indigo-500 font-medium" />
               </div>
 
@@ -659,7 +659,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
               </div>
 
               <div className="pt-3 border-t border-slate-100 flex justify-end gap-2 sticky bottom-0 bg-white py-2">
-                <button type="button" onClick={() => setIsSemesterModalOpen(false)} className="px-4 py-2 rounded-xl font-bold text-xs text-slate-500 bg-slate-100 hover:bg-slate-200">Cencel</button>
+                <button type="button" onClick={() => setIsSemesterModalOpen(false)} className="px-4 py-2 rounded-xl font-bold text-xs text-slate-500 bg-slate-100 hover:bg-slate-200">Cancel</button>
                 <button type="submit" className="px-5 py-2 rounded-xl font-bold text-xs text-white bg-indigo-600 hover:bg-indigo-700">Save Changes</button>
               </div>
 
@@ -684,7 +684,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
               </div>
               <div><label className="text-xs font-bold text-slate-500 uppercase">Parent's Follow-up Note</label><textarea required value={dailyFormData.notes} onChange={e => setDailyFormData({...dailyFormData, notes: e.target.value})} className="w-full mt-1 border rounded-xl px-3 py-2 bg-slate-50 text-xs sm:text-sm outline-none focus:border-sky-500" rows={2} /></div>
               <div className="pt-3 border-t border-slate-100 flex justify-end gap-2 sticky bottom-0 bg-white py-2">
-                <button type="button" onClick={() => setIsDailyModalOpen(false)} className="px-4 py-2 rounded-xl font-bold text-xs text-slate-500 bg-slate-100 hover:bg-slate-200">Batal</button>
+                <button type="button" onClick={() => setIsDailyModalOpen(false)} className="px-4 py-2 rounded-xl font-bold text-xs text-slate-500 bg-slate-100 hover:bg-slate-200">Cancel</button>
                 <button type="submit" className="px-5 py-2 rounded-xl font-bold text-xs text-white bg-sky-600 hover:bg-sky-700">Save Changes</button>
               </div>
             </form>

@@ -108,7 +108,7 @@ export default async function InputReportSemester({ params }: { params: Promise<
           <Link href="/dashboard/guru/evaluasi" className="text-xs font-bold text-sky-600 hover:underline flex items-center gap-1 mb-2">
             ← Back to Evaluation
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Input Assessment Semester</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Input Semester Assessment</h1>
           <p className="text-slate-500 text-sm mt-1">Student: <span className="font-semibold text-slate-800">{siswa.user.name}</span> ({siswa.user.username})</p>
         </div>
       </div>
@@ -117,7 +117,7 @@ export default async function InputReportSemester({ params }: { params: Promise<
         
         {/* 1. PERIODE TERM */}
         <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-xs border border-slate-200">
-          <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Periode / Term</label>
+          <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Period / Term</label>
           <input 
             name="term" 
             type="text" 
@@ -133,7 +133,7 @@ export default async function InputReportSemester({ params }: { params: Promise<
           <div className="border-b border-slate-100 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <h3 className="text-lg font-bold text-slate-800">English Language Skills (0 - 100)</h3>
-              <p className="text-xs text-slate-400 mt-1">Enter the Midterm and/or Final grades. Leave blank if the exam has not been conducted..</p>
+              <p className="text-xs text-slate-400 mt-1">Enter the Midterm and/or Final grades. Leave blank if the exam has not been conducted.</p>
             </div>
             {/* Header Keterangan Kolom di Desktop */}
             {/* <div className="hidden sm:flex items-center gap-3 text-xs font-bold text-slate-400 uppercase tracking-wider pr-2">

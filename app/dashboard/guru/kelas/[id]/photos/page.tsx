@@ -183,7 +183,7 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
 
                   {/* FOOTER UPLOADER & HAPUS */}
                   <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-                    <span className="truncate">Oleh: <strong className="text-slate-600">{item.uploader?.user?.name || "Guru"}</strong></span>
+                    <span className="truncate">Uploaded by: <strong className="text-slate-600">{item.uploader?.user?.name || "Guru"}</strong></span>
                     
                     <form action={handleDeleteMedia}>
                       <input type="hidden" name="photoId" value={item.id} />

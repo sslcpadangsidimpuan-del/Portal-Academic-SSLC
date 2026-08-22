@@ -44,9 +44,9 @@ export default async function GlobalGalleryPage() {
       
       {/* HEADER GALERI GLOBAL */}
       <div className="mb-6 sm:mb-8 text-left">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Galery</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Gallery</h1>
         <p className="text-slate-500 mt-1 text-xs sm:text-base leading-relaxed">
-          Monitor all learning activity documentation from all classes and events.
+          Monitor learning activity documentation across all classes and events.
         </p>
       </div>
 
