@@ -31,7 +31,7 @@ export default async function EvaluasiRaporPage() {
       <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Evaluation & Report</h1>
-          <p className="text-slate-500 mt-1 text-sm sm:text-base">Monitor history, edit reports, and print report.</p>
+          <p className="text-slate-500 mt-1 text-sm sm:text-base">Monitor report history, edit, and print report.</p>
         </div>
       </div>
       

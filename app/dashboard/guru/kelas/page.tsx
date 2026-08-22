@@ -19,7 +19,7 @@ export default async function PilihLevelKelas({ searchParams }: { searchParams: 
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-800">Choose Level & Class</h1>
         <p className="text-slate-500 mt-2">
-          Please select the category and class you will enter today to begin the teaching session.
+           Please select a category and class to input the student's attendance, daily/semester report, or documentation.
         </p>
       </div>
 

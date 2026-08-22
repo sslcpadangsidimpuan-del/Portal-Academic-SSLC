@@ -23,10 +23,10 @@ export default async function DaftarSiswaReportPage({ params }: { params: Promis
           href={`/dashboard/guru/kelas/${id}`} 
           className="text-sky-500 hover:text-sky-600 text-sm font-medium mb-2 inline-flex items-center gap-2"
         >
-          ← Kembali ke Ruang Kelas
+          ← Back to Classroom
         </Link>
-        <h1 className="text-3xl font-bold text-slate-800 mt-2">Input Laporan Harian dan Semester</h1>
-        <p className="text-slate-500">Pilih siswa untuk menginput Laporan Harian dan Semester.</p>
+        <h1 className="text-3xl font-bold text-slate-800 mt-2">Daily and Semester Report Input</h1>
+        <p className="text-slate-500">Select a student to enter the Daily and Semester Reports.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -38,7 +38,7 @@ export default async function DaftarSiswaReportPage({ params }: { params: Promis
               </div>
               <div>
                 <h3 className="font-bold text-slate-700">{siswa.user.name}</h3>
-                <p className="text-xs text-slate-400">NIS: {siswa.user.username}</p>
+                <p className="text-xs text-slate-400">ID: {siswa.user.username}</p>
               </div>
             </div>
 
@@ -47,13 +47,13 @@ export default async function DaftarSiswaReportPage({ params }: { params: Promis
                 href={`/dashboard/guru/kelas/${id}/report/${siswa.id}/harian`}
                 className="flex-1 text-center py-2.5 bg-sky-50 text-sky-600 font-semibold rounded-xl hover:bg-sky-500 hover:text-white transition-colors text-sm"
               >
-                Harian
+                Daily Report
               </Link>
               <Link 
                 href={`/dashboard/guru/kelas/${id}/report/${siswa.id}/semester`}
                 className="flex-1 text-center py-2.5 bg-indigo-50 text-indigo-600 font-semibold rounded-xl hover:bg-indigo-500 hover:text-white transition-colors text-sm"
               >
-                Semester
+                Semester Report
               </Link>
             </div>
           </div>

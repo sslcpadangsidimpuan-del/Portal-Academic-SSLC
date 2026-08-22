@@ -61,7 +61,7 @@ export default function LoginForm() {
           </h2>
           
           <p className="text-xs sm:text-sm text-slate-400 mt-3 font-medium">
-            Silakan masukkan ID dan Password Anda
+            Please enter your ID and Password
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export default function LoginForm() {
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Contoh: GURU001 atau SISWA001"
+              placeholder="ID"
               className="w-full px-4 py-3 text-sm sm:text-base rounded-xl border border-slate-200 bg-white/50 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition-all duration-200 text-slate-700 placeholder:text-slate-300 shadow-inner"
             />
           </div>
@@ -140,14 +140,14 @@ export default function LoginForm() {
                 Memproses...
               </span>
             ) : (
-              "Masuk ke Sistem"
+              "Log In"
             )}
           </button>
         </form>
 
         <div className="text-center mt-6">
           <p className="text-xs text-slate-400">
-            Kendala login? Hubungi admin dengan klik icon di pojok kanan bawah.
+            Having trouble logging in? Contact the admin by clicking the icon at the bottom right corner.
           </p>
         </div>
       </div>

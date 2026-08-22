@@ -15,7 +15,7 @@ export function SidebarGuru() {
   const menuItems = [
     { name: "Home", href: "/dashboard/guru", icon: "🏠" },
     { name: "Class & Level", href: "/dashboard/guru/kelas", icon: "📚" },
-    { name: "Galery", href: "/dashboard/guru/photos", icon: "🖼️" },
+    { name: "Gallery", href: "/dashboard/guru/photos", icon: "🖼️" },
     { name: "Student Report", href: "/dashboard/guru/evaluasi", icon: "📊" },
     { name: "Profile", href: "/dashboard/guru/profile", icon: "👤"}
   ];

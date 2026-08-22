@@ -50,7 +50,7 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="font-bold text-emerald-800 text-base sm:text-lg leading-tight mb-1 truncate">Class Attendance</h3>
-            <p className="text-emerald-600 text-xs sm:text-sm leading-snug truncate">Take student attendance</p>
+            <p className="text-emerald-600 text-xs sm:text-sm leading-snug truncate">Record today's student attendance</p>
           </div>
         </Link>
 
@@ -63,7 +63,7 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="font-bold text-amber-800 text-base sm:text-lg leading-tight mb-1 truncate">Input Report</h3>
-            <p className="text-amber-600 text-xs sm:text-sm leading-snug truncate">Make a daily/semester reportr</p>
+            <p className="text-amber-600 text-xs sm:text-sm leading-snug truncate"> Input daily or semester report.</p>
           </div>
         </Link>
 
@@ -76,7 +76,7 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="font-bold text-indigo-800 text-base sm:text-lg leading-tight mb-1 truncate">Class Gallery</h3>
-            <p className="text-indigo-600 text-xs sm:text-sm leading-snug">Upload photos & videos of activities</p>
+            <p className="text-indigo-600 text-xs sm:text-sm leading-snug">Upload photos or videos of student's activities.</p>
           </div>
         </Link>
       </div>

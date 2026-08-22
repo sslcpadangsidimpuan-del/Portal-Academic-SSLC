@@ -70,10 +70,10 @@ export default async function InputReportHarian({ params }: { params: Promise<{ 
     <div className="p-8 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
         <Link href={`/dashboard/guru/kelas/${id}/report`} className="text-sky-500 hover:text-sky-600 text-sm font-medium mb-2 inline-flex items-center gap-2">
-          ← Kembali ke Daftar Siswa
+          ← Back to Student List
         </Link>
-        <h1 className="text-3xl font-bold text-slate-800 mt-2">Input Laporan Harian</h1>
-        <p className="text-slate-600">Siswa: <span className="font-semibold text-sky-600">{siswa?.user.name}</span></p>
+        <h1 className="text-3xl font-bold text-slate-800 mt-2">Daily Report Input</h1>
+        <p className="text-slate-600">Student: <span className="font-semibold text-sky-600">{siswa?.user.name}</span></p>
       </div>
 
       <form action={simpanReportHarian} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-6">
@@ -87,7 +87,7 @@ export default async function InputReportHarian({ params }: { params: Promise<{ 
           </select>
           
           <label className="block text-xs font-semibold text-slate-500 mb-1">
-            Topik Tambahan (Hanya isi jika memilih "Others" di atas)
+            Additional Topic (Only fill in if you chose 'Others' above)
           </label>
           <input 
             type="text" 
@@ -140,7 +140,7 @@ export default async function InputReportHarian({ params }: { params: Promise<{ 
         </div>
 
         <button type="submit" className="w-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white py-4 rounded-xl font-bold hover:opacity-90 transition shadow-lg">
-          Simpan Laporan
+          Save
         </button>
       </form>
     </div>

@@ -71,7 +71,7 @@ export default async function GuruProfilePage() {
     <div className="p-8 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-800">Profile</h1>
-        <p className="text-slate-500 mt-1">Manage your account information and digital signature.</p>
+        <p className="text-slate-500 mt-1">Manage your account information and e-Signature.</p>
       </div>
       
       <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
@@ -91,7 +91,7 @@ export default async function GuruProfilePage() {
         </div>
 
         <div>
-          <h2 className="text-lg font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Digital Signature</h2>
+          <h2 className="text-lg font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">e-Signature</h2>
           
           {currentUser.guruProfile.signatureUrl ? (
             <div className="mb-6">
@@ -115,7 +115,7 @@ export default async function GuruProfilePage() {
             <label className="block text-sm font-bold text-slate-700 mb-2">
               Update / Upload Signature
             </label>
-            <p className="text-xs text-slate-500 mb-4">Use a bright white paper photo with black pen scribbles, or a transparent file (.PNG).</p>
+            <p className="text-xs text-slate-500 mb-4">Please use PNG file with a transparent background.</p>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <input 

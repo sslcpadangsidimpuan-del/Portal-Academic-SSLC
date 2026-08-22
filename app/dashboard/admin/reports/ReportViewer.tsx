@@ -98,8 +98,8 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
           </div>
 
           <div className="flex px-6 border-b border-slate-100 shrink-0">
-            <button onClick={() => setActiveReportTab("DAILY")} className={`py-4 font-semibold text-sm mr-6 border-b-2 ${activeReportTab === "DAILY" ? "border-indigo-600 text-indigo-700" : "border-transparent text-slate-400 hover:text-slate-600"}`}>📝 Laporan Harian</button>
-            <button onClick={() => setActiveReportTab("SEMESTER")} className={`py-4 font-semibold text-sm border-b-2 ${activeReportTab === "SEMESTER" ? "border-sky-600 text-sky-700" : "border-transparent text-slate-400 hover:text-slate-600"}`}>📊 Laporan Semester</button>
+            <button onClick={() => setActiveReportTab("DAILY")} className={`py-4 font-semibold text-sm mr-6 border-b-2 ${activeReportTab === "DAILY" ? "border-indigo-600 text-indigo-700" : "border-transparent text-slate-400 hover:text-slate-600"}`}>📝 Daily Report</button>
+            <button onClick={() => setActiveReportTab("SEMESTER")} className={`py-4 font-semibold text-sm border-b-2 ${activeReportTab === "SEMESTER" ? "border-sky-600 text-sky-700" : "border-transparent text-slate-400 hover:text-slate-600"}`}>📊 Semester Report</button>
           </div>
 
           <div className="flex-1 overflow-y-auto p-6 bg-slate-50/50">
@@ -108,9 +108,9 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
             {activeReportTab === "DAILY" && (
               <div className="max-w-4xl mx-auto">
                 <div className="mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                  <button onClick={handlePrevMonth} className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-600 hover:bg-slate-50 shadow-sm">← Bulan Lalu</button>
+                  <button onClick={handlePrevMonth} className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-600 hover:bg-slate-50 shadow-sm">← Previous</button>
                   <p className="font-bold text-lg text-slate-700">{monthName}</p>
-                  <button onClick={handleNextMonth} className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-600 hover:bg-slate-50 shadow-sm">Bulan Depan →</button>
+                  <button onClick={handleNextMonth} className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-600 hover:bg-slate-50 shadow-sm">Next →</button>
                 </div>
 
                 <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">

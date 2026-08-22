@@ -262,7 +262,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
                                 ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
                                 : "bg-amber-50 text-amber-700 border-amber-200"
                             }`}>
-                              {rep.isActiveClass ? "🟢 Kelas Aktif:" : "📜 Riwayat Kelas:"} {rep.level.category} — {rep.level.name}
+                              {rep.isActiveClass ? "🟢 current class:" : "📜 Graduated:"} {rep.level.category} — {rep.level.name}
                             </span>
                           ) : (
                             <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-2.5 py-1 rounded-md border border-slate-200">
@@ -593,10 +593,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
               <div className="space-y-3">
                 <label className="text-xs font-bold text-slate-500 uppercase block">Skill Score Matrix (0 - 100)</label>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="grid grid-cols-2 gap-2 w-full sm:w-1/2">
-                    <p className="bg-white text-slate-800 rounded-lg px-2.5 py-1.5 text-xs sm:text-sm text-center font-bold">Mid</p>
-                    <p className="bg-white rounded-lg text-slate-800 px-2.5 py-1.5 text-xs sm:text-sm text-center font-bold">Final</p>
-                  </div>
+
                 </div>
                 {skillsList.map((sk, idx) => (
                   <div key={idx} className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -663,7 +660,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
 
               <div className="pt-3 border-t border-slate-100 flex justify-end gap-2 sticky bottom-0 bg-white py-2">
                 <button type="button" onClick={() => setIsSemesterModalOpen(false)} className="px-4 py-2 rounded-xl font-bold text-xs text-slate-500 bg-slate-100 hover:bg-slate-200">Cencel</button>
-                <button type="submit" className="px-5 py-2 rounded-xl font-bold text-xs text-white bg-indigo-600 hover:bg-indigo-700">Save</button>
+                <button type="submit" className="px-5 py-2 rounded-xl font-bold text-xs text-white bg-indigo-600 hover:bg-indigo-700">Save Changes</button>
               </div>
 
             </form>
@@ -676,19 +673,19 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4" style={{ backgroundColor: 'rgba(15, 23, 42, 0.5)' }}>
           <div className="bg-white w-full max-w-2xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl relative max-h-[92vh] flex flex-col text-slate-800">
             <button onClick={() => setIsDailyModalOpen(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-lg p-1">✕</button>
-            <h3 className="text-lg sm:text-xl font-bold mb-4 pb-3 border-b border-slate-100 pr-8">✏️ Edit Laporan Harian</h3>
+            <h3 className="text-lg sm:text-xl font-bold mb-4 pb-3 border-b border-slate-100 pr-8">✏️ Edit Daily Report</h3>
             <form onSubmit={handleUpdateDaily} className="space-y-3 overflow-y-auto pr-1 flex-1">
               <div><label className="text-xs font-bold text-slate-500 uppercase">Learning Topic</label><input required type="text" value={dailyFormData.material} onChange={e => setDailyFormData({...dailyFormData, material: e.target.value})} className="w-full mt-1 border rounded-xl px-3 py-2 bg-slate-50 text-xs sm:text-sm outline-none focus:border-sky-500" /></div>
               <div><label className="text-xs font-bold text-slate-500 uppercase">Learning Descriptions</label><textarea required value={dailyFormData.desc} onChange={e => setDailyFormData({...dailyFormData, desc: e.target.value})} className="w-full mt-1 border rounded-xl px-3 py-2 bg-slate-50 text-xs sm:text-sm outline-none focus:border-sky-500" rows={2} /></div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div><label className="text-xs font-bold text-slate-500 uppercase">Performance</label><select value={dailyFormData.performance} onChange={e => setDailyFormData({...dailyFormData, performance: e.target.value})} className="w-full mt-1 border rounded-xl px-2 py-2 bg-slate-50 text-xs outline-none"><option value="Excellent">Excellent</option><option value="Good">Good</option><option value="Fair">Fair</option><option value="Needs Improvement">Needs Improvement</option></select></div>
-                <div><label className="text-xs font-bold text-slate-500 uppercase">English Use</label><select value={dailyFormData.englishUse} onChange={e => setDailyFormData({...dailyFormData, englishUse: e.target.value})} className="w-full mt-1 border rounded-xl px-2 py-2 bg-slate-50 text-xs outline-none"><option value="Always">Always</option><option value="Often">Often</option><option value="Sometimes">Sometimes</option><option value="Rarely">Rarely</option></select></div>
+                <div><label className="text-xs font-bold text-slate-500 uppercase">English Use in Class</label><select value={dailyFormData.englishUse} onChange={e => setDailyFormData({...dailyFormData, englishUse: e.target.value})} className="w-full mt-1 border rounded-xl px-2 py-2 bg-slate-50 text-xs outline-none"><option value="Always">Always</option><option value="Often">Often</option><option value="Sometimes">Sometimes</option><option value="Rarely">Rarely</option></select></div>
                 <div><label className="text-xs font-bold text-slate-500 uppercase">Progress</label><select value={dailyFormData.progress} onChange={e => setDailyFormData({...dailyFormData, progress: e.target.value})} className="w-full mt-1 border rounded-xl px-2 py-2 bg-slate-50 text-xs outline-none"><option value="Fast">Fast</option><option value="Steady">Steady</option><option value="Slow">Slow</option></select></div>
               </div>
               <div><label className="text-xs font-bold text-slate-500 uppercase">Parent's Follow-up Note</label><textarea required value={dailyFormData.notes} onChange={e => setDailyFormData({...dailyFormData, notes: e.target.value})} className="w-full mt-1 border rounded-xl px-3 py-2 bg-slate-50 text-xs sm:text-sm outline-none focus:border-sky-500" rows={2} /></div>
               <div className="pt-3 border-t border-slate-100 flex justify-end gap-2 sticky bottom-0 bg-white py-2">
                 <button type="button" onClick={() => setIsDailyModalOpen(false)} className="px-4 py-2 rounded-xl font-bold text-xs text-slate-500 bg-slate-100 hover:bg-slate-200">Batal</button>
-                <button type="submit" className="px-5 py-2 rounded-xl font-bold text-xs text-white bg-sky-600 hover:bg-sky-700">Simpan Perubahan</button>
+                <button type="submit" className="px-5 py-2 rounded-xl font-bold text-xs text-white bg-sky-600 hover:bg-sky-700">Save Changes</button>
               </div>
             </form>
           </div>

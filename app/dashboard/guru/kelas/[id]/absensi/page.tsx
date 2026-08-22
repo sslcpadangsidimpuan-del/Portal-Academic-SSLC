@@ -193,7 +193,7 @@ export default async function AbsensiPage({ params }: { params: Promise<{ id: st
             type="submit" 
             className="w-full sm:w-auto px-8 py-3 bg-sky-500 text-white font-bold rounded-xl shadow-md shadow-sky-200 hover:bg-sky-600 transition-colors text-sm sm:text-base"
           >
-            Simpan Absensi
+            Save Attendance
           </button>
         </div>
       </form>
