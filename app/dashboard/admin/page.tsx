@@ -36,10 +36,10 @@ export default async function AdminDashboard() {
       {/* Header Salam */}
       <div className="mb-5 sm:mb-8 text-left">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">
-          Selamat datang, Admin! 👋
+         Hi, Admin! 👋
         </h1>
         <p className="text-slate-500 mt-1 text-xs sm:text-sm md:text-base leading-relaxed">
-          Berikut adalah ringkasan operasional Smart Step Learning Center saat ini.
+          Here’s a summary of the current operations at Smart Step Learning Center.
         </p>
       </div>
 
@@ -48,7 +48,7 @@ export default async function AdminDashboard() {
         <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs flex items-center gap-4 sm:gap-6">
           <div className="w-11 h-11 sm:w-14 sm:h-14 bg-sky-50 text-sky-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl shrink-0">🧑‍🏫</div>
           <div>
-            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">Total Guru</p>
+            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">Total Teachers</p>
             <p className="text-2xl sm:text-3xl font-black text-slate-800">{totalGuru}</p>
           </div>
         </div>
@@ -56,7 +56,7 @@ export default async function AdminDashboard() {
         <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs flex items-center gap-4 sm:gap-6">
           <div className="w-11 h-11 sm:w-14 sm:h-14 bg-emerald-50 text-emerald-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl shrink-0">👦</div>
           <div>
-            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">Total Siswa</p>
+            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">Total Students</p>
             <p className="text-2xl sm:text-3xl font-black text-slate-800">{totalSiswa}</p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default async function AdminDashboard() {
         <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs flex items-center gap-4 sm:gap-6">
           <div className="w-11 h-11 sm:w-14 sm:h-14 bg-indigo-50 text-indigo-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl shrink-0">📚</div>
           <div>
-            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">Total Kelas</p>
+            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">Total classes</p>
             <p className="text-2xl sm:text-3xl font-black text-slate-800">{totalKelas}</p>
           </div>
         </div>
@@ -73,31 +73,31 @@ export default async function AdminDashboard() {
       {/* Section Pantauan Hari Ini */}
       <h2 className="text-base sm:text-lg font-bold text-slate-800 mb-3 sm:mb-4 flex items-center gap-2">
         <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        Pantauan Hari Ini
+        Today's Monitoring
       </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6 mb-8 sm:mb-12">
         {/* Status Kehadiran */}
         <div className="lg:col-span-2 bg-white p-4 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs">
           <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 sm:mb-4">
-            Status Kehadiran Siswa
+            Student Attendance Status
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
             <div className="bg-emerald-50 p-3 sm:p-4 rounded-xl border border-emerald-100 text-center">
               <p className="text-xl sm:text-2xl font-black text-emerald-700">{totalHadir}</p>
-              <p className="text-[9px] sm:text-[10px] font-bold text-emerald-600 uppercase mt-0.5">Hadir</p>
+              <p className="text-[9px] sm:text-[10px] font-bold text-emerald-600 uppercase mt-0.5">Present</p>
             </div>
             <div className="bg-amber-50 p-3 sm:p-4 rounded-xl border border-amber-100 text-center">
               <p className="text-xl sm:text-2xl font-black text-amber-700">{totalSakit}</p>
-              <p className="text-[9px] sm:text-[10px] font-bold text-amber-600 uppercase mt-0.5">Sakit</p>
+              <p className="text-[9px] sm:text-[10px] font-bold text-amber-600 uppercase mt-0.5">Sick</p>
             </div>
             <div className="bg-sky-50 p-3 sm:p-4 rounded-xl border border-sky-100 text-center">
               <p className="text-xl sm:text-2xl font-black text-sky-700">{totalIzin}</p>
-              <p className="text-[9px] sm:text-[10px] font-bold text-sky-600 uppercase mt-0.5">Izin</p>
+              <p className="text-[9px] sm:text-[10px] font-bold text-sky-600 uppercase mt-0.5">Excused</p>
             </div>
             <div className="bg-rose-50 p-3 sm:p-4 rounded-xl border border-rose-100 text-center">
               <p className="text-xl sm:text-2xl font-black text-rose-700">{totalAlpha}</p>
-              <p className="text-[9px] sm:text-[10px] font-bold text-rose-600 uppercase mt-0.5">Alpha</p>
+              <p className="text-[9px] sm:text-[10px] font-bold text-rose-600 uppercase mt-0.5">Unexcused</p>
             </div>
           </div>
         </div>
@@ -105,28 +105,28 @@ export default async function AdminDashboard() {
         {/* Laporan Pembelajaran Masuk */}
         <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-center items-center text-center">
           <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
-            Laporan Pembelajaran Masuk
+            Incoming Learning Report
           </p>
           <div className="text-4xl sm:text-5xl font-black text-indigo-600 my-1">{totalLaporanHariIni}</div>
-          <p className="text-slate-500 text-xs">Dokumen tersimpan hari ini</p>
+          <p className="text-slate-500 text-xs">Document saved today</p>
         </div>
       </div>
 
       {/* Jalan Pintas */}
-      <h2 className="text-base sm:text-lg font-bold text-slate-800 mb-3 sm:mb-4">Jalan Pintas</h2>
+      <h2 className="text-base sm:text-lg font-bold text-slate-800 mb-3 sm:mb-4">Shortcut</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <Link href="/dashboard/admin/users" className="bg-slate-800 hover:bg-slate-900 text-white p-4 sm:p-5 rounded-xl sm:rounded-2xl flex items-center justify-between transition-colors group">
           <div>
-            <h3 className="font-bold text-sm sm:text-base">Kelola Pengguna</h3>
-            <p className="text-slate-400 text-xs mt-0.5">Tambah, edit, atau hapus Guru & Siswa</p>
+            <h3 className="font-bold text-sm sm:text-base">User Managament</h3>
+            <p className="text-slate-400 text-xs mt-0.5">Add, edit, or delete Teachers & Students</p>
           </div>
           <span className="text-xl sm:text-2xl group-hover:translate-x-1 transition-transform">→</span>
         </Link>
         
         <Link href="/dashboard/admin/classes" className="bg-indigo-600 hover:bg-indigo-700 text-white p-4 sm:p-5 rounded-xl sm:rounded-2xl flex items-center justify-between transition-colors group">
           <div>
-            <h3 className="font-bold text-sm sm:text-base">Manajemen Kelas</h3>
-            <p className="text-indigo-200 text-xs mt-0.5">Atur kategori, level, dan penempatan</p>
+            <h3 className="font-bold text-sm sm:text-base">Classroom Management</h3>
+            <p className="text-indigo-200 text-xs mt-0.5">Set the category, level, and placement</p>
           </div>
           <span className="text-xl sm:text-2xl group-hover:translate-x-1 transition-transform">→</span>
         </Link>

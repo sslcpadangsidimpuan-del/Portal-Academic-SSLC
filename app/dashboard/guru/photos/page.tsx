@@ -44,9 +44,9 @@ export default async function GlobalGalleryPage() {
       
       {/* HEADER GALERI GLOBAL */}
       <div className="mb-6 sm:mb-8 text-left">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Galeri Global</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">Galery</h1>
         <p className="text-slate-500 mt-1 text-xs sm:text-base leading-relaxed">
-          Pantau seluruh dokumentasi aktivitas belajar dari semua kelas dan event yang ada.
+          Monitor all learning activity documentation from all classes and events.
         </p>
       </div>
 
@@ -54,7 +54,7 @@ export default async function GlobalGalleryPage() {
       <div className="bg-rose-50 border border-rose-200 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl mb-8 flex items-start gap-2.5 sm:gap-3">
         <span className="text-base sm:text-xl leading-none">⚠️</span>
         <p className="text-rose-700 text-xs sm:text-sm font-semibold leading-snug sm:leading-relaxed">
-          *Foto atau Video akan dihapus secara otomatis dalam 30 hari sejak tanggal upload.
+          *Photos or videos will be automatically deleted 30 days after the upload date.
         </p>
       </div>
 
@@ -65,7 +65,7 @@ export default async function GlobalGalleryPage() {
           <div className="relative">
             <div className="flex items-center gap-3 mb-4">
               <span className="w-2 h-7 sm:h-8 bg-amber-500 rounded-full"></span>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-800">🎉 Event & Acara Sekolah</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-800">🎉 School Events & Activities</h2>
             </div>
 
             <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden">
@@ -80,7 +80,7 @@ export default async function GlobalGalleryPage() {
                     {/* Badge Event */}
                     <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 pointer-events-none">
                       <span className="bg-amber-500 text-white text-[9px] sm:text-[10px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full shadow-xs">
-                        🎉 Event Sekolah
+                        🎉 School Events
                       </span>
                     </div>
 
@@ -113,10 +113,10 @@ export default async function GlobalGalleryPage() {
                             {item.caption}
                           </p>
                         ) : (
-                          <p className="text-[10px] sm:text-xs text-slate-400 italic mb-1.5">Tanpa deskripsi</p>
+                          <p className="text-[10px] sm:text-xs text-slate-400 italic mb-1.5">No description</p>
                         )}
 
-                        <p className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Tanggal Unggah</p>
+                        <p className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Upload Date</p>
                         <p className="text-[10px] sm:text-xs text-slate-700 font-medium">
                           {new Date(item.createdAt).toLocaleDateString('id-ID', {
                             day: 'numeric', month: 'short', year: 'numeric'
@@ -145,7 +145,7 @@ export default async function GlobalGalleryPage() {
                   href={`/dashboard/guru/kelas/${level.id}/photos`}
                   className="text-xs sm:text-sm font-bold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-colors"
                 >
-                  Lihat Semua →
+                  View All →
                 </Link>
               </div>
 
@@ -162,11 +162,11 @@ export default async function GlobalGalleryPage() {
                       <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 pointer-events-none">
                         {item.isPublic ? (
                           <span className="bg-emerald-500/95 text-white text-[9px] sm:text-[10px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full shadow-xs">
-                            🌍 Global Kelas
+                            🌍 Class
                           </span>
                         ) : (
                           <span className="bg-indigo-600/95 text-white text-[9px] sm:text-[10px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full shadow-xs">
-                            🎯 Tag ({item.tags.length})
+                            🎯 Tagged ({item.tags.length})
                           </span>
                         )}
                       </div>
@@ -200,10 +200,10 @@ export default async function GlobalGalleryPage() {
                               {item.caption}
                             </p>
                           ) : (
-                            <p className="text-[10px] sm:text-xs text-slate-400 italic mb-1.5">Tanpa deskripsi</p>
+                            <p className="text-[10px] sm:text-xs text-slate-400 italic mb-1.5">No description</p>
                           )}
 
-                          <p className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Tanggal Unggah</p>
+                          <p className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Upload Date</p>
                           <p className="text-[10px] sm:text-xs text-slate-700 font-medium">
                             {new Date(item.createdAt).toLocaleDateString('id-ID', {
                               day: 'numeric', month: 'short', year: 'numeric'
@@ -239,9 +239,9 @@ export default async function GlobalGalleryPage() {
           schoolEvents.length === 0 && (
             <div className="py-16 sm:py-24 text-center bg-white rounded-3xl border-2 border-dashed border-slate-200 mt-8">
               <div className="text-5xl sm:text-6xl mb-4">🖼️</div>
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-700">Galeri Masih Kosong</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-700">The gallery is still empty</h3>
               <p className="text-slate-500 mt-2 text-xs sm:text-sm max-w-md mx-auto">
-                Belum ada dokumentasi foto atau video dari kelas maupun event manapun.
+                There aren't any photos or videos from any classes or events yet.
               </p>
             </div>
           )

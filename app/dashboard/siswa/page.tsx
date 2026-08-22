@@ -66,7 +66,7 @@ export default async function SiswaDashboard() {
               </div>
             ) : (
               <p className="text-base sm:text-xl font-bold text-slate-400 truncate mt-0.5">
-                Belum masuk kelas
+                Not assigned to any class yet.
               </p>
             )}
           </div>
@@ -78,7 +78,7 @@ export default async function SiswaDashboard() {
             🪪
           </div>
           <div className="min-w-0">
-            <h3 className="text-slate-400 sm:text-slate-500 text-xs sm:text-sm font-semibold tracking-wide uppercase">Nomor Induk Siswa</h3>
+            <h3 className="text-slate-400 sm:text-slate-500 text-xs sm:text-sm font-semibold tracking-wide uppercase">Student ID</h3>
             <p className="text-base sm:text-xl font-bold text-slate-800 truncate mt-0.5">{user.username}</p>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default async function SiswaDashboard() {
       {myNotifications.length > 0 && (
         <div className="pt-2">
           <h2 className="text-xs font-bold text-slate-400 sm:text-slate-500 uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span>📌</span> Pengumuman Penting
+            <span>📌</span> Announcement
           </h2>
           
           <div className="space-y-3 sm:space-y-4">
@@ -111,7 +111,7 @@ export default async function SiswaDashboard() {
                         {notif.title}
                       </h3>
                       <span className="text-[9px] sm:text-[10px] text-slate-500 font-semibold bg-white/80 border border-slate-100 px-2 py-0.5 rounded-full w-fit shrink-0">
-                        {new Date(notif.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        {new Date(notif.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </span>
                     </div>
                     <p className="text-xs sm:text-sm text-slate-700 whitespace-pre-wrap leading-relaxed">

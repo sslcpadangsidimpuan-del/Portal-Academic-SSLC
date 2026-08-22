@@ -74,9 +74,9 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
   return (
     <div className="p-4 sm:p-8 max-w-7xl mx-auto animate-in fade-in duration-500 lg:h-[calc(100vh-4rem)] flex flex-col">
       <div className="mb-4 sm:mb-6 shrink-0">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Pantau Laporan</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Check the Report</h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Lacak rekam jejak akademik, evaluasi, dan absensi siswa secara historis.
+          Track students' academic records, evaluations, and attendance historically.
         </p>
       </div>
 
@@ -93,14 +93,14 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
                 className="flex-1 text-slate-400 p-2 sm:p-2.5 text-xs sm:text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <button type="submit" className="bg-slate-800 text-white px-3 sm:px-4 rounded-lg text-xs sm:text-sm font-bold hover:bg-slate-700 transition-colors">
-                Cari
+                Search
               </button>
             </form>
           </div>
 
           <div className="flex-1 overflow-y-auto p-2">
             {students.length === 0 ? (
-              <p className="text-center text-slate-400 text-xs sm:text-sm p-4 mt-6">Siswa tidak ditemukan.</p>
+              <p className="text-center text-slate-400 text-xs sm:text-sm p-4 mt-6">Student not found.</p>
             ) : (
               <ul className="space-y-1">
                 {students.map(siswa => {
@@ -123,7 +123,7 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
                               {siswa.name}
                             </p>
                             <p className="text-[10px] sm:text-xs font-mono text-slate-500 mt-0.5">
-                              NIS: {siswa.username}
+                             ID: {siswa.username}
                             </p>
                           </div>
                           
@@ -138,7 +138,7 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
                               </div>
                             ) : (
                               <span className="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-md font-bold bg-slate-100 text-slate-500">
-                                Belum Ada
+                                Not Available Yet
                               </span>
                             )}
                           </div>
@@ -163,9 +163,9 @@ export default async function ReportsPage({ searchParams }: { searchParams: Prom
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center text-slate-400 p-6 sm:p-8 text-center">
               <div className="text-5xl sm:text-6xl mb-4 opacity-20">📂</div>
-              <h2 className="text-lg sm:text-xl font-bold text-slate-700 mb-2">Belum Ada Siswa yang Dipilih</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-slate-700 mb-2">No Students Have Been Selected Yet</h2>
               <p className="text-xs sm:text-sm max-w-md text-slate-400">
-                Pilih salah satu nama siswa pada daftar di atas untuk mulai memantau riwayat laporan akademik mereka.
+               Choose one of the students' names from the list above to start tracking their academic report history.
               </p>
             </div>
           )}

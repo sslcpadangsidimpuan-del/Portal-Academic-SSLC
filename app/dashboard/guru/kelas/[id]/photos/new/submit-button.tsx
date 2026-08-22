@@ -26,7 +26,7 @@ export function SubmitButton() {
         </>
       ) : (
         <>
-          <span>📤</span> Unggah Semua Media
+          <span>📤</span> Upload
         </>
       )}
     </button>

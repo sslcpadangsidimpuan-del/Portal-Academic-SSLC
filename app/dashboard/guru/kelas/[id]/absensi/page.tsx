@@ -88,16 +88,16 @@ export default async function AbsensiPage({ params }: { params: Promise<{ id: st
       <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <Link href={`/dashboard/guru/kelas/${id}`} className="text-sky-500 hover:text-sky-600 text-xs sm:text-sm font-medium mb-1.5 inline-flex items-center gap-1">
-            ← Kembali ke Ruang Kelas
+            ← Back to Classroom
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Absensi Harian</h1>
-          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">Kelas: <span className="font-semibold text-slate-700">{level.name}</span></p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Daily Attendance</h1>
+          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">Class: <span className="font-semibold text-slate-700">{level.name}</span></p>
         </div>
 
         <div className="bg-slate-50 sm:bg-transparent p-3 sm:p-0 rounded-xl border border-slate-100 sm:border-0 flex justify-between sm:block items-center">
-          <p className="text-xs font-medium text-slate-400">Tanggal Hari Ini</p>
+          <p className="text-xs font-medium text-slate-400">Today's Date</p>
           <p className="text-xs sm:text-base font-bold text-slate-700">
-            {new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' })}
+            {new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' })}
           </p>
         </div>
       </div>
@@ -118,7 +118,7 @@ export default async function AbsensiPage({ params }: { params: Promise<{ id: st
                   </div>
                   <div className="min-w-0 flex-1">
                     <h4 className="font-bold text-slate-800 text-sm sm:text-base truncate">{siswa.user.name}</h4>
-                    <p className="text-[11px] sm:text-xs text-slate-400 font-mono">NIS: {siswa.user.username}</p>
+                    <p className="text-[11px] sm:text-xs text-slate-400 font-mono">ID: {siswa.user.username}</p>
                   </div>
                 </div>
 
@@ -135,7 +135,7 @@ export default async function AbsensiPage({ params }: { params: Promise<{ id: st
                       required 
                     />
                     <div className="w-full px-1.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-slate-200 text-slate-500 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:border-emerald-500 transition-all text-center">
-                      Hadir
+                      Present
                     </div>
                   </label>
 
@@ -149,7 +149,7 @@ export default async function AbsensiPage({ params }: { params: Promise<{ id: st
                       required 
                     />
                     <div className="w-full px-1.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-slate-200 text-slate-500 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 transition-all text-center">
-                      Izin
+                      Excused
                     </div>
                   </label>
 
@@ -163,7 +163,7 @@ export default async function AbsensiPage({ params }: { params: Promise<{ id: st
                       required 
                     />
                     <div className="w-full px-1.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-slate-200 text-slate-500 peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition-all text-center">
-                      Sakit
+                      Sick
                     </div>
                   </label>
 
@@ -177,7 +177,7 @@ export default async function AbsensiPage({ params }: { params: Promise<{ id: st
                       required 
                     />
                     <div className="w-full px-1.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-slate-200 text-slate-500 peer-checked:bg-rose-500 peer-checked:text-white peer-checked:border-rose-500 transition-all text-center">
-                      Alpa
+                      Unexcused
                     </div>
                   </label>
 

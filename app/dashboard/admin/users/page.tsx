@@ -125,7 +125,7 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                                   ))}
                                 </div>
                               ) : (
-                                <span className="text-slate-400 italic text-xs">Belum ditugaskan ke kelas</span>
+                                <span className="text-slate-400 italic text-xs">Not yet assigned to a class</span>
                               )}
                             </td>
                           ) : (

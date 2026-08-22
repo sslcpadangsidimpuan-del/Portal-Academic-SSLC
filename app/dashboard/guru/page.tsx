@@ -31,17 +31,17 @@ export default async function GuruDashboard() {
     <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto">
       <div className="bg-blue-600 text-white p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm mb-6">
         <h1 className="text-xl sm:text-3xl font-black mb-1 sm:mb-2 flex items-center gap-2">
-          Halo, {user.name}! 👋
+          Hi, {user.name}! 👋
         </h1>
         <p className="text-xs sm:text-base text-blue-100 font-medium">
-          Selamat datang di portal manajemen kelas Anda.
+          Welcome to your class management portal.
         </p>
       </div>
 
       {myNotifications.length > 0 && (
         <div className="mb-8">
           <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span>📌</span> Pengumuman Penting
+            <span>📌</span> Announcement
           </h2>
           <div className="grid grid-cols-1 gap-4">
             {myNotifications.map((item) => {

@@ -29,12 +29,12 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           href="/dashboard/guru/kelas" 
           className="text-sky-500 hover:text-sky-600 text-sm font-medium mb-4 inline-flex items-center gap-2"
         >
-          ← Kembali ke Daftar Kelas
+          ← Back to Class List
         </Link>
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm mt-4 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-slate-800">Ruang Kelas: {level.name}</h1>
-            <p className="text-slate-500 mt-1">Daftar siswa dan aktivitas di kelas {level.name}.</p>
+            <h1 className="text-3xl font-bold text-slate-800">Classroom: {level.name}</h1>
+            <p className="text-slate-500 mt-1">List of students and activities in class {level.name}.</p>
           </div>
           <div className="text-4xl">📚</div>
         </div>
@@ -49,8 +49,8 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
             ✋
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="font-bold text-emerald-800 text-base sm:text-lg leading-tight mb-1 truncate">Absensi Kelas</h3>
-            <p className="text-emerald-600 text-xs sm:text-sm leading-snug truncate">Catat kehadiran siswa</p>
+            <h3 className="font-bold text-emerald-800 text-base sm:text-lg leading-tight mb-1 truncate">Class Attendance</h3>
+            <p className="text-emerald-600 text-xs sm:text-sm leading-snug truncate">Take student attendance</p>
           </div>
         </Link>
 
@@ -63,7 +63,7 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="font-bold text-amber-800 text-base sm:text-lg leading-tight mb-1 truncate">Input Report</h3>
-            <p className="text-amber-600 text-xs sm:text-sm leading-snug truncate">Buat laporan harian/semester</p>
+            <p className="text-amber-600 text-xs sm:text-sm leading-snug truncate">Make a daily/semester reportr</p>
           </div>
         </Link>
 
@@ -75,14 +75,14 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
             📸
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="font-bold text-indigo-800 text-base sm:text-lg leading-tight mb-1 truncate">Galeri Kelas</h3>
-            <p className="text-indigo-600 text-xs sm:text-sm leading-snug">Unggah foto & video aktivitas</p>
+            <h3 className="font-bold text-indigo-800 text-base sm:text-lg leading-tight mb-1 truncate">Class Gallery</h3>
+            <p className="text-indigo-600 text-xs sm:text-sm leading-snug">Upload photos & videos of activities</p>
           </div>
         </Link>
       </div>
 
       <div>
-        <h2 className="text-xl font-bold text-slate-800 mb-4">Daftar Siswa ({level.siswas.length})</h2>
+        <h2 className="text-xl font-bold text-slate-800 mb-4">Student List ({level.siswas.length})</h2>
         
         {level.siswas.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -93,14 +93,14 @@ export default async function RuangKelasPage({ params }: { params: Promise<{ id:
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-700">{siswa.user.name}</h4>
-                  <p className="text-xs text-slate-400">NIS: {siswa.user.username}</p>
+                  <p className="text-xs text-slate-400">ID: {siswa.user.username}</p>
                 </div>
               </div>
             ))}
           </div>
         ) : (
           <div className="p-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-            <p className="text-slate-500">Belum ada siswa yang dimasukkan ke kelas ini.</p>
+            <p className="text-slate-500">No students have been added to this class yet.</p>
           </div>
         )}
       </div>

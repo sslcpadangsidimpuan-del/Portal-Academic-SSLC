@@ -195,18 +195,18 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
       {/* 1. KONTROL PEMILIHAN KELAS & MURID */}
       <div className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200 flex flex-col sm:flex-row gap-4 text-slate-800">
         <div className="flex-1">
-          <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">1. Pilih Kelas</label>
+          <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">1. Select Class</label>
           <select 
             value={selectedLevelId} 
             onChange={(e) => { setSelectedLevelId(e.target.value); setSelectedSiswaId(""); }}
             className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-3 outline-none focus:border-sky-500 font-medium text-sm sm:text-base"
           >
-            <option value="">-- Pilih Level/Kelas --</option>
+            <option value="">-- Select Level/Class --</option>
             {levels.map(l => <option key={l.id} value={l.id}>{l.name} ({l.category})</option>)}
           </select>
         </div>
         <div className="flex-1">
-          <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">2. Pilih Siswa</label>
+          <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">2. Select Student</label>
           <select 
             value={selectedSiswaId} 
             onChange={(e) => setSelectedSiswaId(e.target.value)}
@@ -214,7 +214,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
             suppressHydrationWarning={true}
             className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-3 outline-none focus:border-sky-500 font-medium text-sm sm:text-base disabled:opacity-50"
           >
-            <option value="">-- Pilih Siswa --</option>
+            <option value="">-- Select Student --</option>
             {siswas.map((s: any) => <option key={s.id} value={s.id}>{s.user.name} ({s.user.username})</option>)}
           </select>
         </div>
@@ -225,27 +225,27 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
         <div className="animate-in fade-in duration-300 space-y-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-sky-50 p-4 sm:p-6 rounded-2xl border border-sky-100 gap-4">
             <div>
-              <h3 className="text-base sm:text-lg font-bold text-sky-900">Riwayat Akademik: {selectedSiswa.user.name}</h3>
-              <p className="text-xs sm:text-sm text-sky-600 mt-0.5">Siswa ID: {selectedSiswa.user.username}</p>
+              <h3 className="text-base sm:text-lg font-bold text-sky-900">Academic History: {selectedSiswa.user.name}</h3>
+              <p className="text-xs sm:text-sm text-sky-600 mt-0.5">Student ID: {selectedSiswa.user.username}</p>
             </div>
             <Link 
               href={`/dashboard/guru/kelas/${selectedLevelId}/report/${selectedSiswa.id}/semester`}
               className="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white px-5 py-3 rounded-xl font-bold transition-all text-center text-xs sm:text-sm flex items-center justify-center gap-2"
             >
-              <span>📝</span> Input Assessment Baru
+              <span>📝</span> New Assessment Input
             </Link>
           </div>
 
           {isLoading ? (
-            <div className="text-center py-10 text-slate-400 font-medium animate-pulse">Memuat riwayat laporan...</div>
+            <div className="text-center py-10 text-slate-400 font-medium animate-pulse">Loading report history...</div>
           ) : (
             <div className="space-y-6">
               
               {/* SECTION: LAPORAN SEMESTER */}
               <div>
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Laporan Assessment Semester</h4>
+                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Semester Assessment Report</h4>
                 {reports.semester.length === 0 ? (
-                  <div className="bg-white p-6 rounded-2xl border border-dashed border-slate-200 text-center text-slate-400 text-sm">Belum ada data Assessment Semester untuk siswa ini.</div>
+                  <div className="bg-white p-6 rounded-2xl border border-dashed border-slate-200 text-center text-slate-400 text-sm">There is no Semester Assessment data for this student yet.</div>
                 ) : (
                   reports.semester.map(rep => (
                     <div key={rep.id} className="bg-white p-4 sm:p-5 rounded-2xl border-l-4 border-l-indigo-500 border border-slate-200 flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-4">
@@ -266,7 +266,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
                             </span>
                           ) : (
                             <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-2.5 py-1 rounded-md border border-slate-200">
-                              📑 Data Lama (Tanpa Level)
+                              📑 Old Data (No Level)
                             </span>
                           )}
                         </div>
@@ -283,9 +283,9 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
 
               {/* SECTION: LAPORAN HARIAN */}
               <div>
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Laporan Harian (Daily Reports)</h4>
+                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Daily Reports</h4>
                 {reports.daily.length === 0 ? (
-                  <div className="bg-white p-6 rounded-2xl border border-dashed border-slate-200 text-center text-slate-400 text-sm">Belum ada Laporan Harian.</div>
+                  <div className="bg-white p-6 rounded-2xl border border-dashed border-slate-200 text-center text-slate-400 text-sm">There is no Daily Report yet.</div>
                 ) : (
                   <div className="space-y-3">
                     {reports.daily.map(rep => {
@@ -296,7 +296,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
                           <div className="space-y-1">
                             <div className="flex flex-wrap items-center gap-2">
                               <span className="text-emerald-600 text-[11px] font-bold">
-                                📅 {new Date(rep.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                📅 {new Date(rep.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                               </span>
                               {rep.level && (
                                 <span className="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-md border border-slate-200">
@@ -582,7 +582,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4" style={{ backgroundColor: 'rgba(15, 23, 42, 0.5)' }}>
           <div className="bg-white w-full max-w-3xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl relative max-h-[92vh] flex flex-col text-slate-800">
             <button onClick={() => setIsSemesterModalOpen(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-lg p-1">✕</button>
-            <h3 className="text-lg sm:text-xl font-bold mb-4 pb-3 border-b border-slate-100 pr-8">✏️ Edit Assessment Semester</h3>
+            <h3 className="text-lg sm:text-xl font-bold mb-4 pb-3 border-b border-slate-100 pr-8">✏️ Edit Semester Assessment</h3>
             
             <form onSubmit={handleUpdateSemester} className="space-y-4 overflow-y-auto pr-1 flex-1">
               <div>
@@ -591,7 +591,7 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
               </div>
 
               <div className="space-y-3">
-                <label className="text-xs font-bold text-slate-500 uppercase block">Matriks Nilai Skill (0 - 100)</label>
+                <label className="text-xs font-bold text-slate-500 uppercase block">Skill Score Matrix (0 - 100)</label>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="grid grid-cols-2 gap-2 w-full sm:w-1/2">
                     <p className="bg-white text-slate-800 rounded-lg px-2.5 py-1.5 text-xs sm:text-sm text-center font-bold">Mid</p>
@@ -662,8 +662,8 @@ export default function EvaluasiClient({ levels, guruId }: { levels: any[], guru
               </div>
 
               <div className="pt-3 border-t border-slate-100 flex justify-end gap-2 sticky bottom-0 bg-white py-2">
-                <button type="button" onClick={() => setIsSemesterModalOpen(false)} className="px-4 py-2 rounded-xl font-bold text-xs text-slate-500 bg-slate-100 hover:bg-slate-200">Batal</button>
-                <button type="submit" className="px-5 py-2 rounded-xl font-bold text-xs text-white bg-indigo-600 hover:bg-indigo-700">Simpan Perubahan</button>
+                <button type="button" onClick={() => setIsSemesterModalOpen(false)} className="px-4 py-2 rounded-xl font-bold text-xs text-slate-500 bg-slate-100 hover:bg-slate-200">Cencel</button>
+                <button type="submit" className="px-5 py-2 rounded-xl font-bold text-xs text-white bg-indigo-600 hover:bg-indigo-700">Save</button>
               </div>
 
             </form>

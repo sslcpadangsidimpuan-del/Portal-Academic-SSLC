@@ -26,7 +26,7 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
 
   return (
     <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-xs border border-slate-100 max-h-[85vh] overflow-y-auto">
-      <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-4 sm:mb-6">Tambah Pengguna Baru</h2>
+      <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-4 sm:mb-6">Add New User</h2>
       
       {message && (
         <div className={`p-3 sm:p-4 rounded-xl mb-4 text-xs sm:text-sm font-semibold ${message.type === "error" ? "bg-red-50 text-red-600" : "bg-green-50 text-green-600"}`}>
@@ -37,21 +37,21 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
       <form id="addUserForm" action={handleAction} className="space-y-4">
         {/* TIPE PENGGUNA */}
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Tipe Pengguna (Role)</label>
+          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Role</label>
           <select 
             name="role" 
             value={role} 
             onChange={(e) => setRole(e.target.value)}
             className="w-full p-2.5 text-xs sm:text-sm bg-slate-50 border text-slate-700 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 font-medium"
           >
-            <option value="GURU">Guru</option>
-            <option value="SISWA">Siswa</option>
+            <option value="GURU">Teacher</option>
+            <option value="SISWA">Student</option>
           </select>
         </div>
 
         {/* NAMA LENGKAP */}
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Nama Lengkap Siswa / Guru</label>
+          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Full Name of Student / Teacher</label>
           <input type="text" name="name" required placeholder="Cth: Paramitra Lubis" className="w-full text-xs sm:text-sm text-slate-700 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-sky-500" />
         </div>
         
@@ -72,7 +72,7 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
         {/* --- INFO TAMBAHAN KHUSUS GURU --- */}
         {role === "GURU" && (
           <div className="p-3 sm:p-4 bg-indigo-50 rounded-xl space-y-3 border border-indigo-100 mt-4">
-            <h3 className="text-xs font-bold text-indigo-800">Tugaskan ke Kelas (Bisa pilih &gt; 1)</h3>
+            <h3 className="text-xs font-bold text-indigo-800">Assign to Class (Can choose &gt; 1)</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-40 overflow-y-auto p-2 bg-white rounded-lg border border-indigo-100">
               {levels.map(level => (
                 <label key={level.id} className="flex items-center space-x-2 text-xs text-slate-700 cursor-pointer hover:bg-slate-50 p-1 rounded">
@@ -90,12 +90,12 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
             
             {/* KELOMPOK 1: KELAS & KURSUS */}
             <div className="p-3 sm:p-4 bg-sky-50/70 rounded-xl space-y-3 border border-sky-100">
-              <h3 className="text-[11px] font-bold uppercase tracking-wider text-sky-800">1. Data Kelas & Kursus</h3>
+              <h3 className="text-[11px] font-bold uppercase tracking-wider text-sky-800">1. Class & Course Data</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1">Daftarkan ke Kelas</label>
+                  <label className="block text-xs font-semibold text-slate-600 mb-1">Sign up for the Class</label>
                   <select name="levelId" className="w-full p-2 text-xs text-slate-700 bg-white border border-slate-200 rounded-lg outline-none">
-                    <option value="">-- Pilih Nanti --</option>
+                    <option value="">-- Choose Later --</option>
                     {levels.map(level => (
                       <option key={level.id} value={level.id}>
                         {level.category} - {level.name}
@@ -112,7 +112,7 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
 
             {/* KELOMPOK 2: DATA PRIBADI SISWA */}
             <div className="p-3 sm:p-4 bg-slate-50 rounded-xl space-y-3 border border-slate-200">
-              <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-700">2. Biodata Pribadi Siswa</h3>
+              <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-700">2. Student Personal Data</h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
@@ -122,9 +122,9 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
                 <div>
                   <label className="block text-xs font-semibold text-slate-600 mb-1">Gender</label>
                   <select name="gender" className="w-full p-2 text-xs text-slate-700 bg-white border border-slate-200 rounded-lg outline-none">
-                    <option value="">-- Pilih --</option>
-                    <option value="Male">Male (Laki-laki)</option>
-                    <option value="Female">Female (Perempuan)</option>
+                    <option value="">-- Choose --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                   </select>
                 </div>
               </div>
@@ -132,9 +132,9 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {/* DROPDOWN AGAMA RESMI INDONESIA */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1">Religion (Agama)</label>
+                  <label className="block text-xs font-semibold text-slate-600 mb-1">Religion</label>
                   <select name="religion" className="w-full p-2 text-xs text-slate-700 bg-white border border-slate-200 rounded-lg outline-none">
-                    <option value="">-- Pilih Agama --</option>
+                    <option value="">-- Select Religion --</option>
                     <option value="Islam">Islam</option>
                     <option value="Kristen Protestan">Kristen Protestan</option>
                     <option value="Katolik">Katolik</option>
@@ -151,14 +151,14 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">Address (Alamat Siswa)</label>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">Address</label>
                 <textarea name="address" rows={2} placeholder="Alamat lengkap..." className="w-full p-2 text-xs text-slate-700 bg-white border border-slate-200 rounded-lg outline-none" />
               </div>
             </div>
 
             {/* KELOMPOK 3: DATA ORANG TUA */}
             <div className="p-3 sm:p-4 bg-amber-50/60 rounded-xl space-y-3 border border-amber-100">
-              <h3 className="text-[11px] font-bold uppercase tracking-wider text-amber-800">3. Data Orang Tua (Parent's Info)</h3>
+              <h3 className="text-[11px] font-bold uppercase tracking-wider text-amber-800">3. Parent's Info</h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
@@ -183,14 +183,14 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">Telephone Number (WA Ortu)</label>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">Telephone Number</label>
                 <input type="text" name="parentPhone" placeholder="+62 812..." className="w-full p-2 text-xs text-slate-700 bg-white border border-slate-200 rounded-lg outline-none" />
               </div>
             </div>
 
             {/* KELOMPOK 4: DATA WALI (OPTIONAL) */}
             <div className="p-3 sm:p-4 bg-slate-50 rounded-xl space-y-3 border border-slate-200">
-              <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-500">4. Data Wali / Guardian (Opsional)</h3>
+              <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-500">4. Guardian (Opsional)</h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>

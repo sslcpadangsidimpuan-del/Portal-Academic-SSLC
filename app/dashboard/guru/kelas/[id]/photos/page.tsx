@@ -83,17 +83,17 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
             href={`/dashboard/guru/kelas/${id}`} 
             className="text-indigo-500 hover:text-indigo-600 text-xs sm:text-sm font-semibold mb-2 inline-flex items-center gap-1.5"
           >
-            ← Kembali ke Ruang Kelas
+            ← Back to Classroom
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">Galeri Kelas {level.name}</h1>
-          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">Semua foto dan video dokumentasi aktivitas belajar siswa & event sekolah</p>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">Class {level.name} Gallery</h1>
+          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">All photos and videos documenting student learning activities & school events</p>
         </div>
 
         <Link
           href={`/dashboard/guru/kelas/${id}/photos/new`}
           className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm shrink-0"
         >
-          <span>📤</span> Upload Foto / Video
+          <span>📤</span> Upload
         </Link>
       </div>
 
@@ -101,7 +101,7 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
       <div className="bg-rose-50 border border-rose-200 p-3.5 sm:p-4 rounded-xl mb-6 flex items-start gap-3">
         <span className="text-lg leading-none">⚠️</span>
         <p className="text-rose-700 text-xs sm:text-sm font-semibold leading-relaxed">
-          *Foto atau Video akan dihapus secara otomatis dalam 30 hari sejak tanggal upload.
+          *Photos or videos will be automatically deleted 30 days after the upload date.
         </p>
       </div>
 
@@ -147,11 +147,11 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
                   <div>
                     <div className="flex items-center gap-2 mb-2 flex-wrap">
                       {item.isPublic && !item.levelId ? (
-                        <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🎉 Event Sekolah</span>
+                        <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🎉 School Event</span>
                       ) : item.isPublic ? (
-                        <span className="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🌍 Global Kelas</span>
+                        <span className="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🌍 Class</span>
                       ) : (
-                        <span className="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🎯 Tag Spesifik</span>
+                        <span className="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🎯 Specific Tag</span>
                       )}
                       
                       <span className="text-[10px] text-slate-400 font-medium">
@@ -164,12 +164,12 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
                         {item.caption}
                       </p>
                     ) : (
-                      <p className="text-slate-400 italic text-xs">Tanpa deskripsi.</p>
+                      <p className="text-slate-400 italic text-xs">No description.</p>
                     )}
 
                     {item.tags.length > 0 && (
                       <div className="mt-3 pt-2 border-t border-slate-100">
-                        <p className="text-[10px] font-bold text-slate-500 mb-1">Siswa Ditandai:</p>
+                        <p className="text-[10px] font-bold text-slate-500 mb-1">Tagged Student:</p>
                         <div className="flex flex-wrap gap-1">
                           {item.tags.map(t => (
                             <span key={t.id} className="bg-slate-100 text-slate-700 text-[10px] font-semibold px-2 py-0.5 rounded-md">
@@ -192,7 +192,7 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
                         className="text-rose-500 hover:text-rose-700 font-bold p-1 transition cursor-pointer"
                         title="Hapus media"
                       >
-                        🗑️ Hapus
+                        🗑️ Delete
                       </button>
                     </form>
                   </div>
@@ -205,9 +205,9 @@ export default async function GaleriKelasGuruPage({ params }: { params: Promise<
       ) : (
         <div className="p-12 text-center bg-white rounded-2xl border border-dashed border-slate-300">
           <div className="text-4xl mb-3">📸</div>
-          <h3 className="font-bold text-slate-700 text-base">Belum Ada Dokumentasi</h3>
+          <h3 className="font-bold text-slate-700 text-base">Belum ada dokumentasi</h3>
           <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-sm mx-auto">
-            Kelas ini belum memiliki foto atau video kegiatan. Klik tombol upload di atas untuk menambahkan.
+            This class doesn't have any photos or videos of activities yet. Click the upload button above to add them.
           </p>
         </div>
       )}

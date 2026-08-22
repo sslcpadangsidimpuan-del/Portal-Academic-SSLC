@@ -71,17 +71,17 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
           </div>
           <div>
             <h2 className="text-2xl font-bold">{student.name}</h2>
-            <p className="text-indigo-200 font-mono text-sm mt-0.5">NIS: {student.username}</p>
+            <p className="text-indigo-200 font-mono text-sm mt-0.5">ID: {student.username}</p>
           </div>
         </div>
       </div>
 
       {uniqueLevels.length === 0 ? (
-        <div className="flex-1 flex items-center justify-center text-slate-400 italic">Belum ada riwayat kelas untuk siswa ini.</div>
+        <div className="flex-1 flex items-center justify-center text-slate-400 italic">There’s no class history for this student yet.</div>
       ) : (
         <>
           <div className="px-6 pt-4 border-b border-slate-200 bg-slate-50 overflow-x-auto shrink-0">
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3">Linimasa Kelas (Pilih Kelas)</p>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3">Select Class</p>
             <div className="flex gap-2 pb-4">
               {uniqueLevels.map((level: any) => (
                 <button
@@ -145,7 +145,7 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
                           onClick={() => {
                             if (daftarLaporan && daftarLaporan.length > 0) {
                               setSelectedReports(daftarLaporan);
-                              setSelectedDateText(new Date(keyTanggal).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
+                              setSelectedDateText(new Date(keyTanggal).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
                             }
                           }}
                           className={`aspect-square flex flex-col items-center justify-center rounded-xl border font-bold transition-all duration-200 ${bgColor} ${cursorStyle}`}
@@ -164,7 +164,7 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
 {/* LAPORAN SEMESTER */}
 {activeReportTab === "SEMESTER" && (
   currentSemesterReports.length === 0 ? (
-    <p className="text-center text-slate-400 py-10">Tidak ada laporan semester.</p>
+    <p className="text-center text-slate-400 py-10">No semester report.</p>
   ) : (
     <div className="grid grid-cols-1 gap-6">
       {currentSemesterReports.map((report: any) => {
@@ -203,7 +203,7 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
 
               {/* SISI KANAN: Tabel Nilai & Feedback */}
               <div className="flex-1">
-                <h4 className="text-xs font-bold uppercase opacity-50 mb-2">Nilai Keterampilan</h4>
+                <h4 className="text-xs font-bold uppercase opacity-50 mb-2">Skill Score</h4>
                 <div className="overflow-x-auto bg-white/50 rounded-xl border border-black/5 mb-4">
                   <table className="w-full text-left text-xs">
                     <thead className="bg-black/5">
@@ -262,18 +262,18 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
                 </div>
 
                 <div className="mb-6">
-                   <p className="text-[10px] font-bold uppercase opacity-50 mb-1">Feedback Guru</p>
+                   <p className="text-[10px] font-bold uppercase opacity-50 mb-1">Teacher Feedback</p>
                    <p className="text-sm opacity-80 italic">"{report.comments || "Tidak ada catatan."}"</p>
                 </div>
 
                 {/* REKAP KEHADIRAN */}
                 <div className="pt-4 border-t border-black/10">
-                  <p className="text-[10px] font-bold uppercase opacity-50 mb-3">Rekap Kehadiran Kelas Ini</p>
+                  <p className="text-[10px] font-bold uppercase opacity-50 mb-3">This Class Attendance Recap</p>
                   <div className="flex flex-wrap gap-2">
-                    <span className="bg-white/60 px-2.5 py-1 rounded-lg text-[10px] font-bold">✅ Hadir: {totalHadir}</span>
-                    <span className="bg-white/60 px-2.5 py-1 rounded-lg text-[10px] font-bold">🤒 Sakit: {totalSakit}</span>
-                    <span className="bg-white/60 px-2.5 py-1 rounded-lg text-[10px] font-bold">💌 Izin: {totalIzin}</span>
-                    <span className="bg-white/60 px-2.5 py-1 rounded-lg text-[10px] font-bold">❌ Alpha: {totalAlpha}</span>
+                    <span className="bg-white/60 px-2.5 py-1 rounded-lg text-[10px] font-bold">✅ Present: {totalHadir}</span>
+                    <span className="bg-white/60 px-2.5 py-1 rounded-lg text-[10px] font-bold">🤒 Sick: {totalSakit}</span>
+                    <span className="bg-white/60 px-2.5 py-1 rounded-lg text-[10px] font-bold">💌 Excused: {totalIzin}</span>
+                    <span className="bg-white/60 px-2.5 py-1 rounded-lg text-[10px] font-bold">❌ Unexcused: {totalAlpha}</span>
                   </div>
                 </div>
 
@@ -298,7 +298,7 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
             <div className="flex items-center gap-3 mb-4 border-b border-slate-100 pb-4">
               <span className="text-3xl">📚</span>
               <div>
-                <h3 className="text-xl font-bold text-slate-800">Laporan Pembelajaran</h3>
+                <h3 className="text-xl font-bold text-slate-800">Learning Report</h3>
                 <p className="text-xs text-slate-400">{selectedDateText}</p>
               </div>
             </div>
@@ -318,7 +318,7 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
                   <div key={report.id} className="border border-slate-100 rounded-2xl p-5 bg-slate-50/50 space-y-4">
                     <div className="flex justify-between items-center border-b pb-2">
                       <h4 className="font-bold text-slate-800">{data.topic}</h4>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase">Sesi #{idx + 1}</span>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">Session #{idx + 1}</span>
                     </div>
                     <div className="bg-slate-50 p-3 rounded-lg border border-slate-100 mb-4">
                       <p className="text-[10px] font-bold text-slate-400 uppercase">Learning Descriptions</p>

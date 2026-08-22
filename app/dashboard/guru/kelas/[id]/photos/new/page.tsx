@@ -19,10 +19,10 @@ export default async function UploadPhotoPage({ params }: { params: Promise<{ id
     <div className="p-8 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
         <Link href={`/dashboard/guru/kelas/${id}`} className="text-indigo-500 hover:text-indigo-600 text-sm font-medium mb-2 inline-flex items-center gap-2">
-          ← Kembali ke Kelas
+          ← Back to Class List
         </Link>
-        <h1 className="text-3xl font-bold text-slate-800 mt-2">Unggah Dokumentasi</h1>
-        <p className="text-slate-500 mt-1">Kelas: {level.name}</p>
+        <h1 className="text-3xl font-bold text-slate-800 mt-2">Upload Documentation</h1>
+        <p className="text-slate-500 mt-1">Class: {level.name}</p>
       </div>
 
       <Link 
@@ -33,8 +33,8 @@ export default async function UploadPhotoPage({ params }: { params: Promise<{ id
           🖼️
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-bold text-indigo-800 text-lg">Lihat Galeri Kelas</h3>
-          <p className="text-indigo-600 text-sm">Lihat semua dokumentasi kelas ini</p>
+          <h3 className="font-bold text-indigo-800 text-lg">View Class Gallery</h3>
+          <p className="text-indigo-600 text-sm">See all the documentation for this class</p>
         </div>
       </Link>
 

@@ -17,9 +17,9 @@ export default async function PilihLevelKelas({ searchParams }: { searchParams: 
   return (
     <div className="p-8 max-w-5xl mx-auto animate-in fade-in duration-500">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-800">Pilih Level & Kelas</h1>
+        <h1 className="text-3xl font-bold text-slate-800">Choose Level & Class</h1>
         <p className="text-slate-500 mt-2">
-          Silakan pilih kategori dan kelas yang akan Anda masuki hari ini untuk memulai sesi pengajaran.
+          Please select the category and class you will enter today to begin the teaching session.
         </p>
       </div>
 
@@ -52,13 +52,13 @@ export default async function PilihLevelKelas({ searchParams }: { searchParams: 
                 <span className="text-2xl">📚</span>
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-1">{kelas.name}</h3>
-              <p className="text-sm text-slate-500 mb-6">Program kelas {activeTab}</p>
+              <p className="text-sm text-slate-500 mb-6">Class program {activeTab}</p>
               
               <Link 
                 href={`/dashboard/guru/kelas/${kelas.id}`} 
                 className="block w-full text-center bg-slate-50 text-sky-600 py-2.5 rounded-xl font-bold hover:bg-sky-500 hover:text-white transition-colors"
               >
-                Masuk Kelas
+                Enter the classroom
               </Link>
             </div>
           ))}
@@ -66,8 +66,8 @@ export default async function PilihLevelKelas({ searchParams }: { searchParams: 
       ) : (
         <div className="py-16 text-center bg-white rounded-3xl border-2 border-dashed border-slate-200">
           <span className="text-4xl mb-4 block">📭</span>
-          <h3 className="text-lg font-semibold text-slate-700">Belum ada kelas</h3>
-          <p className="text-slate-500 mt-1">Kelas untuk program {activeTab} belum ditambahkan ke sistem.</p>
+          <h3 className="text-lg font-semibold text-slate-700">No classes yet</h3>
+          <p className="text-slate-500 mt-1">Class for the {activeTab} program hasn't been added to the system yet.</p>
         </div>
       )}
     </div>

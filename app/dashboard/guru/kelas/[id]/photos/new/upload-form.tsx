@@ -133,12 +133,12 @@ export function UploadForm({ action, students }: UploadFormProps) {
       <div className="bg-rose-50 border border-rose-200 p-4 rounded-xl flex gap-3">
         <span className="text-xl">⚠️</span>
         <p className="text-rose-600 text-sm font-bold leading-relaxed">
-          *Foto atau Video akan dihapus secara otomatis dalam 30 hari sejak tanggal upload.
+          *Photos or videos will be automatically deleted 30 days after the upload date.
         </p>
       </div>
       
       <div>
-        <label className="block text-sm font-bold text-slate-700 mb-2">Pilih Foto / Video (Bisa lebih dari 1)</label>
+        <label className="block text-sm font-bold text-slate-700 mb-2">Select Photo / Video (You can choose more than one)</label>
         <input 
           type="file" 
           name="media" 
@@ -148,12 +148,12 @@ export function UploadForm({ action, students }: UploadFormProps) {
           className="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-800 bg-slate-50 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" 
           required 
         />
-        <p className="text-xs text-slate-400 mt-2">Dukung format: JPG, PNG, MP4. Foto otomatis dirotasi & dikompresi sebelum diunggah.</p>
+        <p className="text-xs text-slate-400 mt-2">Supported formats: JPG, PNG, MP4. Photos are automatically rotated & compressed before uploading.</p>
       </div>
 
       <div>
         <label className="block text-sm font-bold text-slate-700 mb-2">
-          Caption / Deskripsi Singkat <span className="text-slate-400 font-normal">(Opsional)</span>
+          Caption <span className="text-slate-400 font-normal">(Optional)</span>
         </label>
         <textarea 
           name="caption" 
@@ -165,15 +165,15 @@ export function UploadForm({ action, students }: UploadFormProps) {
       </div>
 
       <div className="space-y-4">
-        <label className="block text-sm font-bold text-slate-700">Jenis & Ruang Lingkup Media</label>
+        <label className="block text-sm font-bold text-slate-700">Types & Scope of Media</label>
         
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <label className="cursor-pointer">
             <input type="radio" name="visibility" value="public" className="peer sr-only" defaultChecked disabled={isCompressing} />
             <div className="h-full p-4 rounded-xl border-2 border-slate-200 peer-checked:border-indigo-500 peer-checked:bg-indigo-50 transition-all flex flex-col justify-between">
               <div>
-                <p className="font-bold text-indigo-900">🌍 Global Kelas</p>
-                <p className="text-[11px] leading-tight text-slate-500 mt-1">Muncul di galeri semua orang tua & siswa di KELAS INI.</p>
+                <p className="font-bold text-indigo-900">🌍 Class</p>
+                <p className="text-[11px] leading-tight text-slate-500 mt-1">Show up in the gallery of all the parents & students in THIS CLASS.</p>
               </div>
             </div>
           </label>
@@ -182,8 +182,8 @@ export function UploadForm({ action, students }: UploadFormProps) {
             <input type="radio" name="visibility" value="event" className="peer sr-only" disabled={isCompressing} />
             <div className="h-full p-4 rounded-xl border-2 border-slate-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 transition-all flex flex-col justify-between">
               <div>
-                <p className="font-bold text-amber-900">🎉 Event Sekolah</p>
-                <p className="text-[11px] leading-tight text-slate-500 mt-1">Muncul di SEMUA galeri siswa di seluruh kelas SSLC.</p>
+                <p className="font-bold text-amber-900">🎉 School Event</p>
+                <p className="text-[11px] leading-tight text-slate-500 mt-1">Appears in ALL student galleries across all SSLC classes.</p>
               </div>
             </div>
           </label>
@@ -192,8 +192,8 @@ export function UploadForm({ action, students }: UploadFormProps) {
             <input type="radio" name="visibility" value="private" className="peer sr-only" disabled={isCompressing} />
             <div className="h-full p-4 rounded-xl border-2 border-slate-200 peer-checked:border-purple-500 peer-checked:bg-purple-50 transition-all flex flex-col justify-between">
               <div>
-                <p className="font-bold text-purple-900">🎯 Tag Spesifik</p>
-                <p className="text-[11px] leading-tight text-slate-500 mt-1">Hanya muncul di galeri anak yang Anda tandai di bawah.</p>
+                <p className="font-bold text-purple-900">🎯Specific Tag</p>
+                <p className="text-[11px] leading-tight text-slate-500 mt-1">Only appears in the gallery of the child you tagged below.</p>
               </div>
             </div>
           </label>
@@ -202,7 +202,7 @@ export function UploadForm({ action, students }: UploadFormProps) {
 
       <div className="border-t border-slate-100 pt-6">
         <label className="block text-sm font-bold text-slate-700 mb-3">
-          Tandai Siswa <span className="text-slate-400 font-normal">(Wajib jika memilih Tag Spesifik)</span>
+          Tag Student <span className="text-slate-400 font-normal">(Required if selecting a Specific Tag)</span>
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-60 overflow-y-auto p-2 border border-slate-200 rounded-xl bg-slate-50">
           {students.map((siswa) => (
@@ -233,7 +233,7 @@ export function UploadForm({ action, students }: UploadFormProps) {
           </>
         ) : (
           <>
-            <span>📤</span> Unggah Semua Media
+            <span>📤</span> Upload
           </>
         )}
       </button>

@@ -78,8 +78,8 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div className="p-6 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
               <h2 className="text-lg font-bold text-slate-800">
-                {activeTab === "PINDAH_SISWA" ? "Daftar Penempatan Siswa" 
-                 : activeTab === "PINDAH_GURU" ? "Daftar Penugasan Guru" 
+                {activeTab === "PINDAH_SISWA" ? "Students assigned List" 
+                 : activeTab === "PINDAH_GURU" ? "Teachers assigned List" 
                  : `Class List ${activeTab}`}
               </h2>
             </div>
