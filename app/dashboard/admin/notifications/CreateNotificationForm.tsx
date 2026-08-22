@@ -89,7 +89,7 @@ export default function CreateNotificationForm({ users }: { users: any[] }) {
         {targetRole === "SPECIFIC" && (
           <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-3">
             <div className="flex justify-between items-center">
-              <p className="text-sm font-semibold text-slate-600">Choose Recipient:</p>
+              <p className="text-sm font-semibold text-slate-600">Select Recipient:</p>
               <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md">
                 {selectedUsers.length} Selected
               </span>
@@ -140,7 +140,7 @@ export default function CreateNotificationForm({ users }: { users: any[] }) {
         </div>
 
         <button type="submit" disabled={loading || (targetRole === "SPECIFIC" && selectedUsers.length === 0)} className="w-full mt-6 bg-slate-800 text-white font-bold py-3 rounded-xl hover:bg-slate-700 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed">
-          {loading ? "Mengirim..." : "Spread the Announcement 🚀"}
+          {loading ? "Mengirim..." : "Active Announcement 🚀"}
         </button>
       </form>
     </div>

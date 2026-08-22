@@ -38,7 +38,7 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
     <div className="p-8 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-800">Class Management</h1>
-        <p className="text-slate-500 mt-1">Class management, student movement, and teacher assignments.</p>
+        <p className="text-slate-500 mt-1">Manage classes, student placement, and teacher assignments.</p>
       </div>
 
       <div className="flex space-x-2 border-b border-slate-200 mb-8 overflow-x-auto">
@@ -78,9 +78,9 @@ export default async function ManageClassesPage({ searchParams }: { searchParams
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div className="p-6 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
               <h2 className="text-lg font-bold text-slate-800">
-                {activeTab === "PINDAH_SISWA" ? "Students assigned List" 
-                 : activeTab === "PINDAH_GURU" ? "Teachers assigned List" 
-                 : `Class List ${activeTab}`}
+                {activeTab === "PINDAH_SISWA" ? "List of Assigned Students" 
+                 : activeTab === "PINDAH_GURU" ? "List of Assigned Teachers" 
+                 : `List of ${activeTab} Class`}
               </h2>
             </div>
             

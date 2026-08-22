@@ -74,14 +74,14 @@ export default function MoveStudentForm({ students, levels }: { students: any[],
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm font-semibold text-slate-600 mb-2">1. Choose Student</label>
+          <label className="block text-sm font-semibold text-slate-600 mb-2">1. Select Student</label>
           <select 
             value={selectedStudentProfileId}
             onChange={handleStudentChange}
             required 
             className="w-full text-slate-700 p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
           >
-            <option value="">-- Choose Student --</option>
+            <option value="">-- Select Student --</option>
             {students.map(s => {
               const profileId = s.siswaProfile?.id;
               if (!profileId) return null;
@@ -97,7 +97,7 @@ export default function MoveStudentForm({ students, levels }: { students: any[],
         </div>
 
         <div className={selectedStudentProfileId ? "block" : "hidden"}>
-          <label className="block text-sm font-semibold text-slate-600 mb-2">2. Choose Class List</label>
+          <label className="block text-sm font-semibold text-slate-600 mb-2">2. Select Class List</label>
           <div className="space-y-4 max-h-[45vh] overflow-y-auto pr-2">
             {categories.map(cat => {
               const catLevels = levels.filter(l => l.category === cat);

@@ -30,7 +30,7 @@ export default function AddClassForm({ activeTab }: { activeTab: string }) {
       )}
       <form id="addClassForm" action={handleAction} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-slate-600 mb-2">Classes Name</label>
+          <label className="block text-sm font-semibold text-slate-600 mb-2">Class Name</label>
           <input type="text" name="name" required placeholder="e.g. Preschool 4" className="w-full text-slate-700 p-3 bg-slate-50 border border-slate-200 rounded-xl" />
         </div>
         <div>

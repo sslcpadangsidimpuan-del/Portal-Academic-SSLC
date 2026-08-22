@@ -62,19 +62,19 @@ export default function MoveTeacherForm({ teachers, levels }: { teachers: any[],
         </div>
         <div>
           <h2 className="text-lg font-bold text-slate-800">Assign Teacher to Class</h2>
-          <p className="text-xs text-slate-500 mt-0.5">Choose a teacher and check the classes they will teach.</p>
+          <p className="text-xs text-slate-500 mt-0.5"> Select a teacher and assign them to one or more classes.</p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">1. Choose a Teacher</label>
+          <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">1. Select a Teacher</label>
           <select 
             value={selectedTeacherId}
             onChange={handleTeacherChange}
             className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all font-medium"
           >
-            <option value="">-- Choose a Teacher --</option>
+            <option value="">-- Select a Teacher --</option>
             {teachers.map(t => (
               <option key={t.id} value={t.id}>{t.name}</option>
             ))}

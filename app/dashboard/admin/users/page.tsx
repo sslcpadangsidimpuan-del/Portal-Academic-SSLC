@@ -30,8 +30,8 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
   return (
     <div className="p-4 sm:p-8 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Kelola Pengguna</h1>
-        <p className="text-slate-500 mt-1 text-sm sm:text-base">Tambah guru atau siswa baru beserta biodata lengkapnya.</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">User Managament</h1>
+        <p className="text-slate-500 mt-1 text-sm sm:text-base">Add a new teacher or student along with their full bio.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -43,7 +43,7 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div className="p-6 border-b border-slate-100 bg-slate-50">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-lg font-bold text-slate-800">Daftar Pengguna Terdaftar</h2>
+                <h2 className="text-lg font-bold text-slate-800">List of Registered Users</h2>
                 <span className="bg-slate-200 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">
                   Total {activeTab === "GURU" ? "Guru" : "Siswa"}: {users.length}
                 </span>
@@ -58,7 +58,7 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                       : 'text-slate-400 hover:text-slate-600'
                   }`}
                 >
-                  👩‍🏫 Daftar Guru
+                  👩‍🏫 Teacher List
                 </Link>
                 <Link 
                   href="?tab=SISWA"
@@ -68,7 +68,7 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                       : 'text-slate-400 hover:text-slate-600'
                   }`}
                 >
-                  👦 Daftar Siswa
+                  👦 Student List
                 </Link>
               </div>
             </div>
@@ -77,14 +77,14 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
               <table className="w-full text-left text-sm">
                 <thead className="bg-white border-b border-slate-100 text-slate-400">
                   <tr>
-                    <th className="p-4 font-semibold">Nama & Username</th>
+                    <th className="p-4 font-semibold">Name & Username</th>
                     
                     {activeTab === "GURU" ? (
-                      <th className="p-4 font-semibold">Kelas yang Diajar</th>
+                      <th className="p-4 font-semibold">Assigned to</th>
                     ) : (
                       <>
-                        <th className="p-4 font-semibold">Kelas & Biodata</th>
-                        <th className="p-4 font-semibold">Data Orang Tua / Wali</th>
+                        <th className="p-4 font-semibold">Class & Profile</th>
+                        <th className="p-4 font-semibold">Parent / Guardian Data</th>
                       </>
                     )}
                   </tr>
@@ -93,7 +93,7 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                   {users.length === 0 ? (
                     <tr>
                       <td colSpan={3} className="p-8 text-center text-slate-400">
-                        Belum ada data {activeTab === "GURU" ? "Guru" : "Siswa"}.
+                        No data available {activeTab === "GURU" ? "Guru" : "Siswa"}.
                       </td>
                     </tr>
                   ) : (
@@ -140,7 +140,7 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                                     ))}
                                   </div>
                                 ) : (
-                                  <span className="text-slate-400 italic block mb-1">Belum masuk kelas</span>
+                                  <span className="text-slate-400 italic block mb-1">Has not entered the class yet</span>
                                 )}
 
                                 {sp?.dateOfBirth && (
@@ -160,7 +160,7 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
                                     {sp.parentPhone && <p className="text-emerald-600 font-semibold mt-1">Phone Number : {sp.parentPhone}</p>}
                                   </div>
                                 ) : (
-                                  <span className="text-slate-400 italic">Belum ada data ortu</span>
+                                  <span className="text-slate-400 italic">No parental data available</span>
                                 )}
 
                                 {sp?.guardianName && (

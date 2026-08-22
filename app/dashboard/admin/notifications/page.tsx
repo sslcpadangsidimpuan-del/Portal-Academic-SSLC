@@ -32,7 +32,7 @@ export default async function ManageNotificationsPage() {
         </div>
 
         <div className="lg:col-span-7 space-y-6">
-          <h2 className="text-xl font-bold text-slate-800">Announcement Sent & Active.</h2>
+          <h2 className="text-xl font-bold text-slate-800">Active Announcement</h2>
           
           {notifications.length === 0 ? (
             <div className="bg-white p-10 rounded-2xl border border-slate-100 text-center text-slate-400">
@@ -71,7 +71,7 @@ export default async function ManageNotificationsPage() {
 
                   <div className="bg-white/60 rounded-xl p-4 border border-white/40">
                     <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">
-                      Still airing on {notif.recipients.length} Users:
+                      Currently active on {notif.recipients.length} User:
                     </p>
                     {notif.recipients.length === 0 ? (
                       <p className="text-xs text-slate-400 italic">All targets have been deleted / there are no targets.</p>

@@ -204,7 +204,7 @@ export default function StudentReportClient({
                               ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
                               : "bg-slate-100 text-slate-600 border-slate-200"
                           }`}>
-                            {report.isActiveClass ? "🟢 Current Classf:" : "📜 Graduated:"} {report.level.category} — {report.level.name}
+                            {report.isActiveClass ? "🟢 Current Class:" : "📜 Graduated:"} {report.level.category} — {report.level.name}
                           </span>
                         )}
                       </div>
