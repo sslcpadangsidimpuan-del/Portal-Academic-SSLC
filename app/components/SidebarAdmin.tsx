@@ -72,7 +72,7 @@ export default function SidebarAdmin({ userName }: { userName: string }) {
 
         {/* User Profile di HP (Pindah ke atas agar mudah dijangkau) */}
         <div className="p-4 border-b border-slate-800 md:hidden bg-slate-800/50 mt-16">
-           <p className="text-sm font-semibold text-white truncate">👋 Hallo, {userName}</p>
+           <p className="text-sm font-semibold text-white truncate"> Hi, {userName}! 👋</p>
         </div>
 
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
@@ -106,7 +106,7 @@ export default function SidebarAdmin({ userName }: { userName: string }) {
           <div className="bg-slate-800 p-4 rounded-xl flex flex-col gap-2">
             <p className="text-sm font-semibold text-white truncate">{userName}</p>
             <Link href="/api/auth/signout" className="text-xs text-rose-400 hover:text-rose-300 font-medium w-fit">
-               Logout
+               Log Out
             </Link>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function SidebarAdmin({ userName }: { userName: string }) {
         {/* Tombol Logout untuk HP */}
         <div className="p-4 border-t border-slate-800 md:hidden">
             <Link href="/api/auth/signout" className="block w-full text-center py-3 bg-rose-500/10 text-rose-400 rounded-xl hover:bg-rose-500/20 transition-colors font-medium">
-               Log out
+               Log Out
             </Link>
         </div>
       </aside>

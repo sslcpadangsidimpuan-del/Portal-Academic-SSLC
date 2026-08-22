@@ -30,8 +30,8 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
   return (
     <div className="p-4 sm:p-8 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">User Managament</h1>
-        <p className="text-slate-500 mt-1 text-sm sm:text-base">Add a new teacher or student along with their full bio.</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">User Management</h1>
+        <p className="text-slate-500 mt-1 text-sm sm:text-base">Add a new teacher or student.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

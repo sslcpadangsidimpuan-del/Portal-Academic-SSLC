@@ -140,7 +140,7 @@ export default function CreateNotificationForm({ users }: { users: any[] }) {
         </div>
 
         <button type="submit" disabled={loading || (targetRole === "SPECIFIC" && selectedUsers.length === 0)} className="w-full mt-6 bg-slate-800 text-white font-bold py-3 rounded-xl hover:bg-slate-700 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed">
-          {loading ? "Mengirim..." : "Active Announcement 🚀"}
+          {loading ? "Mengirim..." : "Publish Announcement 🚀"}
         </button>
       </form>
     </div>

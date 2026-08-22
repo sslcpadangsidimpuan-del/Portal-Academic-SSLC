@@ -22,7 +22,7 @@ export default async function ManageNotificationsPage() {
   return (
     <div className="p-8 max-w-7xl mx-auto animate-in fade-in duration-500">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-800">Notification</h1>
+        <h1 className="text-3xl font-bold text-slate-800">Announcement</h1>
         <p className="text-slate-500 mt-1">Manage notifications, bills, and mass messages for users.</p>
       </div>
 
@@ -71,7 +71,7 @@ export default async function ManageNotificationsPage() {
 
                   <div className="bg-white/60 rounded-xl p-4 border border-white/40">
                     <p className="text-xs font-bold text-slate-500 mb-3 uppercase tracking-wider">
-                      Currently active on {notif.recipients.length} User:
+                      Currently active on {notif.recipients.length} User(s):
                     </p>
                     {notif.recipients.length === 0 ? (
                       <p className="text-xs text-slate-400 italic">All targets have been deleted / there are no targets.</p>

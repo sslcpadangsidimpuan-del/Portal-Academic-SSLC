@@ -196,7 +196,7 @@ export default function ReportViewer({ student, dailyReports = [], semesterRepor
                 </div>
                 
                 <div className="bg-white/50 px-3 py-1.5 rounded-xl border border-black/5 text-center w-full">
-                   <p className="text-[9px] font-bold uppercase opacity-60">English Use</p>
+                   <p className="text-[9px] font-bold uppercase opacity-60">English Use in Class</p>
                    <p className="text-sm font-bold">{report.englishUse || "Always"}</p>
                 </div>
               </div>

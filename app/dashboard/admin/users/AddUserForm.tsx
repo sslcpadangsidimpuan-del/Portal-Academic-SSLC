@@ -250,7 +250,7 @@ export default function AddUserForm({ levels }: { levels: any[] }) {
           disabled={loading}
           className="w-full mt-4 sm:mt-6 bg-slate-800 text-white font-bold py-3 text-xs sm:text-sm rounded-xl hover:bg-slate-700 transition-colors disabled:bg-slate-400 shadow-xs"
         >
-          {loading ? "Menyimpan..." : "Simpan Pengguna Baru"}
+          {loading ? "Menyimpan..." : "Save"}
         </button>
       </form>
     </div>
