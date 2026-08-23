@@ -13,11 +13,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Smart Step Learning Center (SSLC)",
   description: "Integrated Academic Portal & Learning Center",
-  metadataBase: new URL("https://portal-academic-sslc.vercel.app"), // 👈 Wajib agar gambar OG terbaca
+  metadataBase: new URL("https://smartsteplearningcenter.vercel.app"), // 👈 Wajib agar gambar OG terbaca
   openGraph: {
     title: "Smart Step Learning Center (SSLC)",
     description: "Integrated Academic Portal & Learning Center",
-    url: "https://portal-academic-sslc.vercel.app",
+    url: "https://smartsteplearningcenter.vercel.app",
     siteName: "SSLC Portal",
     locale: "id_ID",
     type: "website",
