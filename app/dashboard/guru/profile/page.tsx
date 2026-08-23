@@ -123,7 +123,7 @@ export default async function GuruProfilePage() {
                 name="signature" 
                 accept="image/png, image/jpeg, image/jpg" 
                 required
-                className="flex-1 bg-white px-4 py-2 rounded-lg border border-slate-300 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"
+                className="flex-1 text-slate-700 bg-white px-4 py-2 rounded-lg border border-slate-300 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"
               />
               <button 
                 type="submit" 

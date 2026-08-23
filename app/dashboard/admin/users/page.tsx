@@ -45,7 +45,7 @@ export default async function ManageUsersPage({ searchParams }: { searchParams: 
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-lg font-bold text-slate-800">List of Registered Users</h2>
                 <span className="bg-slate-200 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">
-                  Total {activeTab === "GURU" ? "Guru" : "Siswa"}: {users.length}
+                  Total {activeTab === "GURU" ? "Teachers" : "Students"}: {users.length}
                 </span>
               </div>
 
