@@ -26,18 +26,25 @@ export async function createClass(formData: FormData) {
 
 export async function deleteClass(formData: FormData) {
   const id = formData.get("id") as string;
-  if (!id) return { error: "ID kelas tidak ditemukan." };
+  if (!id) return { error: "Class ID not found." };
 
   try {
-    // Dengan skema Many-to-Many, menghapus level akan otomatis 
-    // melepaskan relasi dari tabel perantara siswa & guru secara aman.
+    // 1. HAPUS SEMUA DATA TERKAIT TERLEBIH DAHULU (Bypass Error Foreign Key P2003)
+    // Menghapus laporan harian, laporan semester, absensi, dan foto galeri 
+    // yang terikat dengan kelas ini agar tidak memicu constraint error.
+    await prisma.dailyReport.deleteMany({ where: { levelId: id } });
+    await prisma.semesterReport.deleteMany({ where: { levelId: id } });
+    await prisma.absensi.deleteMany({ where: { levelId: id } });
+    await prisma.photo.deleteMany({ where: { levelId: id } });
+
+    // 2. SETELAH BERSIH, BARU HAPUS KELAS UTAMANYA
     await prisma.level.delete({ where: { id } });
     
     revalidatePath("/dashboard/admin/classes");
     return { success: true };
   } catch (error) {
     console.error("Gagal menghapus kelas:", error);
-    return { error: "Gagal menghapus kelas dari database." };
+    return { error: "Failed to delete the class. Please try again or contact support." };
   }
 }
 

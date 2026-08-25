@@ -2,7 +2,6 @@
 
 import { deleteClass } from "./actions";
 
-// 🟢 Pastikan menggunakan 'export default' di sini
 export default function DeleteButton({ id }: { id: string }) {
   return (
     <form 
@@ -18,7 +17,13 @@ export default function DeleteButton({ id }: { id: string }) {
         type="submit" 
         className="text-xs text-rose-600 hover:text-rose-800 font-bold p-1 hover:bg-rose-100 rounded-lg transition-colors"
         onClick={(e) => {
-          if (!confirm("Apakah Anda yakin ingin menghapus kelas ini?")) {
+          // 🔴 Pop-up peringatan tegas dalam Bahasa Inggris sesuai permintaan klien
+          const isConfirmed = confirm(
+            "Are you sure you want to delete this class?\n\n" +
+            "WARNING: This action cannot be undone. All data inside this class, including galleries, daily reports, semester reports, and attendance records, will be PERMANENTLY deleted!"
+          );
+          
+          if (!isConfirmed) {
             e.preventDefault();
           }
         }}
