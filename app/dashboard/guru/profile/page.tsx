@@ -5,7 +5,9 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 
-// Inisialisasi bersih: Versi terbaru supabase-js sudah otomatis mengenali format sb_secret_...
+// PERBAIKAN: Import disesuaikan ke folder app/components
+import ChangePasswordButton from "@/app/components/ChangePasswordButton";
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseSecretKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseSecretKey);
@@ -25,9 +27,6 @@ export default async function GuruProfilePage() {
 
   const guruProfileId = currentUser.guruProfile.id;
 
-  // ==========================================
-  // SERVER ACTION: PROSES UPLOAD TTD KE SUPABASE STORAGE
-  // ==========================================
   async function handleUploadSignature(formData: FormData) {
     "use server";
     
@@ -64,9 +63,6 @@ export default async function GuruProfilePage() {
     revalidatePath("/dashboard/guru/profile");
   }
 
-  // ==========================================
-  // UI: HALAMAN PROFIL GURU
-  // ==========================================
   return (
     <div className="p-8 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
@@ -87,6 +83,10 @@ export default async function GuruProfilePage() {
               <p className="text-sm font-semibold text-slate-400">Username / ID</p>
               <p className="font-bold text-slate-700 text-lg">{currentUser.username}</p>
             </div>
+          </div>
+          
+          <div className="mt-6">
+            <ChangePasswordButton />
           </div>
         </div>
 

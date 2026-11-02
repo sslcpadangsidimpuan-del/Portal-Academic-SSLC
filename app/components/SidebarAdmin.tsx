@@ -81,11 +81,11 @@ export default function SidebarAdmin({ userName }: { userName: string }) {
           </Link>
           
           <div className="pt-4 pb-2">
-            <p className="px-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Managament</p>
+            <p className="px-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Management</p>
           </div>
           
           <Link href="/dashboard/admin/users" onClick={closeMenu} className={`block px-4 py-3 rounded-xl transition-colors ${isActive('/dashboard/admin/users')}`}>
-            👥 User Managament
+            👥 User Management
           </Link>
           <Link href="/dashboard/admin/classes" onClick={closeMenu} className={`block px-4 py-3 rounded-xl transition-colors ${isActive('/dashboard/admin/classes')}`}>
             📚 Class Management
@@ -100,14 +100,24 @@ export default function SidebarAdmin({ userName }: { userName: string }) {
           <Link href="/dashboard/admin/notifications" onClick={closeMenu} className={`block px-4 py-3 rounded-xl transition-colors ${isActive('/dashboard/admin/notifications')}`}>
             📢 Announcement
           </Link>
+          
+          {/* TAMBAHAN: Menu Profile ditambahkan pada area navigasi untuk konsistensi di HP & Desktop */}
+          <div className="pt-4 pb-2">
+            <p className="px-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Account</p>
+          </div>
+          <Link href="/dashboard/admin/profile" onClick={closeMenu} className={`block px-4 py-3 rounded-xl transition-colors ${isActive('/dashboard/admin/profile')}`}>
+            👤 Profile & Security
+          </Link>
         </nav>
 
         <div className="p-4 border-t border-slate-800 hidden md:block">
           <div className="bg-slate-800 p-4 rounded-xl flex flex-col gap-2">
             <p className="text-sm font-semibold text-white truncate">{userName}</p>
-            <Link href="/api/auth/signout" className="text-xs text-rose-400 hover:text-rose-300 font-medium w-fit">
-               Log Out
-            </Link>
+            <div className="flex gap-4">
+              <Link href="/api/auth/signout" className="text-xs text-rose-400 hover:text-rose-300 font-medium w-fit">
+                 Log Out
+              </Link>
+            </div>
           </div>
         </div>
 
